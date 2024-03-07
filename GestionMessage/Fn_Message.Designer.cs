@@ -1,0 +1,323 @@
+﻿namespace GestionMessage
+{
+    partial class Fn_Message
+    {
+        /// <summary>
+        ///  Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        ///  Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        ///  Required method for Designer support - do not modify
+        ///  the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            Cb_GroupeMessage = new ComboBox();
+            Tb_CodeMessage = new TextBox();
+            Tb_Message = new TextBox();
+            Btn_Nouveau = new Button();
+            Btn_Modifier = new Button();
+            Btn_Supprimer = new Button();
+            Btn_Enregistrer = new Button();
+            Lb_Groupe = new Label();
+            Lb_Code = new Label();
+            Lb_Message = new Label();
+            TP_GestionMessage = new TabControl();
+            TP_Message = new TabPage();
+            Cb_Code = new ComboBox();
+            Lb_ChercheCode = new Label();
+            TP_GroupeMessage = new TabPage();
+            comboBox1 = new ComboBox();
+            Lb_ChercheMessage = new Label();
+            button1 = new Button();
+            button2 = new Button();
+            button3 = new Button();
+            button4 = new Button();
+            Lb_LabelGroupeMessage = new Label();
+            textBox1 = new TextBox();
+            TP_GestionMessage.SuspendLayout();
+            TP_Message.SuspendLayout();
+            TP_GroupeMessage.SuspendLayout();
+            SuspendLayout();
+            // 
+            // Cb_GroupeMessage
+            // 
+            Cb_GroupeMessage.FormattingEnabled = true;
+            Cb_GroupeMessage.Location = new Point(65, 17);
+            Cb_GroupeMessage.Name = "Cb_GroupeMessage";
+            Cb_GroupeMessage.Size = new Size(121, 23);
+            Cb_GroupeMessage.TabIndex = 0;
+            // 
+            // Tb_CodeMessage
+            // 
+            Tb_CodeMessage.Location = new Point(67, 47);
+            Tb_CodeMessage.Name = "Tb_CodeMessage";
+            Tb_CodeMessage.Size = new Size(39, 23);
+            Tb_CodeMessage.TabIndex = 1;
+            // 
+            // Tb_Message
+            // 
+            Tb_Message.Location = new Point(65, 78);
+            Tb_Message.Multiline = true;
+            Tb_Message.Name = "Tb_Message";
+            Tb_Message.Size = new Size(327, 92);
+            Tb_Message.TabIndex = 2;
+            // 
+            // Btn_Nouveau
+            // 
+            Btn_Nouveau.Location = new Point(128, 176);
+            Btn_Nouveau.Name = "Btn_Nouveau";
+            Btn_Nouveau.Size = new Size(75, 23);
+            Btn_Nouveau.TabIndex = 3;
+            Btn_Nouveau.Text = "Nouveau";
+            Btn_Nouveau.UseVisualStyleBackColor = true;
+            // 
+            // Btn_Modifier
+            // 
+            Btn_Modifier.Location = new Point(128, 205);
+            Btn_Modifier.Name = "Btn_Modifier";
+            Btn_Modifier.Size = new Size(75, 23);
+            Btn_Modifier.TabIndex = 4;
+            Btn_Modifier.Text = "Modifier";
+            Btn_Modifier.UseVisualStyleBackColor = true;
+            // 
+            // Btn_Supprimer
+            // 
+            Btn_Supprimer.Location = new Point(209, 205);
+            Btn_Supprimer.Name = "Btn_Supprimer";
+            Btn_Supprimer.Size = new Size(75, 23);
+            Btn_Supprimer.TabIndex = 5;
+            Btn_Supprimer.Text = "Supprimer";
+            Btn_Supprimer.UseVisualStyleBackColor = true;
+            // 
+            // Btn_Enregistrer
+            // 
+            Btn_Enregistrer.Location = new Point(209, 176);
+            Btn_Enregistrer.Name = "Btn_Enregistrer";
+            Btn_Enregistrer.Size = new Size(75, 23);
+            Btn_Enregistrer.TabIndex = 6;
+            Btn_Enregistrer.Text = "Enregistrer";
+            Btn_Enregistrer.UseVisualStyleBackColor = true;
+            // 
+            // Lb_Groupe
+            // 
+            Lb_Groupe.AutoSize = true;
+            Lb_Groupe.Location = new Point(6, 20);
+            Lb_Groupe.Name = "Lb_Groupe";
+            Lb_Groupe.Size = new Size(46, 15);
+            Lb_Groupe.TabIndex = 7;
+            Lb_Groupe.Text = "Groupe";
+            // 
+            // Lb_Code
+            // 
+            Lb_Code.AutoSize = true;
+            Lb_Code.Location = new Point(8, 50);
+            Lb_Code.Name = "Lb_Code";
+            Lb_Code.Size = new Size(35, 15);
+            Lb_Code.TabIndex = 8;
+            Lb_Code.Text = "Code";
+            // 
+            // Lb_Message
+            // 
+            Lb_Message.AutoSize = true;
+            Lb_Message.Location = new Point(6, 81);
+            Lb_Message.Name = "Lb_Message";
+            Lb_Message.Size = new Size(53, 15);
+            Lb_Message.TabIndex = 9;
+            Lb_Message.Text = "Message";
+            // 
+            // TP_GestionMessage
+            // 
+            TP_GestionMessage.Controls.Add(TP_Message);
+            TP_GestionMessage.Controls.Add(TP_GroupeMessage);
+            TP_GestionMessage.Location = new Point(0, -2);
+            TP_GestionMessage.Name = "TP_GestionMessage";
+            TP_GestionMessage.SelectedIndex = 0;
+            TP_GestionMessage.Size = new Size(417, 263);
+            TP_GestionMessage.TabIndex = 10;
+            // 
+            // TP_Message
+            // 
+            TP_Message.Controls.Add(Cb_Code);
+            TP_Message.Controls.Add(Lb_ChercheCode);
+            TP_Message.Controls.Add(Lb_Groupe);
+            TP_Message.Controls.Add(Lb_Message);
+            TP_Message.Controls.Add(Cb_GroupeMessage);
+            TP_Message.Controls.Add(Lb_Code);
+            TP_Message.Controls.Add(Tb_CodeMessage);
+            TP_Message.Controls.Add(Tb_Message);
+            TP_Message.Controls.Add(Btn_Enregistrer);
+            TP_Message.Controls.Add(Btn_Nouveau);
+            TP_Message.Controls.Add(Btn_Supprimer);
+            TP_Message.Controls.Add(Btn_Modifier);
+            TP_Message.Location = new Point(4, 24);
+            TP_Message.Name = "TP_Message";
+            TP_Message.Padding = new Padding(3);
+            TP_Message.Size = new Size(409, 235);
+            TP_Message.TabIndex = 0;
+            TP_Message.Text = "Message";
+            TP_Message.UseVisualStyleBackColor = true;
+            // 
+            // Cb_Code
+            // 
+            Cb_Code.FormattingEnabled = true;
+            Cb_Code.Location = new Point(327, 17);
+            Cb_Code.Name = "Cb_Code";
+            Cb_Code.Size = new Size(76, 23);
+            Cb_Code.TabIndex = 12;
+            // 
+            // Lb_ChercheCode
+            // 
+            Lb_ChercheCode.AutoSize = true;
+            Lb_ChercheCode.Location = new Point(243, 20);
+            Lb_ChercheCode.Name = "Lb_ChercheCode";
+            Lb_ChercheCode.Size = new Size(78, 15);
+            Lb_ChercheCode.TabIndex = 11;
+            Lb_ChercheCode.Text = "cherche code";
+            // 
+            // TP_GroupeMessage
+            // 
+            TP_GroupeMessage.Controls.Add(comboBox1);
+            TP_GroupeMessage.Controls.Add(Lb_ChercheMessage);
+            TP_GroupeMessage.Controls.Add(button1);
+            TP_GroupeMessage.Controls.Add(button2);
+            TP_GroupeMessage.Controls.Add(button3);
+            TP_GroupeMessage.Controls.Add(button4);
+            TP_GroupeMessage.Controls.Add(Lb_LabelGroupeMessage);
+            TP_GroupeMessage.Controls.Add(textBox1);
+            TP_GroupeMessage.Location = new Point(4, 24);
+            TP_GroupeMessage.Name = "TP_GroupeMessage";
+            TP_GroupeMessage.Padding = new Padding(3);
+            TP_GroupeMessage.Size = new Size(409, 235);
+            TP_GroupeMessage.TabIndex = 1;
+            TP_GroupeMessage.Text = "Groupe message";
+            TP_GroupeMessage.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(67, 44);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(266, 23);
+            comboBox1.TabIndex = 14;
+            // 
+            // Lb_ChercheMessage
+            // 
+            Lb_ChercheMessage.AutoSize = true;
+            Lb_ChercheMessage.Location = new Point(67, 26);
+            Lb_ChercheMessage.Name = "Lb_ChercheMessage";
+            Lb_ChercheMessage.Size = new Size(98, 15);
+            Lb_ChercheMessage.TabIndex = 13;
+            Lb_ChercheMessage.Text = "cherche message";
+            // 
+            // button1
+            // 
+            button1.Location = new Point(215, 148);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 10;
+            button1.Text = "Enregistrer";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(134, 148);
+            button2.Name = "button2";
+            button2.Size = new Size(75, 23);
+            button2.TabIndex = 7;
+            button2.Text = "Nouveau";
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(215, 177);
+            button3.Name = "button3";
+            button3.Size = new Size(75, 23);
+            button3.TabIndex = 9;
+            button3.Text = "Supprimer";
+            button3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(134, 177);
+            button4.Name = "button4";
+            button4.Size = new Size(75, 23);
+            button4.TabIndex = 8;
+            button4.Text = "Modifier";
+            button4.UseVisualStyleBackColor = true;
+            // 
+            // Lb_LabelGroupeMessage
+            // 
+            Lb_LabelGroupeMessage.AutoSize = true;
+            Lb_LabelGroupeMessage.Location = new Point(67, 87);
+            Lb_LabelGroupeMessage.Name = "Lb_LabelGroupeMessage";
+            Lb_LabelGroupeMessage.Size = new Size(125, 15);
+            Lb_LabelGroupeMessage.TabIndex = 1;
+            Lb_LabelGroupeMessage.Text = "Label groupe message";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(67, 105);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(266, 23);
+            textBox1.TabIndex = 0;
+            // 
+            // Fn_Message
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(416, 262);
+            Controls.Add(TP_GestionMessage);
+            Name = "Fn_Message";
+            Text = "Message";
+            TP_GestionMessage.ResumeLayout(false);
+            TP_Message.ResumeLayout(false);
+            TP_Message.PerformLayout();
+            TP_GroupeMessage.ResumeLayout(false);
+            TP_GroupeMessage.PerformLayout();
+            ResumeLayout(false);
+        }
+
+        #endregion
+
+        private ComboBox Cb_GroupeMessage;
+        private TextBox Tb_CodeMessage;
+        private TextBox Tb_Message;
+        private Button Btn_Nouveau;
+        private Button Btn_Modifier;
+        private Button Btn_Supprimer;
+        private Button Btn_Enregistrer;
+        private Label Lb_Groupe;
+        private Label Lb_Code;
+        private Label Lb_Message;
+        private TabControl TP_GestionMessage;
+        private TabPage TP_Message;
+        private TabPage TP_GroupeMessage;
+        private TextBox textBox1;
+        private ComboBox Cb_Code;
+        private Label Lb_ChercheCode;
+        private ComboBox comboBox1;
+        private Label Lb_ChercheMessage;
+        private Button button1;
+        private Button button2;
+        private Button button3;
+        private Button button4;
+        private Label Lb_LabelGroupeMessage;
+    }
+}
