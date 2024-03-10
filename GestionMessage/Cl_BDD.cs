@@ -16,26 +16,23 @@ namespace GestionMessage
         //
         // connexionBDD
         //
-        public void connexionBDD()
+        public Cl_BDD()
         {
             string cheminBDD = "C:\\VADIT\\VADIT.db";
             char version = '3';
             string chaineDeConnexion = "Data Source=" + cheminBDD + ";Version=" + version + ";";
 
             maConnexion = new SQLiteConnection(chaineDeConnexion);
-            maConnexion.Open();
         }
         //
-        // insert
+        // fonction abstraite insert,update,delete
         //
         public abstract void insert();
-        //
-        // update
-        //
         public abstract void update();
-        //
-        // delete
-        //
         public abstract void delete();
+        //
+        // ToString
+        //
+        public override abstract string ToString();
     }
 }

@@ -43,12 +43,12 @@
             Cb_Code = new ComboBox();
             Lb_ChercheCode = new Label();
             TP_GroupeMessage = new TabPage();
-            comboBox1 = new ComboBox();
-            Lb_ChercheMessage = new Label();
+            Cb_ChercheGroupeMessage = new ComboBox();
+            Lb_ChercheGroupeMessage = new Label();
             Btn_EnregistrerGroupeMessage = new Button();
             Btn_NouveauGroupeMessage = new Button();
-            button3 = new Button();
-            button4 = new Button();
+            Btn_SupprimerGroupeMessage = new Button();
+            Btn_ModifierGroupeMessage = new Button();
             Lb_LabelGroupeMessage = new Label();
             Tb_LabelGroupeMessage = new TextBox();
             TP_GestionMessage.SuspendLayout();
@@ -193,12 +193,12 @@
             // 
             // TP_GroupeMessage
             // 
-            TP_GroupeMessage.Controls.Add(comboBox1);
-            TP_GroupeMessage.Controls.Add(Lb_ChercheMessage);
+            TP_GroupeMessage.Controls.Add(Cb_ChercheGroupeMessage);
+            TP_GroupeMessage.Controls.Add(Lb_ChercheGroupeMessage);
             TP_GroupeMessage.Controls.Add(Btn_EnregistrerGroupeMessage);
             TP_GroupeMessage.Controls.Add(Btn_NouveauGroupeMessage);
-            TP_GroupeMessage.Controls.Add(button3);
-            TP_GroupeMessage.Controls.Add(button4);
+            TP_GroupeMessage.Controls.Add(Btn_SupprimerGroupeMessage);
+            TP_GroupeMessage.Controls.Add(Btn_ModifierGroupeMessage);
             TP_GroupeMessage.Controls.Add(Lb_LabelGroupeMessage);
             TP_GroupeMessage.Controls.Add(Tb_LabelGroupeMessage);
             TP_GroupeMessage.Location = new Point(4, 24);
@@ -209,22 +209,23 @@
             TP_GroupeMessage.Text = "Groupe message";
             TP_GroupeMessage.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
+            // Cb_ChercheGroupeMessage
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(67, 44);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(266, 23);
-            comboBox1.TabIndex = 14;
+            Cb_ChercheGroupeMessage.FormattingEnabled = true;
+            Cb_ChercheGroupeMessage.Location = new Point(67, 44);
+            Cb_ChercheGroupeMessage.Name = "Cb_ChercheGroupeMessage";
+            Cb_ChercheGroupeMessage.Size = new Size(266, 23);
+            Cb_ChercheGroupeMessage.TabIndex = 14;
+            Cb_ChercheGroupeMessage.SelectedIndexChanged += Cb_ChercheGroupeMessage_SelectedIndexChanged;
             // 
-            // Lb_ChercheMessage
+            // Lb_ChercheGroupeMessage
             // 
-            Lb_ChercheMessage.AutoSize = true;
-            Lb_ChercheMessage.Location = new Point(67, 26);
-            Lb_ChercheMessage.Name = "Lb_ChercheMessage";
-            Lb_ChercheMessage.Size = new Size(98, 15);
-            Lb_ChercheMessage.TabIndex = 13;
-            Lb_ChercheMessage.Text = "cherche message";
+            Lb_ChercheGroupeMessage.AutoSize = true;
+            Lb_ChercheGroupeMessage.Location = new Point(67, 26);
+            Lb_ChercheGroupeMessage.Name = "Lb_ChercheGroupeMessage";
+            Lb_ChercheGroupeMessage.Size = new Size(139, 15);
+            Lb_ChercheGroupeMessage.TabIndex = 13;
+            Lb_ChercheGroupeMessage.Text = "cherche groupe message";
             // 
             // Btn_EnregistrerGroupeMessage
             // 
@@ -246,23 +247,25 @@
             Btn_NouveauGroupeMessage.UseVisualStyleBackColor = true;
             Btn_NouveauGroupeMessage.Click += Btn_NouveauGroupeMessage_Click;
             // 
-            // button3
+            // Btn_SupprimerGroupeMessage
             // 
-            button3.Location = new Point(215, 177);
-            button3.Name = "button3";
-            button3.Size = new Size(75, 23);
-            button3.TabIndex = 9;
-            button3.Text = "Supprimer";
-            button3.UseVisualStyleBackColor = true;
+            Btn_SupprimerGroupeMessage.Location = new Point(215, 177);
+            Btn_SupprimerGroupeMessage.Name = "Btn_SupprimerGroupeMessage";
+            Btn_SupprimerGroupeMessage.Size = new Size(75, 23);
+            Btn_SupprimerGroupeMessage.TabIndex = 9;
+            Btn_SupprimerGroupeMessage.Text = "Supprimer";
+            Btn_SupprimerGroupeMessage.UseVisualStyleBackColor = true;
+            Btn_SupprimerGroupeMessage.Click += Btn_SupprimerGroupeMessage_Click;
             // 
-            // button4
+            // Btn_ModifierGroupeMessage
             // 
-            button4.Location = new Point(134, 177);
-            button4.Name = "button4";
-            button4.Size = new Size(75, 23);
-            button4.TabIndex = 8;
-            button4.Text = "Modifier";
-            button4.UseVisualStyleBackColor = true;
+            Btn_ModifierGroupeMessage.Location = new Point(134, 177);
+            Btn_ModifierGroupeMessage.Name = "Btn_ModifierGroupeMessage";
+            Btn_ModifierGroupeMessage.Size = new Size(75, 23);
+            Btn_ModifierGroupeMessage.TabIndex = 8;
+            Btn_ModifierGroupeMessage.Text = "Modifier";
+            Btn_ModifierGroupeMessage.UseVisualStyleBackColor = true;
+            Btn_ModifierGroupeMessage.Click += Btn_ModifierGroupeMessage_Click;
             // 
             // Lb_LabelGroupeMessage
             // 
@@ -279,6 +282,7 @@
             Tb_LabelGroupeMessage.Name = "Tb_LabelGroupeMessage";
             Tb_LabelGroupeMessage.Size = new Size(266, 23);
             Tb_LabelGroupeMessage.TabIndex = 0;
+            Tb_LabelGroupeMessage.TextChanged += Tb_LabelGroupeMessage_TextChanged;
             // 
             // Fn_Message
             // 
@@ -287,6 +291,7 @@
             ClientSize = new Size(416, 262);
             Controls.Add(TP_GestionMessage);
             Name = "Fn_Message";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Message";
             Load += Fn_Message_Load;
             TP_GestionMessage.ResumeLayout(false);
@@ -315,12 +320,12 @@
         private TextBox Tb_LabelGroupeMessage;
         private ComboBox Cb_Code;
         private Label Lb_ChercheCode;
-        private ComboBox comboBox1;
-        private Label Lb_ChercheMessage;
+        private ComboBox Cb_ChercheGroupeMessage;
+        private Label Lb_ChercheGroupeMessage;
         private Button Btn_EnregistrerGroupeMessage;
         private Button Btn_NouveauGroupeMessage;
-        private Button button3;
-        private Button button4;
+        private Button Btn_SupprimerGroupeMessage;
+        private Button Btn_ModifierGroupeMessage;
         private Label Lb_LabelGroupeMessage;
     }
 }

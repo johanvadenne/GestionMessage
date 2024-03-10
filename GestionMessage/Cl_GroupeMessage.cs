@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
+using System.Data.SqlClient;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Data.Entity.Infrastructure;
 
 namespace GestionMessage
 {
@@ -16,14 +19,13 @@ namespace GestionMessage
         private int _IdGroupeMessage;
         private string _LabelGroupeMessage;
         private string Table = "T_GroupeMessage";
-        private string colonne = "LabelGroupeMessage";
         //
         // constructeur
         //
-        public Cl_GroupeMessage()
+        public Cl_GroupeMessage(int IdGroupeMessageRecu, string LabelGroupeMessageRecu)
         {
-            _IdGroupeMessage = 0;
-            _LabelGroupeMessage = "";
+            _IdGroupeMessage = IdGroupeMessageRecu;
+            _LabelGroupeMessage = LabelGroupeMessageRecu;
         }
         //
         // IdGroupeMessage
@@ -50,21 +52,53 @@ namespace GestionMessage
             }
         }
         //
-        // LabelGroupeMessage
-        //
-        public string insertValeur()
-        {
-            return "'" + LabelGroupeMessage + "'";
-        }
-        //
         // override insert
         //
         public override void insert()
         {
-            string reqSQL = "INSERT INTO " + Table + " (" + colonne + ") VALUES(" + insertValeur() + ");";
-            this.connexionBDD();
-            SQLiteCommand commande = new SQLiteCommand(reqSQL, this.maConnexion);
-            commande.ExecuteNonQuery();
+            // création de la requete
+            string requete = 
+                "INSERT INTO " + Table + 
+                " (LabelGroupeMessage) VALUES(@LabelGroupeMessage);";
+
+            SQLiteCommand command = new SQLiteCommand(requete, this.maConnexion);
+            
+            // Ajouter des paramètres à la commande
+            command.Parameters.AddWithValue("@LabelGroupeMessage", LabelGroupeMessage);
+
+            this.maConnexion.Open();
+            command.ExecuteNonQuery();
+            this.maConnexion.Close();
+        }
+        //
+        // override update
+        //
+        public override void update()
+        {
+
+        }
+        //
+        // override delete
+        //
+        public override void delete()
+        {
+            // création de la requete
+            string requete =
+                "DELETE FROM " + Table +
+                " WHERE IdGroupeMessage = " + IdGroupeMessage + ";";
+            
+            SQLiteCommand command = new SQLiteCommand(requete, this.maConnexion);
+            
+            this.maConnexion.Open();
+            command.ExecuteNonQuery();
+            this.maConnexion.Close();
+        }
+        //
+        // override ToString
+        //
+        public override string ToString()
+        {
+            return IdGroupeMessage.ToString() + " - " + LabelGroupeMessage;
         }
     }
 }
