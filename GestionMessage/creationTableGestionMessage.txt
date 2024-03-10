@@ -1,0 +1,35 @@
+BEGIN TRANSACTION;
+--
+-- T_GroupeMessage
+--
+CREATE TABLE IF NOT EXISTS "T_GroupeMessage" (
+	"IdGroupeMessage"	INTEGER NOT NULL UNIQUE,
+	"LabelGroupeMessage"	TEXT(100) NOT NULL UNIQUE,
+	PRIMARY KEY("IdGroupeMessage" AUTOINCREMENT),
+	UNIQUE("LabelGroupeMessage")
+);
+--
+-- T_TypeMessage
+--
+CREATE TABLE IF NOT EXISTS "T_TypeMessage" (
+	"IdTypeMessage"	INTEGER NOT NULL UNIQUE,
+	"LabelTypeMessage"	TEXT(20) NOT NULL UNIQUE,
+	PRIMARY KEY("IdTypeMessage" AUTOINCREMENT),
+	UNIQUE("LabelTypeMessage")
+);
+--
+-- T_Message
+--
+CREATE TABLE IF NOT EXISTS "T_Message" (
+	"IdMessage"	INTEGER NOT NULL UNIQUE,
+	"IdGroupeMessage"	INTEGER NOT NULL,
+	"IdTypeMessage"	INTEGER NOT NULL,
+	"CodeMessage"	TEXT(4) NOT NULL UNIQUE,
+	"Message"	TEXT(255) NOT NULL,
+	PRIMARY KEY("IdMessage" AUTOINCREMENT),
+	FOREIGN KEY("IdGroupeMessage") REFERENCES "T_GroupeMessage"("IdGroupeMessage"),
+	FOREIGN KEY("IdTypeMessage") REFERENCES "T_TypeMessage"("IdTypeMessage"),
+	UNIQUE("CodeMessage"),
+	UNIQUE("Message")
+);
+COMMIT;

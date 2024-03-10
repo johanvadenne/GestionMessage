@@ -45,12 +45,12 @@
             TP_GroupeMessage = new TabPage();
             comboBox1 = new ComboBox();
             Lb_ChercheMessage = new Label();
-            button1 = new Button();
-            button2 = new Button();
+            Btn_EnregistrerGroupeMessage = new Button();
+            Btn_NouveauGroupeMessage = new Button();
             button3 = new Button();
             button4 = new Button();
             Lb_LabelGroupeMessage = new Label();
-            textBox1 = new TextBox();
+            Tb_LabelGroupeMessage = new TextBox();
             TP_GestionMessage.SuspendLayout();
             TP_Message.SuspendLayout();
             TP_GroupeMessage.SuspendLayout();
@@ -195,12 +195,12 @@
             // 
             TP_GroupeMessage.Controls.Add(comboBox1);
             TP_GroupeMessage.Controls.Add(Lb_ChercheMessage);
-            TP_GroupeMessage.Controls.Add(button1);
-            TP_GroupeMessage.Controls.Add(button2);
+            TP_GroupeMessage.Controls.Add(Btn_EnregistrerGroupeMessage);
+            TP_GroupeMessage.Controls.Add(Btn_NouveauGroupeMessage);
             TP_GroupeMessage.Controls.Add(button3);
             TP_GroupeMessage.Controls.Add(button4);
             TP_GroupeMessage.Controls.Add(Lb_LabelGroupeMessage);
-            TP_GroupeMessage.Controls.Add(textBox1);
+            TP_GroupeMessage.Controls.Add(Tb_LabelGroupeMessage);
             TP_GroupeMessage.Location = new Point(4, 24);
             TP_GroupeMessage.Name = "TP_GroupeMessage";
             TP_GroupeMessage.Padding = new Padding(3);
@@ -226,23 +226,25 @@
             Lb_ChercheMessage.TabIndex = 13;
             Lb_ChercheMessage.Text = "cherche message";
             // 
-            // button1
+            // Btn_EnregistrerGroupeMessage
             // 
-            button1.Location = new Point(215, 148);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 10;
-            button1.Text = "Enregistrer";
-            button1.UseVisualStyleBackColor = true;
+            Btn_EnregistrerGroupeMessage.Location = new Point(215, 148);
+            Btn_EnregistrerGroupeMessage.Name = "Btn_EnregistrerGroupeMessage";
+            Btn_EnregistrerGroupeMessage.Size = new Size(75, 23);
+            Btn_EnregistrerGroupeMessage.TabIndex = 10;
+            Btn_EnregistrerGroupeMessage.Text = "Enregistrer";
+            Btn_EnregistrerGroupeMessage.UseVisualStyleBackColor = true;
+            Btn_EnregistrerGroupeMessage.Click += Btn_EnregistrerGroupeMessage_Click;
             // 
-            // button2
+            // Btn_NouveauGroupeMessage
             // 
-            button2.Location = new Point(134, 148);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 7;
-            button2.Text = "Nouveau";
-            button2.UseVisualStyleBackColor = true;
+            Btn_NouveauGroupeMessage.Location = new Point(134, 148);
+            Btn_NouveauGroupeMessage.Name = "Btn_NouveauGroupeMessage";
+            Btn_NouveauGroupeMessage.Size = new Size(75, 23);
+            Btn_NouveauGroupeMessage.TabIndex = 7;
+            Btn_NouveauGroupeMessage.Text = "Nouveau";
+            Btn_NouveauGroupeMessage.UseVisualStyleBackColor = true;
+            Btn_NouveauGroupeMessage.Click += Btn_NouveauGroupeMessage_Click;
             // 
             // button3
             // 
@@ -271,12 +273,12 @@
             Lb_LabelGroupeMessage.TabIndex = 1;
             Lb_LabelGroupeMessage.Text = "Label groupe message";
             // 
-            // textBox1
+            // Tb_LabelGroupeMessage
             // 
-            textBox1.Location = new Point(67, 105);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(266, 23);
-            textBox1.TabIndex = 0;
+            Tb_LabelGroupeMessage.Location = new Point(67, 105);
+            Tb_LabelGroupeMessage.Name = "Tb_LabelGroupeMessage";
+            Tb_LabelGroupeMessage.Size = new Size(266, 23);
+            Tb_LabelGroupeMessage.TabIndex = 0;
             // 
             // Fn_Message
             // 
@@ -286,6 +288,7 @@
             Controls.Add(TP_GestionMessage);
             Name = "Fn_Message";
             Text = "Message";
+            Load += Fn_Message_Load;
             TP_GestionMessage.ResumeLayout(false);
             TP_Message.ResumeLayout(false);
             TP_Message.PerformLayout();
@@ -309,13 +312,13 @@
         private TabControl TP_GestionMessage;
         private TabPage TP_Message;
         private TabPage TP_GroupeMessage;
-        private TextBox textBox1;
+        private TextBox Tb_LabelGroupeMessage;
         private ComboBox Cb_Code;
         private Label Lb_ChercheCode;
         private ComboBox comboBox1;
         private Label Lb_ChercheMessage;
-        private Button button1;
-        private Button button2;
+        private Button Btn_EnregistrerGroupeMessage;
+        private Button Btn_NouveauGroupeMessage;
         private Button button3;
         private Button button4;
         private Label Lb_LabelGroupeMessage;

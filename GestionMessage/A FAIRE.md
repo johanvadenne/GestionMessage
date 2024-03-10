@@ -1,0 +1,3 @@
+- Exeption
+- Injection SQL, requete préparer
+- procédure obligatoirement réecrite
