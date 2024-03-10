@@ -7,7 +7,7 @@ using System.Data.SQLite;
 
 namespace GestionMessage
 {
-    public class Cl_BDD
+    public abstract class Cl_BDD
     {
         //
         // variable
