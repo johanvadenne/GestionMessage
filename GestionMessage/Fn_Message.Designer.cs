@@ -178,15 +178,15 @@
             // Cb_Code
             // 
             Cb_Code.FormattingEnabled = true;
-            Cb_Code.Location = new Point(327, 17);
+            Cb_Code.Location = new Point(293, 17);
             Cb_Code.Name = "Cb_Code";
-            Cb_Code.Size = new Size(76, 23);
+            Cb_Code.Size = new Size(110, 23);
             Cb_Code.TabIndex = 12;
             // 
             // Lb_ChercheCode
             // 
             Lb_ChercheCode.AutoSize = true;
-            Lb_ChercheCode.Location = new Point(243, 20);
+            Lb_ChercheCode.Location = new Point(209, 20);
             Lb_ChercheCode.Name = "Lb_ChercheCode";
             Lb_ChercheCode.Size = new Size(78, 15);
             Lb_ChercheCode.TabIndex = 11;

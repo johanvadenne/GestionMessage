@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace GestionMessage
 {
-    public partial class Cl_AfficheMessage
+    public partial class Cl_AfficheMessageBox
     {
+        //
+        // Erreur
         public static void MessageErreur(string message)
         {
             MessageBox.Show(message, "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -18,7 +18,6 @@ namespace GestionMessage
         //
         private int _IdGroupeMessage;
         private string _LabelGroupeMessage;
-        private string Table = "T_GroupeMessage";
         //
         // constructeur
         //
@@ -29,7 +28,7 @@ namespace GestionMessage
 
             if (_LabelGroupeMessage.Length > 100) // vérifie la taille de _LabelGroupeMessageRecu
             {
-                Cl_AfficheMessage.MessageAlerte("Le label groupe message ne peux comporter plus de 100 charactères");
+                Cl_AfficheMessageBox.MessageAlerte("Le label groupe message ne peux comporter plus de 100 charactères");
             }
         }
         //
@@ -52,7 +51,7 @@ namespace GestionMessage
                 }
                 else
                 {
-                    Cl_AfficheMessage.MessageAlerte("Le label groupe message ne peux comporter plus de 100 charactères");
+                    Cl_AfficheMessageBox.MessageAlerte("Le label groupe message ne peux comporter plus de 100 charactères");
                 }
             }
         }
@@ -65,8 +64,8 @@ namespace GestionMessage
             {
                 // création de la requete
                 string requete =
-                    "INSERT INTO " + Table +
-                    " (LabelGroupeMessage) VALUES(@LabelGroupeMessage);";
+                    "INSERT INTO T_GroupeMessage " +
+                    "(LabelGroupeMessage) VALUES(@LabelGroupeMessage);";
 
                 SQLiteCommand command = new SQLiteCommand(requete, this.maConnexion); // créer la commande
 
@@ -78,7 +77,7 @@ namespace GestionMessage
             }
             else
             {
-                Cl_AfficheMessage.MessageAlerte("Le label groupe message ne peux comporter plus de 100 charactères");
+                Cl_AfficheMessageBox.MessageAlerte("Le label groupe message ne peux comporter plus de 100 charactères");
             }
         }
         //
@@ -90,7 +89,7 @@ namespace GestionMessage
             {
                 // création de la requete
                 string requete =
-                    "UPDATE " + Table +
+                    "UPDATE T_GroupeMessage " +
                     " SET LabelGroupeMessage = @LabelGroupeMessage" +
                     " WHERE IdGroupeMessage = @IdGroupeMessage;";
 
@@ -106,7 +105,7 @@ namespace GestionMessage
             }
             else
             {
-                Cl_AfficheMessage.MessageAlerte("Le label groupe message ne peux comporter plus de 100 charactères");
+                Cl_AfficheMessageBox.MessageAlerte("Le label groupe message ne peux comporter plus de 100 charactères");
             }
 }
         //
@@ -116,7 +115,7 @@ namespace GestionMessage
         {
             // création de la requete
             string requete =
-                "DELETE FROM " + Table +
+                "DELETE FROM T_GroupeMessage " +
                 " WHERE IdGroupeMessage = @IdGroupeMessage;";
             
             SQLiteCommand command = new SQLiteCommand(requete, this.maConnexion); // créer la commande

@@ -42,7 +42,7 @@ namespace GestionMessage
                 }
                 else
                 {
-                    Cl_AfficheMessage.MessageErreur("Le label groupe message ne peux comporter plus de 20 charactères");
+                    Cl_AfficheMessageBox.MessageErreur("Le label groupe message ne peux comporter plus de 20 charactères");
                 }
             }
         }

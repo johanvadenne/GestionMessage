@@ -69,10 +69,15 @@ namespace GestionMessage
             }
             catch
             {
-                Cl_AfficheMessage.MessageErreur("La liste n'a pas été charger corectement");
+                Cl_AfficheMessageBox.MessageErreur("La liste n'a pas été charger corectement");
             }
 
         }
+
+        // ######################################## //
+        // ############### ONGLET 2 ############### //
+        // ######################################## //
+
         //
         // evenement lors de la selection d'un élément de la liste
         //
@@ -103,7 +108,7 @@ namespace GestionMessage
             }
             catch
             {
-                Cl_AfficheMessage.MessageErreur("Imposible de selectionner un élément");
+                Cl_AfficheMessageBox.MessageErreur("Imposible de selectionner un élément");
             }
 
         }
@@ -124,7 +129,7 @@ namespace GestionMessage
             }
             catch
             {
-                Cl_AfficheMessage.MessageErreur("La création d'un nouveau groupe message à créer une erreur");
+                Cl_AfficheMessageBox.MessageErreur("La création d'un nouveau groupe message à créer une erreur");
             }
         }
         //
@@ -148,7 +153,7 @@ namespace GestionMessage
                     {
                         if (elementGroupeMessage.LabelGroupeMessage == GroupeMessageSelect.LabelGroupeMessage && GroupeMessageSelect != elementGroupeMessage)
                         {
-                            Cl_AfficheMessage.MessageAlerte("Il ne peux pas y avoir 2 même label groupe message");
+                            Cl_AfficheMessageBox.MessageAlerte("Il ne peux pas y avoir 2 même label groupe message");
                             return;
                         }
                     }
@@ -164,14 +169,14 @@ namespace GestionMessage
                 }
                 else
                 {
-                    Cl_AfficheMessage.MessageErreur("Il n'y a aucun enregistrement à effectuer");
+                    Cl_AfficheMessageBox.MessageErreur("Il n'y a aucun enregistrement à effectuer");
                 }
                 typeModification = ""; // plus de modification en cours
                 remplieListeGroupeMessage(); // initialise la liste
             }
             catch
             {
-                Cl_AfficheMessage.MessageErreur("L'enregistrement à provoquer une erreur");
+                Cl_AfficheMessageBox.MessageErreur("L'enregistrement à provoquer une erreur");
             }
         }
         //
@@ -203,7 +208,7 @@ namespace GestionMessage
             }
             catch
             {
-                Cl_AfficheMessage.MessageErreur("La suppression de l'élément à générer une erreur");
+                Cl_AfficheMessageBox.MessageErreur("La suppression de l'élément à générer une erreur");
             }
         }
         //
@@ -253,7 +258,7 @@ namespace GestionMessage
             }
             catch
             {
-                Cl_AfficheMessage.MessageErreur("Une erreur dans l'édition du texte à provoquer une erreur");
+                Cl_AfficheMessageBox.MessageErreur("Une erreur dans l'édition du texte à provoquer une erreur");
             }
         }
     }
