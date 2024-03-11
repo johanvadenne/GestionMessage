@@ -26,7 +26,7 @@ namespace GestionMessage
             _IdGroupeMessage = IdGroupeMessageRecu;
             _LabelGroupeMessage = LabelGroupeMessageRecu;
 
-            if (_LabelGroupeMessage.Length > 100) // vérifie la taille de _LabelGroupeMessageRecu
+            if (LabelGroupeMessage.Length > 100) // vérifie la taille de _LabelGroupeMessageRecu
             {
                 Cl_AfficheMessageBox.MessageAlerte("Le label groupe message ne peux comporter plus de 100 charactères");
             }
