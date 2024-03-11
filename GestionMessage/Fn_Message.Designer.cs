@@ -43,6 +43,7 @@
             Cb_Code = new ComboBox();
             Lb_ChercheCode = new Label();
             TP_GroupeMessage = new TabPage();
+            Lb_Indicateur = new Label();
             Cb_ChercheGroupeMessage = new ComboBox();
             Lb_ChercheGroupeMessage = new Label();
             Btn_EnregistrerGroupeMessage = new Button();
@@ -193,6 +194,7 @@
             // 
             // TP_GroupeMessage
             // 
+            TP_GroupeMessage.Controls.Add(Lb_Indicateur);
             TP_GroupeMessage.Controls.Add(Cb_ChercheGroupeMessage);
             TP_GroupeMessage.Controls.Add(Lb_ChercheGroupeMessage);
             TP_GroupeMessage.Controls.Add(Btn_EnregistrerGroupeMessage);
@@ -208,6 +210,16 @@
             TP_GroupeMessage.TabIndex = 1;
             TP_GroupeMessage.Text = "Groupe message";
             TP_GroupeMessage.UseVisualStyleBackColor = true;
+            // 
+            // Lb_Indicateur
+            // 
+            Lb_Indicateur.AutoSize = true;
+            Lb_Indicateur.ForeColor = Color.Red;
+            Lb_Indicateur.Location = new Point(339, 108);
+            Lb_Indicateur.Name = "Lb_Indicateur";
+            Lb_Indicateur.Size = new Size(66, 15);
+            Lb_Indicateur.TabIndex = 15;
+            Lb_Indicateur.Text = ">100 mots!";
             // 
             // Cb_ChercheGroupeMessage
             // 
@@ -288,7 +300,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(416, 262);
+            ClientSize = new Size(416, 259);
             Controls.Add(TP_GestionMessage);
             Name = "Fn_Message";
             StartPosition = FormStartPosition.CenterScreen;
@@ -327,5 +339,6 @@
         private Button Btn_SupprimerGroupeMessage;
         private Button Btn_ModifierGroupeMessage;
         private Label Lb_LabelGroupeMessage;
+        private Label Lb_Indicateur;
     }
 }
