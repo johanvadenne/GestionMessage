@@ -16,6 +16,9 @@ namespace GestionMessage
         string typeModificationMessage = "";
         string typeModificationGroupeMessage = "";
         string typeModificationTypeMessage = "";
+        const string GROUPE_MESSAGE = "GROUPE MESSAGE";
+        const string TYPE_MESSAGE = "TYPE MESSAGE";
+        delegate void AffichageChamp(bool valeur);
         //
         // initialisation affichage
         //
@@ -28,8 +31,8 @@ namespace GestionMessage
         //
         private void Fn_Message_Load(object sender, EventArgs e)
         {
-            remplieListeGroupeMessage();
-            remplieListeTypeMessage();
+            remplieListe(GROUPE_MESSAGE);
+            remplieListe(TYPE_MESSAGE);
             remplieListeMessage();
         }
         //
@@ -91,98 +94,90 @@ namespace GestionMessage
 
         }
         //
-        // Remplie la liste de groupe message
+        // Remplie les listes
         //
-        private void remplieListeGroupeMessage()
+        private void remplieListe(string nomListe)
         {
-            try
+            ComboBox CB_OngletEdition;
+            ComboBox CB_OngletPrincipale;
+            string requeteSQL;
+            AffichageChamp affichageChamp;
+
+            switch (nomListe)
             {
-                Cb_ChercheGroupeMessage.Items.Clear(); // supprime la liste
-                Cb_GroupeMessage.Items.Clear(); // supprime la liste
-
-                string requeteSQL = "SELECT IdGroupeMessage, LabelGroupeMessage FROM T_GroupeMessage;"; // Requete SQL
-                SQLiteCommand command = new SQLiteCommand(requeteSQL, BDD_SQLlite.connexion); // créer la commande
-
-                BDD_SQLlite.connexion.Open(); // Ouvre la connexion à la base
-                SQLiteDataReader reader = command.ExecuteReader(); // execute la commande en mode lecture
-
-                while (reader.Read()) // tant qu'il y a encore des données à lire
-                {
-                    int IdGroupeMessage = reader.GetInt32(0); // récupère la 1er colonne
-                    string LabelGroupeMessage = reader.GetString(1); // récupère la 2eme colonne
-
-                    Cl_GroupeMessage GroupeMessage = new Cl_GroupeMessage(IdGroupeMessage, LabelGroupeMessage); // j'instancie un nouveau Cl_GroupeMessage
-                    Cb_ChercheGroupeMessage.Items.Add(GroupeMessage); // ajoute l'instance dans la liste
-                    Cb_GroupeMessage.Items.Add(GroupeMessage); // ajoute l'instance dans la liste
-                }
-                reader.Close(); // ferme la lecture
-                BDD_SQLlite.connexion.Close(); // ferme la connexion à la base de données
-
-                // si je n'ai aucun élément
-                if (Cb_ChercheGroupeMessage.Items.Count == 0)
-                {
-                    Cb_ChercheGroupeMessage.Items.Add(new Cl_GroupeMessage(0, "Aucun groupe message"));
-                    AucunGroupeMessage(true); // affichage des élément
-                }
-                else
-                {
-                    AucunGroupeMessage(false); // affichage des élément
-                }
-
-                Cb_ChercheGroupeMessage.SelectedIndex = 0; // selectionne le premier élément par défaut
-            }
-            catch
-            {
-                Cl_AfficheMessageBox.MessageErreur("La liste n'a pas été charger corectement");
+                case GROUPE_MESSAGE:
+                    CB_OngletEdition = Cb_ChercheGroupeMessage;
+                    CB_OngletPrincipale = Cb_GroupeMessage;
+                    requeteSQL = "SELECT IdGroupeMessage, LabelGroupeMessage FROM T_GroupeMessage;"; // Requete SQL
+                    affichageChamp = AucunGroupeMessage;
+                    break;
+                case TYPE_MESSAGE:
+                    CB_OngletEdition = Cb_ChercheTypeMessage;
+                    CB_OngletPrincipale = Cb_TypeMessage;
+                    requeteSQL = "SELECT IdTypeMessage, LabelTypeMessage FROM T_TypeMessage;"; // Requete SQL
+                    affichageChamp = AucunTypeMessage;
+                    break;
+                default:
+                    Cl_AfficheMessageBox.MessageErreur("Une erreur de developpement c'est produite 1");
+                    return;
             }
 
-        }
-        //
-        // Remplie la liste de type message
-        //
-        private void remplieListeTypeMessage()
-        {
-            try
+            CB_OngletEdition.Items.Clear();
+            CB_OngletPrincipale.Items.Clear();
+
+            SQLiteCommand command = new SQLiteCommand(requeteSQL, BDD_SQLlite.connexion); // créer la commande
+
+            BDD_SQLlite.connexion.Open(); // Ouvre la connexion à la base
+            SQLiteDataReader reader = command.ExecuteReader(); // execute la commande en mode lecture
+
+            while (reader.Read()) // tant qu'il y a encore des données à lire
             {
-                Cb_ChercheTypeMessage.Items.Clear(); // supprime la liste
-                Cb_TypeMessage.Items.Clear(); // supprime la liste
-
-                string requeteSQL = "SELECT IdTypeMessage, LabelTypeMessage FROM T_TypeMessage;"; // Requete SQL
-                SQLiteCommand command = new SQLiteCommand(requeteSQL, BDD_SQLlite.connexion); // créer la commande
-
-                BDD_SQLlite.connexion.Open(); // Ouvre la connexion à la base
-                SQLiteDataReader reader = command.ExecuteReader(); // execute la commande en mode lecture
-
-                while (reader.Read()) // tant qu'il y a encore des données à lire
-                {
-                    int IdTypeMessage = reader.GetInt32(0); // récupère la 1er colonne
-                    string LabelTypeMessage = reader.GetString(1); // récupère la 2eme colonne
-
-                    Cl_TypeMessage TypeMessage = new Cl_TypeMessage(IdTypeMessage, LabelTypeMessage); // j'instancie un nouveau Cl_TypeMessage
-                    Cb_ChercheTypeMessage.Items.Add(TypeMessage); // ajoute l'instance dans la liste
-                    Cb_TypeMessage.Items.Add(TypeMessage); // ajoute l'instance dans la liste
+                int IdLu = reader.GetInt32(0); // récupère la 1er colonne
+                string LabelLu = reader.GetString(1); // récupère la 2eme colonne
+                
+                if (nomListe == GROUPE_MESSAGE) 
+                { 
+                    Cl_GroupeMessage valeurRajouter = new Cl_GroupeMessage(IdLu, LabelLu);
+                    CB_OngletEdition.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
+                    CB_OngletPrincipale.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
                 }
-                reader.Close(); // ferme la lecture
-                BDD_SQLlite.connexion.Close(); // ferme la connexion à la base de données
-
-                // si je n'ai aucun élément
-                if (Cb_ChercheTypeMessage.Items.Count == 0)
-                {
-                    Cb_ChercheTypeMessage.Items.Add(new Cl_TypeMessage(0, "Aucun type message"));
-                    AucunTypeMessage(true); // affichage des élément
+                else if (nomListe == TYPE_MESSAGE) 
+                { 
+                    Cl_TypeMessage valeurRajouter = new Cl_TypeMessage(IdLu, LabelLu);
+                    CB_OngletEdition.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
+                    CB_OngletPrincipale.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
                 }
-                else
-                {
-                    AucunTypeMessage(false); // affichage des élément
-                }
-
-                Cb_ChercheTypeMessage.SelectedIndex = 0; // selectionne le premier élément par défaut
+                else { Cl_AfficheMessageBox.MessageErreur("Une erreur de developpement c'est produite 2"); }
             }
-            catch
+            reader.Close(); // ferme la lecture
+            BDD_SQLlite.connexion.Close(); // ferme la connexion à la base de données
+
+            // si je n'ai aucun élément
+            if (CB_OngletEdition.Items.Count == 0)
             {
-                Cl_AfficheMessageBox.MessageErreur("La liste n'a pas été charger corectement");
+                if (nomListe == GROUPE_MESSAGE)
+                {
+                    Cl_GroupeMessage valeurRajouter = new Cl_GroupeMessage(0, "Aucune valeur");
+                    CB_OngletEdition.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
+                    CB_OngletPrincipale.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
+                }
+                else if (nomListe == TYPE_MESSAGE)
+                {
+                    Cl_TypeMessage valeurRajouter = new Cl_TypeMessage(0, "Aucune valeur");
+                    CB_OngletEdition.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
+                    CB_OngletPrincipale.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
+                }
+                else { Cl_AfficheMessageBox.MessageErreur("Une erreur de developpement c'est produite 3"); }
+
+                affichageChamp(true); // affichage des élément
+            }
+            else
+            {
+                affichageChamp(false); // affichage des élément
             }
 
+            CB_OngletEdition.SelectedIndex = 0; // selectionne le premier élément par défaut
+            CB_OngletPrincipale.SelectedIndex = 0; // selectionne le premier élément par défaut
         }
 
         // ############################################## //
@@ -331,8 +326,8 @@ namespace GestionMessage
             }
 
             typeModificationMessage = "";
-            remplieListeGroupeMessage();
-            remplieListeTypeMessage();
+            remplieListe(GROUPE_MESSAGE);
+            remplieListe(TYPE_MESSAGE);
             remplieListeMessage();
         }
         //
@@ -361,16 +356,16 @@ namespace GestionMessage
                     else
                     {
                         MessageSelect.delete(); // supprsion de l'élément
-                        remplieListeGroupeMessage();
-                        remplieListeTypeMessage();
+                        remplieListe(GROUPE_MESSAGE);
+                        remplieListe(TYPE_MESSAGE);
                         remplieListeMessage();
                     }
                 }
                 else
                 {
                     typeModificationMessage = "";  // plus de modification en cours
-                    remplieListeGroupeMessage();
-                    remplieListeTypeMessage();
+                    remplieListe(GROUPE_MESSAGE);
+                    remplieListe(TYPE_MESSAGE);
                     remplieListeMessage();
                 }
             }
@@ -508,7 +503,7 @@ namespace GestionMessage
                     Cl_AfficheMessageBox.MessageErreur("Il n'y a aucun enregistrement à effectuer");
                 }
                 typeModificationGroupeMessage = ""; // plus de modification en cours
-                remplieListeGroupeMessage(); // initialise la liste
+                remplieListe(GROUPE_MESSAGE); // initialise la liste
             }
             catch
             {
@@ -533,13 +528,13 @@ namespace GestionMessage
                     else
                     {
                         GroupeMessageSelect.delete(); // supprsion de l'élément
-                        remplieListeGroupeMessage(); // initialise la liste
+                        remplieListe(GROUPE_MESSAGE); // initialise la liste
                     }
                 }
                 else
                 {
                     typeModificationGroupeMessage = "";  // plus de modification en cours
-                    remplieListeGroupeMessage(); // initialise la liste
+                    remplieListe(GROUPE_MESSAGE); // initialise la liste
                 }
             }
             catch
@@ -684,7 +679,7 @@ namespace GestionMessage
                     Cl_AfficheMessageBox.MessageErreur("Il n'y a aucun enregistrement à effectuer");
                 }
                 typeModificationTypeMessage = ""; // plus de modification en cours
-                remplieListeTypeMessage(); // initialise la liste
+                remplieListe(TYPE_MESSAGE); // initialise la liste
             }
             catch
             {
@@ -717,13 +712,13 @@ namespace GestionMessage
                     else
                     {
                         TypeMessageSelect.delete(); // supprsion de l'élément
-                        remplieListeTypeMessage(); // initialise la liste
+                        remplieListe(TYPE_MESSAGE); // initialise la liste
                     }
                 }
                 else
                 {
                     typeModificationTypeMessage = "";  // plus de modification en cours
-                    remplieListeTypeMessage(); // initialise la liste
+                    remplieListe(TYPE_MESSAGE); // initialise la liste
                 }
             }
             catch
