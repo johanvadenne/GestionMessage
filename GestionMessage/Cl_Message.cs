@@ -177,6 +177,7 @@ namespace GestionMessage
             command.Parameters.AddWithValue("@IdTypeMessage", IdTypeMessage);
             command.Parameters.AddWithValue("@CodeMessage", CodeMessage);
             command.Parameters.AddWithValue("@Message", Message);
+            command.Parameters.AddWithValue("@IdMessage", IdMessage);
 
             this.maConnexion.Open(); // ouvre la connexion à la base de données
             command.ExecuteNonQuery(); // execute la requête

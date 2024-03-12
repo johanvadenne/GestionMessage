@@ -223,6 +223,7 @@
             Cb_CodeMessage.Name = "Cb_CodeMessage";
             Cb_CodeMessage.Size = new Size(88, 23);
             Cb_CodeMessage.TabIndex = 12;
+            Cb_CodeMessage.SelectedIndexChanged += Cb_CodeMessage_SelectedIndexChanged;
             // 
             // Lb_ChercheCode
             // 
