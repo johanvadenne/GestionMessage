@@ -13,12 +13,15 @@ namespace GestionMessage
         Cl_ConnexionBDD BDD_SQLlite = new Cl_ConnexionBDD();
         const string UPDATE = "UPDATE";
         const string INSERT = "INSERT";
-        string typeModificationMessage = "";
-        string typeModificationGroupeMessage = "";
-        string typeModificationTypeMessage = "";
+
         const string GROUPE_MESSAGE = "GROUPE MESSAGE";
         const string TYPE_MESSAGE = "TYPE MESSAGE";
         const string MESSAGE = "MESSAGE";
+        
+        string typeModificationMessage = "";
+        string typeModificationGroupeMessage = "";
+        string typeModificationTypeMessage = "";
+
         delegate void AffichageChamp(bool valeur);
         //
         // initialisation affichage
@@ -32,131 +35,7 @@ namespace GestionMessage
         //
         private void Fn_Message_Load(object sender, EventArgs e)
         {
-            remplieListe(GROUPE_MESSAGE);
-            remplieListe(TYPE_MESSAGE);
-            remplieListe(MESSAGE);
-        }
-        //
-        // Remplie les listes
-        //
-        private void remplieListe(string nomListe)
-        {
-            ComboBox CB_OngletEdition;
-            ComboBox CB_OngletPrincipale;
-            string requeteSQL;
-            AffichageChamp affichageChamp;
-
-            switch (nomListe)
-            {
-                case GROUPE_MESSAGE:
-                    CB_OngletEdition = Cb_ChercheGroupeMessage;
-                    CB_OngletPrincipale = Cb_GroupeMessage;
-                    requeteSQL = "SELECT IdGroupeMessage, LabelGroupeMessage FROM T_GroupeMessage;"; // Requete SQL
-                    affichageChamp = AucunGroupeMessage;
-                    break;
-                case TYPE_MESSAGE:
-                    CB_OngletEdition = Cb_ChercheTypeMessage;
-                    CB_OngletPrincipale = Cb_TypeMessage;
-                    requeteSQL = "SELECT IdTypeMessage, LabelTypeMessage FROM T_TypeMessage;"; // Requete SQL
-                    affichageChamp = AucunTypeMessage;
-                    break;
-                case MESSAGE:
-                    CB_OngletEdition = Cb_CodeMessage;
-                    CB_OngletPrincipale = new ComboBox(); // évite l'erreur
-                    requeteSQL = """
-                        SELECT 
-                            IdMessage, 
-                            IdGroupeMessage, 
-                            IdTypeMessage, 
-                            CodeMessage, 
-                            Message
-                        FROM 
-                            T_Message;
-                        """; // Requete SQL
-                    affichageChamp = AucunMessage;
-                    break;
-                default:
-                    Cl_AfficheMessageBox.MessageErreur("Une erreur de developpement c'est produite 1");
-                    return;
-            }
-
-            CB_OngletEdition.Items.Clear();
-            CB_OngletPrincipale.Items.Clear();
-
-            SQLiteCommand command = new SQLiteCommand(requeteSQL, BDD_SQLlite.connexion); // créer la commande
-
-            BDD_SQLlite.connexion.Open(); // Ouvre la connexion à la base
-            SQLiteDataReader reader = command.ExecuteReader(); // execute la commande en mode lecture
-
-            while (reader.Read()) // tant qu'il y a encore des données à lire
-            {
-                if (nomListe == MESSAGE)
-                {
-                    int IdMessageLu = reader.GetInt32(0); // récupère la 1er colonne
-                    int IdGroupeMessageLu = reader.GetInt32(1); // récupère la 2eme colonne
-                    int IdTypeMessageLu = reader.GetInt32(2); // récupère la 2eme colonne
-                    string CodeLu = reader.GetString(3); // récupère la 2eme colonne
-                    string MessageLu = reader.GetString(4); // récupère la 2eme colonne
-
-                    Cl_Message valeurRajouter = new Cl_Message(IdMessageLu, IdGroupeMessageLu, IdTypeMessageLu, CodeLu, MessageLu);
-                    CB_OngletEdition.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
-                    CB_OngletPrincipale.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
-                }
-                else
-                {
-                    int IdLu = reader.GetInt32(0); // récupère la 1er colonne
-                    string LabelLu = reader.GetString(1); // récupère la 2eme colonne
-                
-                    if (nomListe == GROUPE_MESSAGE) 
-                    { 
-                        Cl_GroupeMessage valeurRajouter = new Cl_GroupeMessage(IdLu, LabelLu);
-                        CB_OngletEdition.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
-                        CB_OngletPrincipale.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
-                    }
-                    else if (nomListe == TYPE_MESSAGE) 
-                    { 
-                        Cl_TypeMessage valeurRajouter = new Cl_TypeMessage(IdLu, LabelLu);
-                        CB_OngletEdition.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
-                        CB_OngletPrincipale.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
-                    }
-                    else { Cl_AfficheMessageBox.MessageErreur("Une erreur de developpement c'est produite 2"); }
-                }
-            }
-            reader.Close(); // ferme la lecture
-            BDD_SQLlite.connexion.Close(); // ferme la connexion à la base de données
-
-            // si je n'ai aucun élément
-            if (CB_OngletEdition.Items.Count == 0)
-            {
-                if (nomListe == GROUPE_MESSAGE)
-                {
-                    Cl_GroupeMessage valeurRajouter = new Cl_GroupeMessage(0, "Aucun groupe message");
-                    CB_OngletEdition.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
-                    CB_OngletPrincipale.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
-                }
-                else if (nomListe == TYPE_MESSAGE)
-                {
-                    Cl_TypeMessage valeurRajouter = new Cl_TypeMessage(0, "Aucun type de message");
-                    CB_OngletEdition.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
-                    CB_OngletPrincipale.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
-                }
-                else if (nomListe == MESSAGE)
-                {
-                    Cl_Message valeurRajouter = new Cl_Message(0, 0, 0, "XXXX", "Aucun message");
-                    CB_OngletEdition.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
-                    CB_OngletPrincipale.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
-                }
-                else { Cl_AfficheMessageBox.MessageErreur("Une erreur de developpement c'est produite 3"); }
-
-                affichageChamp(true); // affichage des élément
-            }
-            else
-            {
-                affichageChamp(false); // affichage des élément
-            }
-
-            CB_OngletEdition.SelectedIndex = 0; // selectionne le premier élément par défaut
-            CB_OngletPrincipale.SelectedIndex = 0; // selectionne le premier élément par défaut
+            initialisationListes();
         }
 
         // ############################################## //
@@ -213,9 +92,11 @@ namespace GestionMessage
                 if (typeModificationMessage == INSERT) // si une modification
                 {
                     Cb_CodeMessage.Items.RemoveAt(Cb_CodeMessage.SelectedIndex); // je supprime l'élément
+                    Cl_GroupeMessage groupeMessageSelectionner = Cb_GroupeMessage.SelectedItem as Cl_GroupeMessage;
+                    Cl_TypeMessage typeMessageSelectionner = Cb_TypeMessage.SelectedItem as Cl_TypeMessage;
 
                     // j'instancie un nouveau message avec le nouveau texte
-                    Cl_Message nouveauMessage = new Cl_Message(0, 0, 0, Tb_CodeMessage.Text, Tb_Message.Text);
+                    Cl_Message nouveauMessage = new Cl_Message(0, groupeMessageSelectionner, typeMessageSelectionner, Tb_CodeMessage.Text, Tb_Message.Text);
                     Cb_CodeMessage.Items.Add(nouveauMessage); // je l'ajoute dans la liste
                     Cb_CodeMessage.SelectedItem = nouveauMessage; // je selectionne l'élément qui vient d'etre ajouter
                 }
@@ -239,25 +120,7 @@ namespace GestionMessage
         //
         private void Btn_NouveauMessage_Click(object sender, EventArgs e)
         {
-            try
-            {
-                typeModificationMessage = INSERT; // repère pour savoir que fait l'utilisateur
-
-                Cl_Message nouveauMessage = new Cl_Message(0, 0, 0, "XXXX", "Aucun message"); // Créez un nouvel objet Cl_Message
-                Cb_CodeMessage.Items.Add(nouveauMessage); // ajout dans la liste
-                Cb_CodeMessage.SelectedItem = nouveauMessage; // selectionne la nouvelle valeur ajouter
-                Tb_Message.Text = nouveauMessage.Message;
-                Tb_CodeMessage.Text = nouveauMessage.CodeMessage;
-
-                Cb_GroupeMessage.SelectedIndex = 0;
-                Cb_TypeMessage.SelectedIndex = 0;
-
-                editeMessage(); // affichage des élément
-            }
-            catch
-            {
-                Cl_AfficheMessageBox.MessageErreur("La création d'un nouveau  message à créer une erreur");
-            }
+            ajouterValeur(MESSAGE);
         }
         //
         // evenement bouton "enregistrer message"
@@ -270,15 +133,13 @@ namespace GestionMessage
 
             int IdGroupMessageSelect = 0;
             int IdTypeMessageSelect = 0;
-            if (GroupeMessageSelect != null) { IdGroupMessageSelect = GroupeMessageSelect.IdGroupeMessage; }
-            if (TypeMessageSelect != null) { IdTypeMessageSelect = TypeMessageSelect.IdTypeMessage; }
 
             if (typeModificationMessage == INSERT)
             {
                 if (MessageSelect != null)
                 {
-                    MessageSelect.IdGroupeMessage = IdGroupMessageSelect;
-                    MessageSelect.IdTypeMessage = IdTypeMessageSelect;
+                    MessageSelect.GroupeMessage = GroupeMessageSelect;
+                    MessageSelect.TypeMessage = TypeMessageSelect;
                     MessageSelect.CodeMessage = Tb_CodeMessage.Text;
                     MessageSelect.Message = Tb_Message.Text;
                     MessageSelect.insert();
@@ -292,8 +153,8 @@ namespace GestionMessage
             {
                 if (MessageSelect != null)
                 {
-                    MessageSelect.IdGroupeMessage = IdGroupMessageSelect;
-                    MessageSelect.IdTypeMessage = IdTypeMessageSelect;
+                    MessageSelect.GroupeMessage = GroupeMessageSelect;
+                    MessageSelect.TypeMessage = TypeMessageSelect;
                     MessageSelect.CodeMessage = Tb_CodeMessage.Text;
                     MessageSelect.Message = Tb_Message.Text;
                     MessageSelect.update();
@@ -305,9 +166,7 @@ namespace GestionMessage
             }
 
             typeModificationMessage = "";
-            remplieListe(GROUPE_MESSAGE);
-            remplieListe(TYPE_MESSAGE);
-            remplieListe(MESSAGE);
+            initialisationListes();
         }
         //
         // evenement bouton "modifier message"
@@ -322,36 +181,7 @@ namespace GestionMessage
         //
         private void Btn_SupprimerMessage_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (typeModificationMessage == "")
-                {
-                    typeModificationMessage = "";  // plus de modification en cours
-                    Cl_Message MessageSelect = Cb_CodeMessage.SelectedItem as Cl_Message; // récupère l'instance selectionner dans la liste
-                    if (MessageSelect == null) // si la valeur selectionner n'est pas une classe Cl_GroupeMessage
-                    {
-                        throw new InvalidOperationException(""); // lever une exeption
-                    }
-                    else
-                    {
-                        MessageSelect.delete(); // supprsion de l'élément
-                        remplieListe(GROUPE_MESSAGE);
-                        remplieListe(TYPE_MESSAGE);
-                        remplieListe(MESSAGE);
-                    }
-                }
-                else
-                {
-                    typeModificationMessage = "";  // plus de modification en cours
-                    remplieListe(GROUPE_MESSAGE);
-                    remplieListe(TYPE_MESSAGE);
-                    remplieListe(MESSAGE);
-                }
-            }
-            catch
-            {
-                Cl_AfficheMessageBox.MessageErreur("La suppression de l'élément à générer une erreur");
-            }
+            supprimeValeur(MESSAGE);
         }
 
         // ##################################################### //
@@ -427,20 +257,7 @@ namespace GestionMessage
         //
         private void Btn_NouveauGroupeMessage_Click(object sender, EventArgs e)
         {
-            try
-            {
-                Cl_GroupeMessage nouveauGroupeMessage = new Cl_GroupeMessage(0, "Nouveau label groupe message"); // Créez un nouvel objet Cl_GroupeMessage
-                Cb_ChercheGroupeMessage.Items.Add(nouveauGroupeMessage); // ajout dans la liste
-                Cb_ChercheGroupeMessage.SelectedItem = nouveauGroupeMessage; // selectionne la nouvelle valeur ajouter
-                Tb_LabelGroupeMessage.Text = "Nouveau label groupe message";
-
-                editeGroupeMessage(); // affichage des élément
-                typeModificationGroupeMessage = INSERT; // repère pour savoir que fait l'utilisateur
-            }
-            catch
-            {
-                Cl_AfficheMessageBox.MessageErreur("La création d'un nouveau groupe message à créer une erreur");
-            }
+            ajouterValeur(GROUPE_MESSAGE);
         }
         //
         // evenement bouton "enregistrer groupe message"
@@ -482,7 +299,7 @@ namespace GestionMessage
                     Cl_AfficheMessageBox.MessageErreur("Il n'y a aucun enregistrement à effectuer");
                 }
                 typeModificationGroupeMessage = ""; // plus de modification en cours
-                remplieListe(GROUPE_MESSAGE); // initialise la liste
+                initialisationListes();
             }
             catch
             {
@@ -494,32 +311,7 @@ namespace GestionMessage
         //
         private void Btn_SupprimerGroupeMessage_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (typeModificationGroupeMessage == "")
-                {
-                    typeModificationGroupeMessage = "";  // plus de modification en cours
-                    Cl_GroupeMessage GroupeMessageSelect = Cb_ChercheGroupeMessage.SelectedItem as Cl_GroupeMessage; // récupère l'instance selectionner dans la liste
-                    if (GroupeMessageSelect == null) // si la valeur selectionner n'est pas une classe Cl_GroupeMessage
-                    {
-                        throw new InvalidOperationException(""); // lever une exeption
-                    }
-                    else
-                    {
-                        GroupeMessageSelect.delete(); // supprsion de l'élément
-                        remplieListe(GROUPE_MESSAGE); // initialise la liste
-                    }
-                }
-                else
-                {
-                    typeModificationGroupeMessage = "";  // plus de modification en cours
-                    remplieListe(GROUPE_MESSAGE); // initialise la liste
-                }
-            }
-            catch
-            {
-                Cl_AfficheMessageBox.MessageErreur("La suppression de l'élément à générer une erreur");
-            }
+            supprimeValeur(GROUPE_MESSAGE);
         }
         //
         // evenement bouton "modifier groupe message"
@@ -530,9 +322,9 @@ namespace GestionMessage
             editeGroupeMessage();
         }
 
-        // ##################################################### //
+        // ################################################### //
         // ############### ONGLET TYPE MESSAGE ############### //
-        // ##################################################### //
+        // ################################################### //
 
         //
         // evenement lors de la selection d'un élément de la liste
@@ -603,20 +395,7 @@ namespace GestionMessage
         //
         private void Btn_NouveauTypeMessage_Click(object sender, EventArgs e)
         {
-            try
-            {
-                Cl_TypeMessage nouveauTypeMessage = new Cl_TypeMessage(0, "Nouveau type message"); // Créez un nouvel objet Cl_TypeMessage
-                Cb_ChercheTypeMessage.Items.Add(nouveauTypeMessage); // ajout dans la liste
-                Cb_ChercheTypeMessage.SelectedItem = nouveauTypeMessage; // selectionne la nouvelle valeur ajouter
-                Tb_LabelTypeMessage.Text = "Nouveau type message";
-
-                editeTypeMessage(); // affichage des élément
-                typeModificationTypeMessage = INSERT; // repère pour savoir que fait l'utilisateur
-            }
-            catch
-            {
-                Cl_AfficheMessageBox.MessageErreur("La création d'un nouveau type message à créer une erreur");
-            }
+            ajouterValeur(TYPE_MESSAGE);
         }
         //
         // evenement bouton "enregistrer type message"
@@ -658,7 +437,7 @@ namespace GestionMessage
                     Cl_AfficheMessageBox.MessageErreur("Il n'y a aucun enregistrement à effectuer");
                 }
                 typeModificationTypeMessage = ""; // plus de modification en cours
-                remplieListe(TYPE_MESSAGE); // initialise la liste
+                initialisationListes(); // initialise la liste
             }
             catch
             {
@@ -678,38 +457,273 @@ namespace GestionMessage
         //
         private void Btn_SupprimerTypeMessage_Click(object sender, EventArgs e)
         {
-            try
+            supprimeValeur(TYPE_MESSAGE);
+        }
+
+        // ############################################ //
+        // ############### modification ############### //
+        // ############################################ //
+
+        //
+        // Suppression
+        //
+        private void supprimeValeur(string nomListe)
+        {
+            ComboBox CB_OngletEdition;
+            switch (nomListe)
             {
-                if (typeModificationTypeMessage == "")
+                case GROUPE_MESSAGE:
+                    CB_OngletEdition = Cb_ChercheGroupeMessage;
+                    break;
+                case TYPE_MESSAGE:
+                    CB_OngletEdition = Cb_ChercheTypeMessage;
+                    break;
+                case MESSAGE:
+                    CB_OngletEdition = Cb_CodeMessage;
+                    break;
+                default:
+                    Cl_AfficheMessageBox.MessageErreur("Une erreur de developpement c'est produite 1");
+                    return;
+            }
+
+            if (typeModificationTypeMessage == "")
+            {
+                typeModificationTypeMessage = "";
+                if (CB_OngletEdition.SelectedItem != null)
                 {
-                    typeModificationTypeMessage = "";  // plus de modification en cours
-                    Cl_TypeMessage TypeMessageSelect = Cb_ChercheTypeMessage.SelectedItem as Cl_TypeMessage; // récupère l'instance selectionner dans la liste
-                    if (TypeMessageSelect == null) // si la valeur selectionner n'est pas une classe Cl_TypeMessage
+                    switch (nomListe)
                     {
-                        throw new InvalidOperationException(""); // lever une exeption
-                    }
-                    else
-                    {
-                        TypeMessageSelect.delete(); // supprsion de l'élément
-                        remplieListe(TYPE_MESSAGE); // initialise la liste
+                        case GROUPE_MESSAGE:
+                            Cl_GroupeMessage elementGroupeMessage = CB_OngletEdition.SelectedItem as Cl_GroupeMessage;
+                            elementGroupeMessage.delete();
+                            break;
+                        case TYPE_MESSAGE:
+                            Cl_TypeMessage elementTypeMessage = CB_OngletEdition.SelectedItem as Cl_TypeMessage;
+                            elementTypeMessage.delete();
+                            break;
+                        case MESSAGE:
+                            Cl_Message elementMessage = CB_OngletEdition.SelectedItem as Cl_Message;
+                            elementMessage.delete();
+                            break;
+                        default:
+                            Cl_AfficheMessageBox.MessageErreur("Une erreur de developpement c'est produite 1");
+                            return;
                     }
                 }
-                else
-                {
-                    typeModificationTypeMessage = "";  // plus de modification en cours
-                    remplieListe(TYPE_MESSAGE); // initialise la liste
-                }
             }
-            catch
+            else
             {
-                Cl_AfficheMessageBox.MessageErreur("La suppression de l'élément à générer une erreur");
+                typeModificationTypeMessage = "";
             }
+
+            initialisationListes();
+        }
+        //
+        // Nouveau
+        //
+        private void ajouterValeur(string nomListe)
+        {
+            Cl_TypeMessage nouveauTypeMessage = new Cl_TypeMessage(0, "Nouveau type message"); // Créez un nouvel objet Cl_TypeMessage
+            Cl_GroupeMessage nouveauGroupeMessage = new Cl_GroupeMessage(0, "Nouveau label groupe message"); // Créez un nouvel objet Cl_GroupeMessage
+
+            switch (nomListe)
+            {
+                case GROUPE_MESSAGE:
+                    Cb_ChercheGroupeMessage.Items.Add(nouveauGroupeMessage); // ajout dans la liste
+                    Cb_ChercheGroupeMessage.SelectedItem = nouveauGroupeMessage; // selectionne la nouvelle valeur ajouter
+                    Tb_LabelGroupeMessage.Text = "Nouveau label groupe message";
+
+                    typeModificationGroupeMessage = INSERT; // repère pour savoir que fait l'utilisateur
+                    editeGroupeMessage();
+                    break;
+                case TYPE_MESSAGE:
+                    Cb_ChercheTypeMessage.Items.Add(nouveauTypeMessage); // ajout dans la liste
+                    Cb_ChercheTypeMessage.SelectedItem = nouveauTypeMessage; // selectionne la nouvelle valeur ajouter
+                    Tb_LabelTypeMessage.Text = "Nouveau type message";
+
+                    typeModificationTypeMessage = INSERT; // repère pour savoir que fait l'utilisateur
+                    editeTypeMessage();
+                    break;
+                case MESSAGE:
+                    typeModificationMessage = INSERT; // repère pour savoir que fait l'utilisateur
+                    
+                    Cl_Message nouveauMessage = new Cl_Message(0, nouveauGroupeMessage, nouveauTypeMessage, "XXXX", "Aucun message"); // Créez un nouvel objet Cl_Message
+                    Cb_CodeMessage.Items.Add(nouveauMessage); // ajout dans la liste
+                    Cb_CodeMessage.SelectedItem = nouveauMessage; // selectionne la nouvelle valeur ajouter
+                    Tb_Message.Text = nouveauMessage.Message;
+                    Tb_CodeMessage.Text = nouveauMessage.CodeMessage;
+
+                    Cb_GroupeMessage.SelectedIndex = 0;
+                    Cb_TypeMessage.SelectedIndex = 0;
+                    editeMessage();
+                    break;
+                default:
+                    Cl_AfficheMessageBox.MessageErreur("Une erreur de developpement c'est produite 1");
+                    return;
+            }
+
+            editeGroupeMessage();
+
         }
 
         // #################################################### //
         // ############### Affichage des champs ############### //
         // #################################################### //
 
+        //
+        // initialisation liste
+        //
+        private void initialisationListes()
+        {
+            remplieListe(TYPE_MESSAGE);
+            remplieListe(GROUPE_MESSAGE);
+            remplieListe(MESSAGE);
+        }
+        //
+        // Remplie les listes
+        //
+        private void remplieListe(string nomListe)
+        {
+            ComboBox CB_OngletEdition;
+            ComboBox CB_OngletPrincipale;
+            string requeteSQL;
+            AffichageChamp affichageChamp;
+
+            switch (nomListe)
+            {
+                case GROUPE_MESSAGE:
+                    CB_OngletEdition = Cb_ChercheGroupeMessage;
+                    CB_OngletPrincipale = Cb_GroupeMessage;
+                    requeteSQL = "SELECT IdGroupeMessage, LabelGroupeMessage FROM T_GroupeMessage;"; // Requete SQL
+                    affichageChamp = AucunGroupeMessage;
+                    break;
+                case TYPE_MESSAGE:
+                    CB_OngletEdition = Cb_ChercheTypeMessage;
+                    CB_OngletPrincipale = Cb_TypeMessage;
+                    requeteSQL = "SELECT IdTypeMessage, LabelTypeMessage FROM T_TypeMessage;"; // Requete SQL
+                    affichageChamp = AucunTypeMessage;
+                    break;
+                case MESSAGE:
+                    CB_OngletEdition = Cb_CodeMessage;
+                    CB_OngletPrincipale = new ComboBox(); // évite l'erreur
+                    requeteSQL = """
+                        SELECT 
+                            IdMessage, 
+                            IdGroupeMessage, 
+                            IdTypeMessage, 
+                            CodeMessage, 
+                            Message
+                        FROM 
+                            T_Message;
+                        """; // Requete SQL
+                    affichageChamp = AucunMessage;
+                    break;
+                default:
+                    Cl_AfficheMessageBox.MessageErreur("Une erreur de developpement c'est produite 1");
+                    return;
+            }
+
+            CB_OngletEdition.Items.Clear();
+            CB_OngletPrincipale.Items.Clear();
+
+            SQLiteCommand command = new SQLiteCommand(requeteSQL, BDD_SQLlite.connexion); // créer la commande
+
+            BDD_SQLlite.connexion.Open(); // Ouvre la connexion à la base
+            SQLiteDataReader reader = command.ExecuteReader(); // execute la commande en mode lecture
+
+            while (reader.Read()) // tant qu'il y a encore des données à lire
+            {
+                if (nomListe == MESSAGE)
+                {
+                    int IdMessageLu = reader.GetInt32(0); // récupère la 1er colonne
+                    int IdGroupeMessageLu = reader.GetInt32(1); // récupère la 2eme colonne
+                    int IdTypeMessageLu = reader.GetInt32(2); // récupère la 2eme colonne
+                    string CodeLu = reader.GetString(3); // récupère la 2eme colonne
+                    string MessageLu = reader.GetString(4); // récupère la 2eme colonne
+
+                    Cl_GroupeMessage groupeMessageLu = null;
+                    Cl_TypeMessage typeMessageLu = null;
+
+                    foreach (Cl_GroupeMessage groupeMessageTrouver in Cb_ChercheGroupeMessage.Items)
+                    {
+                        if (groupeMessageTrouver.IdGroupeMessage == IdGroupeMessageLu) { groupeMessageLu = groupeMessageTrouver; }
+                    }
+                    foreach (Cl_TypeMessage typeMessageTrouver in Cb_ChercheTypeMessage.Items)
+                    {
+                        if (typeMessageTrouver.IdTypeMessage == IdGroupeMessageLu) { typeMessageLu = typeMessageTrouver; }
+                    }
+
+                    if (groupeMessageLu == null)
+                    {
+                        Cl_AfficheMessageBox.MessageAlerte("Le message " + CodeLu + "n'est pas lié à de groupe message\ncontacté les développeurs.");
+                        return;
+                    }
+                    else if (typeMessageLu == null)
+                    {
+                        Cl_AfficheMessageBox.MessageAlerte("Le message " + CodeLu + "n'est pas lié à de type message\ncontacté les développeurs.");
+                        return;
+                    }
+
+                    Cl_Message valeurRajouter = new Cl_Message(IdMessageLu, groupeMessageLu, typeMessageLu, CodeLu, MessageLu);
+                    CB_OngletEdition.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
+                    CB_OngletPrincipale.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
+                }
+                else
+                {
+                    int IdLu = reader.GetInt32(0); // récupère la 1er colonne
+                    string LabelLu = reader.GetString(1); // récupère la 2eme colonne
+
+                    if (nomListe == GROUPE_MESSAGE)
+                    {
+                        Cl_GroupeMessage valeurRajouter = new Cl_GroupeMessage(IdLu, LabelLu);
+                        CB_OngletEdition.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
+                        CB_OngletPrincipale.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
+                    }
+                    else if (nomListe == TYPE_MESSAGE)
+                    {
+                        Cl_TypeMessage valeurRajouter = new Cl_TypeMessage(IdLu, LabelLu);
+                        CB_OngletEdition.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
+                        CB_OngletPrincipale.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
+                    }
+                    else { Cl_AfficheMessageBox.MessageErreur("Une erreur de developpement c'est produite 2"); }
+                }
+            }
+            reader.Close(); // ferme la lecture
+            BDD_SQLlite.connexion.Close(); // ferme la connexion à la base de données
+
+            // si je n'ai aucun élément
+            if (CB_OngletEdition.Items.Count == 0)
+            {
+                Cl_GroupeMessage valeurGroupeMessageRajouter = new Cl_GroupeMessage(0, "Aucun groupe message");
+                Cl_TypeMessage valeurTypeMessageRajouter = new Cl_TypeMessage(0, "Aucun type de message");
+                if (nomListe == GROUPE_MESSAGE)
+                {
+                    CB_OngletEdition.Items.Add(valeurGroupeMessageRajouter); // ajoute l'instance dans la liste
+                    CB_OngletPrincipale.Items.Add(valeurGroupeMessageRajouter); // ajoute l'instance dans la liste
+                }
+                else if (nomListe == TYPE_MESSAGE)
+                {
+                    CB_OngletEdition.Items.Add(valeurTypeMessageRajouter); // ajoute l'instance dans la liste
+                    CB_OngletPrincipale.Items.Add(valeurTypeMessageRajouter); // ajoute l'instance dans la liste
+                }
+                else if (nomListe == MESSAGE)
+                {
+                    Cl_Message valeurRajouter = new Cl_Message(0, valeurGroupeMessageRajouter, valeurTypeMessageRajouter, "XXXX", "Aucun message");
+                    CB_OngletEdition.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
+                    CB_OngletPrincipale.Items.Add(valeurRajouter); // ajoute l'instance dans la liste
+                }
+                else { Cl_AfficheMessageBox.MessageErreur("Une erreur de developpement c'est produite 3"); }
+
+                affichageChamp(true); // affichage des élément
+            }
+            else
+            {
+                affichageChamp(false); // affichage des élément
+            }
+
+            CB_OngletEdition.SelectedIndex = 0; // selectionne le premier élément par défaut
+            CB_OngletPrincipale.SelectedIndex = 0; // selectionne le premier élément par défaut
+        }
         //
         // affichage d'un message
         //

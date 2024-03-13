@@ -20,14 +20,16 @@ namespace GestionMessage
         private int _IdTypeMessage;
         private string _CodeMessage;
         private string _Message;
+        private Cl_GroupeMessage _GroupeMessage;
+        private Cl_TypeMessage _TypeMessage;
         //
         // constructeur
         //
-        public Cl_Message(int IdMessageRecu, int IdGroupeMessageRecu, int IdTypeMessageRecu, string CodeMessageRecu, string MessageRecu)
+        public Cl_Message(int IdMessageRecu, Cl_GroupeMessage GroupeMessageRecu, Cl_TypeMessage TypeMessageRecu, string CodeMessageRecu, string MessageRecu)
         {
-            _IdGroupeMessage = IdGroupeMessageRecu;
             _IdMessage = IdMessageRecu;
-            _IdTypeMessage = IdTypeMessageRecu;
+            GroupeMessage = GroupeMessageRecu;
+            TypeMessage = TypeMessageRecu;
             CodeMessage = CodeMessageRecu;
             _Message = MessageRecu;
 
@@ -41,14 +43,6 @@ namespace GestionMessage
             }
         }
         //
-        // IdGroupeMessage
-        //
-        public int IdGroupeMessage 
-        {
-            get { return _IdGroupeMessage; }
-            set { _IdGroupeMessage = value;}
-        }
-        //
         // IdMessage
         //
         public int IdMessage
@@ -56,12 +50,18 @@ namespace GestionMessage
             get { return _IdMessage; }
         }
         //
+        // IdGroupeMessage
+        //
+        public int IdGroupeMessage
+        {
+            get { return _IdGroupeMessage; }
+        }
+        //
         // TypeMessage
         //
         public int IdTypeMessage
         {
             get { return _IdTypeMessage; }
-            set { _IdTypeMessage = value;}
         }
         //
         // CodeMessage
@@ -94,6 +94,29 @@ namespace GestionMessage
                 {
                     _Message = value;
                 }
+            }
+        }
+        //
+        // GroupeMessage
+        //
+        public Cl_GroupeMessage GroupeMessage
+        {
+            get { return _GroupeMessage; }
+            set { 
+                _GroupeMessage = value;
+                _IdGroupeMessage = value.IdGroupeMessage;
+                }
+        }
+        //
+        // TypeMessage
+        //
+        public Cl_TypeMessage TypeMessage
+        {
+            get { return _TypeMessage; }
+            set
+            {
+                _TypeMessage = value;
+                _IdTypeMessage = value.IdTypeMessage;
             }
         }
         //
