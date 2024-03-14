@@ -18,7 +18,7 @@ namespace GestionMessage
         //
         public Cl_BDD()
         {
-            string cheminBDD = "C:\\VADIT\\VADIT.db";
+            string cheminBDD = "..\\..\\..\\VADIT.db";
             char version = '3';
             string chaineDeConnexion = "Data Source=" + cheminBDD + ";Version=" + version + ";";
 
