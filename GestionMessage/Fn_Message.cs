@@ -3,6 +3,8 @@ using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Data.SQLite;
 using System.Diagnostics.CodeAnalysis;
+using System.Security.Principal;
+using System.Windows.Forms;
 
 
 namespace GestionMessage
@@ -30,6 +32,16 @@ namespace GestionMessage
         //
         public Fn_Message()
         {
+            Fn_Authentification fenetreAuthentification = new Fn_Authentification();
+            fenetreAuthentification.ShowDialog();
+
+            string result = fenetreAuthentification.MessageResult;
+
+            if (result == "False")
+            {
+                this.Close();
+            }
+
             InitializeComponent();
         }
         //
