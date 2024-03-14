@@ -31,6 +31,10 @@ namespace GestionMessage
         public abstract void update();
         public abstract void delete();
         //
+        // savoir si on peux enregistrer
+        //
+        public abstract bool valeurCorrect();
+        //
         // ToString
         //
         public override abstract string ToString();

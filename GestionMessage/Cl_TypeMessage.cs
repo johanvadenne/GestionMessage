@@ -21,12 +21,7 @@ namespace GestionMessage
         public Cl_TypeMessage(int IdTypeMessageRecu, string LabelTypeMessageRecu)
         {
             _IdTypeMessage = IdTypeMessageRecu;
-            _LabelTypeMessage = LabelTypeMessageRecu;
-
-            if (LabelTypeMessage.Length > 20) // vérifie la taille de _LabelGroupeMessageRecu
-            {
-                Cl_AfficheMessageBox.MessageAlerte("Le label groupe message ne peux comporter plus de 20 charactères");
-            }
+            LabelTypeMessage = LabelTypeMessageRecu;
         }
         //
         // IdTypeMessage
@@ -49,16 +44,29 @@ namespace GestionMessage
                 }
                 else
                 {
-                    Cl_AfficheMessageBox.MessageAlerte("Le label groupe message ne peux comporter plus de 20 charactères");
+                    Cl_AfficheMessageBox.MessageAlerte("Le label type message ne peux comporter plus de 20 charactères");
                 }
             }
+        }
+        //
+        // savoir si l'on peux enrigistrer
+        //
+        public override bool valeurCorrect()
+        {
+            if (LabelTypeMessage.Length > 20)
+            {
+                Cl_AfficheMessageBox.MessageAlerte("Le label type message ne peux comporter plus de 20 charactères");
+                return false;
+            }
+
+            return true;
         }
         //
         // override insert
         //
         public override void insert()
         {
-            if (LabelTypeMessage.Length <= 20) // vérifie la taille de LabelGroupeMessage
+            if (valeurCorrect()) // vérifie la taille de LabelGroupeMessage
             {
                 // création de la requete
                 string requete = """
@@ -74,17 +82,13 @@ namespace GestionMessage
                 command.ExecuteNonQuery(); // execute la requête
                 this.maConnexion.Close(); // ferme la connexion à la base de données
             }
-            else
-            {
-                Cl_AfficheMessageBox.MessageAlerte("Le label groupe message ne peux comporter plus de 100 charactères");
-            }
         }
         //
         // override update
         //
         public override void update()
         {
-            if (LabelTypeMessage.Length <= 20) // vérifie la taille de LabelGroupeMessage
+            if (valeurCorrect()) // vérifie la taille de LabelGroupeMessage
             {
                 // création de la requete
                 string requete =
@@ -101,10 +105,6 @@ namespace GestionMessage
                 this.maConnexion.Open(); // ouvre la connexion à la base de données
                 command.ExecuteNonQuery(); // execute la requête
                 this.maConnexion.Close(); // ferme la connexion à la base de données
-            }
-            else
-            {
-                Cl_AfficheMessageBox.MessageAlerte("Le label groupe message ne peux comporter plus de 20 charactères");
             }
         }
         //

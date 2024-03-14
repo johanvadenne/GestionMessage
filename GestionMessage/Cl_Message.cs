@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using System.Data.SQLite;
+using System.Configuration;
 
 namespace GestionMessage
 {
@@ -31,16 +32,7 @@ namespace GestionMessage
             GroupeMessage = GroupeMessageRecu;
             TypeMessage = TypeMessageRecu;
             CodeMessage = CodeMessageRecu;
-            _Message = MessageRecu;
-
-            if (CodeMessage.Length > 4)
-            {
-                Cl_AfficheMessageBox.MessageAlerte("Le code message fait plus de 4 charactères");
-            }
-            else if (Message.Length > 255)
-            {
-                Cl_AfficheMessageBox.MessageAlerte("Le message fait plus de 255 charactères");
-            }
+            Message = MessageRecu;
         }
         //
         // IdMessage
@@ -54,14 +46,14 @@ namespace GestionMessage
         //
         public int IdGroupeMessage
         {
-            get { return _IdGroupeMessage; }
+            get { return _GroupeMessage.IdGroupeMessage; }
         }
         //
         // TypeMessage
         //
         public int IdTypeMessage
         {
-            get { return _IdTypeMessage; }
+            get { return _TypeMessage.IdTypeMessage; }
         }
         //
         // CodeMessage
@@ -122,11 +114,16 @@ namespace GestionMessage
         //
         // vérifie si les valeurs sont valide
         //
-        private bool enregistrer()
+        public override bool valeurCorrect()
         {
             if (CodeMessage.Length > 4) // vérifie la taille de LabelGroupeMessage
             {
                 Cl_AfficheMessageBox.MessageAlerte("Le code ne peux comporter plus de 4 charactères");
+                return false;
+            }
+            else if(CodeMessage == "XXXX")
+            {
+                Cl_AfficheMessageBox.MessageAlerte("Le code XXXX est un mot réserver au logiciel");
                 return false;
             }
             else if (Message.Length > 255)
@@ -154,7 +151,7 @@ namespace GestionMessage
         //
         public override void insert()
         {
-            if (!enregistrer()) { return; }
+            if (!valeurCorrect()) { return; }
             
             // création de la requete
             string requete = """
@@ -179,7 +176,12 @@ namespace GestionMessage
         //
         public override void update()
         {
-            if (!enregistrer()) { return; }
+            if (!valeurCorrect()) { return; }
+            else if (IdMessage <= 0)
+            {
+                Cl_AfficheMessageBox.MessageAlerte("Il n'y a aucun message selectionner");
+                return;
+            }
 
             // création de la requete
             string requete = """
@@ -211,6 +213,12 @@ namespace GestionMessage
         //
         public override void delete()
         {
+            if (IdMessage <= 0) 
+            {
+                Cl_AfficheMessageBox.MessageAlerte("Il n'y a aucun message selectionner");
+                return; 
+            }
+
             // création de la requete
             string requete = """
                 DELETE FROM T_Message

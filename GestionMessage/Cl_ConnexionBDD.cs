@@ -14,6 +14,7 @@ namespace GestionMessage
             get {  return this.maConnexion; }
         }
 
+        public override bool valeurCorrect() { return true; }
         public override void insert() {}
         public override void update() {}
         public override void delete() {}

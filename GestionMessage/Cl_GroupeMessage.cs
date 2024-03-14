@@ -24,12 +24,7 @@ namespace GestionMessage
         public Cl_GroupeMessage(int IdGroupeMessageRecu, string LabelGroupeMessageRecu)
         {
             _IdGroupeMessage = IdGroupeMessageRecu;
-            _LabelGroupeMessage = LabelGroupeMessageRecu;
-
-            if (LabelGroupeMessage.Length > 100) // vérifie la taille de _LabelGroupeMessageRecu
-            {
-                Cl_AfficheMessageBox.MessageAlerte("Le label groupe message ne peux comporter plus de 100 charactères");
-            }
+            LabelGroupeMessage = LabelGroupeMessageRecu;
         }
         //
         // IdGroupeMessage
@@ -56,11 +51,24 @@ namespace GestionMessage
             }
         }
         //
+        // savoir si l'on peux enrigistrer
+        //
+        public override bool valeurCorrect()
+        {
+            if (LabelGroupeMessage.Length > 100)
+            {
+                Cl_AfficheMessageBox.MessageAlerte("Le label groupe message ne peux comporter plus de 100 charactères");
+                return false;
+            }
+
+            return true;
+        }
+        //
         // override insert
         //
         public override void insert()
         {
-            if (LabelGroupeMessage.Length <= 100) // vérifie la taille de LabelGroupeMessage
+            if (valeurCorrect()) // vérifie la taille de LabelGroupeMessage
             {
                 // création de la requete
                 string requete =
@@ -75,17 +83,13 @@ namespace GestionMessage
                 command.ExecuteNonQuery(); // execute la requête
                 this.maConnexion.Close(); // ferme la connexion à la base de données
             }
-            else
-            {
-                Cl_AfficheMessageBox.MessageAlerte("Le label groupe message ne peux comporter plus de 100 charactères");
-            }
         }
         //
         // override update
         //
         public override void update()
         {
-            if (LabelGroupeMessage.Length <= 100) // vérifie la taille de LabelGroupeMessage
+            if (valeurCorrect()) // vérifie la taille de LabelGroupeMessage
             {
                 // création de la requete
                 string requete =
@@ -102,10 +106,6 @@ namespace GestionMessage
                 this.maConnexion.Open(); // ouvre la connexion à la base de données
                 command.ExecuteNonQuery(); // execute la requête
                 this.maConnexion.Close(); // ferme la connexion à la base de données
-            }
-            else
-            {
-                Cl_AfficheMessageBox.MessageAlerte("Le label groupe message ne peux comporter plus de 100 charactères");
             }
 }
         //
