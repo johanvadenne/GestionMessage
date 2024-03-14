@@ -431,6 +431,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(416, 259);
             Controls.Add(TP_GestionMessage);
+            MaximumSize = new Size(432, 298);
+            MinimumSize = new Size(432, 298);
             Name = "Fn_Message";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Message";
