@@ -351,6 +351,7 @@
             // 
             Cb_ChercheTypeMessage.DropDownStyle = ComboBoxStyle.DropDownList;
             Cb_ChercheTypeMessage.FormattingEnabled = true;
+            Cb_ChercheTypeMessage.ItemHeight = 15;
             Cb_ChercheTypeMessage.Location = new Point(95, 48);
             Cb_ChercheTypeMessage.Name = "Cb_ChercheTypeMessage";
             Cb_ChercheTypeMessage.Size = new Size(217, 23);
