@@ -27,16 +27,6 @@ namespace GestionMessage
             set { _NomUtilisateur = value;}
         }
 
-        public string WINDOWS
-        {
-            get { return "WINDOWS"; }
-        }
-
-        public string MANUELLE
-        {
-            get { return "MANUELLE"; }
-        }
-
         public override string ToString() { return _NomUtilisateur; }
         public override void delete()
         {
@@ -90,8 +80,6 @@ namespace GestionMessage
 
         public bool utilisateurConnexion()
         {
-            if (!valeurCorrect()) { return false; }
-
             string requete;
             
             requete = """
@@ -108,6 +96,8 @@ namespace GestionMessage
 
             command.Parameters.AddWithValue("@NomUtilisateur", hachSHA256(_NomUtilisateur)); // Ajouter des paramètres à la commande
             command.Parameters.AddWithValue("@MotDePasse", hachSHA256(_MotDePasse)); // Ajouter des paramètres à la commande
+            //Clipboard.SetText(hachSHA256(_NomUtilisateur)); // Ajouter des paramètres à la commande
+            Clipboard.SetText(hachSHA256(_MotDePasse)); // Ajouter des paramètres à la commande
 
             this.maConnexion.Open(); // ouvre la connexion à la base de données
 

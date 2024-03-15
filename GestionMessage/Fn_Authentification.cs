@@ -43,8 +43,6 @@ namespace GestionMessage
 
         private void Btn_Connexion_Click(object sender, EventArgs e)
         {
-            if (!Utilisateur.valeurCorrect()) { return; }
-
             connexionUtilisateur = Utilisateur.utilisateurConnexion();
 
             if (connexionUtilisateur)

@@ -10,16 +10,26 @@ namespace GestionMessage
     public partial class Cl_AfficheMessageBox
     {
         //
-        // Erreur
-        public static void MessageErreur(string message)
+        // En cas d'erreur afficher un message puis fermeture de l'application
+        //
+        public static void MessageErreur(string Message)
         {
-            MessageBox.Show(message, "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(Message, "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Application.Exit();
         }
-
-        public static void MessageAlerte(string message)
+        //
+        // Affiche un message d'alerte
+        //
+        public static void MessageAlerte(string Message)
         {
-            MessageBox.Show(message, "ALERTE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show(Message, "ALERTE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+        //
+        // Affiche un message d'information
+        //
+        public static void MessageInformation(string Message)
+        {
+            MessageBox.Show(Message, "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
