@@ -624,9 +624,9 @@ namespace GestionMessage
             CB_OngletEdition.Items.Clear();
             CB_OngletPrincipale.Items.Clear();
 
-            SQLiteCommand command = new SQLiteCommand(requeteSQL, BDD_SQLlite.connexion); // créer la commande
+            SQLiteCommand command = new SQLiteCommand(requeteSQL, BDD_SQLlite.Connexion); // créer la commande
 
-            BDD_SQLlite.connexion.Open(); // Ouvre la connexion à la base
+            BDD_SQLlite.Connexion.Open(); // Ouvre la connexion à la base
             SQLiteDataReader reader = command.ExecuteReader(); // execute la commande en mode lecture
 
             while (reader.Read()) // tant qu'il y a encore des données à lire
@@ -687,7 +687,7 @@ namespace GestionMessage
                 }
             }
             reader.Close(); // ferme la lecture
-            BDD_SQLlite.connexion.Close(); // ferme la connexion à la base de données
+            BDD_SQLlite.Connexion.Close(); // ferme la connexion à la base de données
 
             // si je n'ai aucun élément
             if (CB_OngletEdition.Items.Count == 0)
