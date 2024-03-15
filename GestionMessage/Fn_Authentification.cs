@@ -22,8 +22,7 @@ namespace GestionMessage
         public Fn_Authentification()
         {
             InitializeComponent();
-            Utilisateur = new Cl_Utilisateur("", "", "");
-            identiteWindows = WindowsIdentity.GetCurrent();
+            Utilisateur = new Cl_Utilisateur("", "");
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -40,31 +39,6 @@ namespace GestionMessage
 
         private void Fn_Authentification_Load(object sender, EventArgs e)
         {
-            Cb_TypeAuthentification.SelectedIndex = 0;
-        }
-
-        private void Cb_TypeAuthentification_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (Cb_TypeAuthentification.SelectedIndex == 0)
-            {
-                if (identiteWindows == null)
-                {
-                    Cl_AfficheMessageBox.MessageAlerte("L'authentifications windows n'est pas possible!");
-                    Cb_TypeAuthentification.SelectedIndex = 1;
-                    return;
-                }
-
-                Utilisateur.NomUtilisateur = identiteWindows.Name;
-                Utilisateur.TypeAuthentification = Utilisateur.WINDOWS;
-                Tb_Utilisateur.Enabled = false;
-                Tb_MotDePasse.Enabled = false;
-            }
-            else if (Cb_TypeAuthentification.SelectedIndex == 1)
-            {
-                Utilisateur.TypeAuthentification = Utilisateur.MANUELLE;
-                Tb_Utilisateur.Enabled = true;
-                Tb_MotDePasse.Enabled = true;
-            }
         }
 
         private void Btn_Connexion_Click(object sender, EventArgs e)

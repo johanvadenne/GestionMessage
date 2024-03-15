@@ -28,27 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Cb_TypeAuthentification = new ComboBox();
             Tb_Utilisateur = new TextBox();
             Tb_MotDePasse = new TextBox();
             Btn_Connexion = new Button();
             SuspendLayout();
             // 
-            // Cb_TypeAuthentification
-            // 
-            Cb_TypeAuthentification.DropDownStyle = ComboBoxStyle.DropDownList;
-            Cb_TypeAuthentification.FormattingEnabled = true;
-            Cb_TypeAuthentification.Items.AddRange(new object[] { "Authentification Windows", "Authentification manuelle" });
-            Cb_TypeAuthentification.Location = new Point(86, 54);
-            Cb_TypeAuthentification.Name = "Cb_TypeAuthentification";
-            Cb_TypeAuthentification.Size = new Size(177, 23);
-            Cb_TypeAuthentification.TabIndex = 0;
-            Cb_TypeAuthentification.SelectedIndexChanged += Cb_TypeAuthentification_SelectedIndexChanged;
-            // 
             // Tb_Utilisateur
             // 
-            Tb_Utilisateur.Location = new Point(55, 83);
-            Tb_Utilisateur.MaxLength = 4;
+            Tb_Utilisateur.Location = new Point(30, 56);
+            Tb_Utilisateur.MaxLength = 512;
             Tb_Utilisateur.Name = "Tb_Utilisateur";
             Tb_Utilisateur.PlaceholderText = "Utilisateur";
             Tb_Utilisateur.Size = new Size(239, 23);
@@ -56,8 +44,8 @@
             // 
             // Tb_MotDePasse
             // 
-            Tb_MotDePasse.Location = new Point(55, 112);
-            Tb_MotDePasse.MaxLength = 4;
+            Tb_MotDePasse.Location = new Point(30, 85);
+            Tb_MotDePasse.MaxLength = 512;
             Tb_MotDePasse.Name = "Tb_MotDePasse";
             Tb_MotDePasse.PasswordChar = '●';
             Tb_MotDePasse.PlaceholderText = "Mot de passe";
@@ -66,7 +54,7 @@
             // 
             // Btn_Connexion
             // 
-            Btn_Connexion.Location = new Point(137, 141);
+            Btn_Connexion.Location = new Point(112, 114);
             Btn_Connexion.Name = "Btn_Connexion";
             Btn_Connexion.Size = new Size(75, 23);
             Btn_Connexion.TabIndex = 4;
@@ -78,11 +66,10 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(352, 228);
+            ClientSize = new Size(304, 181);
             Controls.Add(Btn_Connexion);
             Controls.Add(Tb_MotDePasse);
             Controls.Add(Tb_Utilisateur);
-            Controls.Add(Cb_TypeAuthentification);
             Name = "Fn_Authentification";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Fn_Authentification";
@@ -92,8 +79,6 @@
         }
 
         #endregion
-
-        private ComboBox Cb_TypeAuthentification;
         private TextBox Tb_Utilisateur;
         private TextBox Tb_MotDePasse;
         private Button Btn_Connexion;

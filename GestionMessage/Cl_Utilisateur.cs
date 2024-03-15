@@ -13,26 +13,18 @@ namespace GestionMessage
     {
         private string _NomUtilisateur;
         private string _MotDePasse;
-        private string _TypeAuthentification;
 
         
-        public Cl_Utilisateur(string nomUtilisateur, string motDePasse, string typeAuthentification)
+        public Cl_Utilisateur(string nomUtilisateur, string motDePasse)
         {
             _NomUtilisateur = nomUtilisateur;
             _MotDePasse = motDePasse;
-            _TypeAuthentification = typeAuthentification;
         }
 
         public string NomUtilisateur
         {
             get { return _NomUtilisateur; }
             set { _NomUtilisateur = value;}
-        }
-
-        public string TypeAuthentification
-        {
-            get { return _TypeAuthentification; }
-            set { _TypeAuthentification = value;}
         }
 
         public string WINDOWS
@@ -60,7 +52,7 @@ namespace GestionMessage
         }
         public override bool valeurCorrect()
         {
-            if (_TypeAuthentification == MANUELLE && !motDePasseCorrect())
+            if (!motDePasseCorrect())
             {
                 Cl_AfficheMessageBox.MessageAlerte("Le mot de passe dois comporter au moins:\n- 12 charactères\n- 1 majuscule\n- 1 minuscule\n- 1 chiffre\n- 1 charactère spéciale");
                 return false;
@@ -101,52 +93,21 @@ namespace GestionMessage
             if (!valeurCorrect()) { return false; }
 
             string requete;
-            if (_TypeAuthentification == WINDOWS) 
-            { 
-                requete = """
-                    SELECT 
-                        IdUtilisateur 
-                    FROM 
-                        T_Utilisateur
-                    WHERE
-                        NomUtilisateur = @NomUtilisateur;
-                    """;
-            }
-            else if (_TypeAuthentification == MANUELLE)
-            {
-                requete = """
-                    SELECT 
-                        IdUtilisateur 
-                    FROM 
-                        T_Utilisateur
-                    WHERE
-                        NomUtilisateur = @NomUtilisateur
-                        AND MotDePasse = @MotDePasse;
-                    """;
-            }
-            else
-            {
-                Cl_AfficheMessageBox.MessageAlerte("Le type d'authentification n'est pas définie!");
-                return false;
-            }
-
+            
+            requete = """
+                SELECT 
+                    IdUtilisateur 
+                FROM 
+                    T_Utilisateur
+                WHERE
+                    NomUtilisateur = @NomUtilisateur
+                    AND MotDePasse = @MotDePasse;
+                """;
+    
             SQLiteCommand command = new SQLiteCommand(requete, this.maConnexion); // créer la commande
 
-            if (_TypeAuthentification == WINDOWS)
-            {
-                command.Parameters.AddWithValue("@NomUtilisateur", hachSHA256(_NomUtilisateur)); // Ajouter des paramètres à la commande
-            }
-            else if (_TypeAuthentification == MANUELLE)
-            {
-                command.Parameters.AddWithValue("@NomUtilisateur", hachSHA256(_NomUtilisateur)); // Ajouter des paramètres à la commande
-                command.Parameters.AddWithValue("@MotDePasse", hachSHA256(_MotDePasse)); // Ajouter des paramètres à la commande
-            }
-            else
-            {
-                Cl_AfficheMessageBox.MessageAlerte("Le type d'authentification n'est pas définie!");
-                return false;
-            }
-
+            command.Parameters.AddWithValue("@NomUtilisateur", hachSHA256(_NomUtilisateur)); // Ajouter des paramètres à la commande
+            command.Parameters.AddWithValue("@MotDePasse", hachSHA256(_MotDePasse)); // Ajouter des paramètres à la commande
 
             this.maConnexion.Open(); // ouvre la connexion à la base de données
 
