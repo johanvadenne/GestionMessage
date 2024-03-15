@@ -15,7 +15,7 @@ namespace GestionMessage
         public static void MessageErreur(string Message)
         {
             MessageBox.Show(Message, "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            Application.Exit();
+            Environment.Exit(0);
         }
         //
         // Affiche un message d'alerte

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SQLite;
+﻿using System.Data.SQLite;
 
 namespace GestionMessage
 {
@@ -12,28 +7,41 @@ namespace GestionMessage
         //
         // variable
         //
-        public SQLiteConnection maConnexion;
+        public SQLiteConnection MaConnexion = null;
         //
-        // connexionBDD
+        // Connexion à la base de données
         //
         public Cl_BDD()
         {
-            string cheminBDD = "..\\..\\..\\VADIT.db";
-            char version = '3';
-            string chaineDeConnexion = "Data Source=" + cheminBDD + ";Version=" + version + ";";
-
-            maConnexion = new SQLiteConnection(chaineDeConnexion);
+            string CheminBDD = "..\\..\\..\\VADIT.db";
+            char Version = '3';
+            string ChaineDeConnexion = "Data Source=" + CheminBDD + ";Version=" + Version + ";";
+            
+            // test de connexion à la base de données
+            try
+            {
+                MaConnexion = new SQLiteConnection(ChaineDeConnexion);
+                SQLiteCommand CommandSQLite = new SQLiteCommand("SELECT * FROM T_TypeMessage;", MaConnexion);
+                MaConnexion.Open();
+                CommandSQLite.ExecuteNonQuery();
+                MaConnexion.Close();    
+            }
+            // Si une erreur est survenue alors afficher l'erreur et fermer l'application
+            catch
+            {
+                Cl_AfficheMessageBox.MessageErreur("La connexion à la base de données à échouée!");
+            }
         }
         //
-        // fonction abstraite insert,update,delete
+        // fonction abstraite insert, update, delete
         //
-        public abstract void insert();
-        public abstract void update();
-        public abstract void delete();
+        public abstract void Insert();
+        public abstract void Update();
+        public abstract void Delete();
         //
-        // savoir si on peux enregistrer
+        // Cette procédure abstraite affiche la valeur incorrecte liée aux données de la classe
         //
-        public abstract bool valeurCorrect();
+        public abstract bool ValeurCorrecte();
         //
         // ToString
         //

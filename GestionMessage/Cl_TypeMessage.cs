@@ -51,7 +51,7 @@ namespace GestionMessage
         //
         // savoir si l'on peux enrigistrer
         //
-        public override bool valeurCorrect()
+        public override bool ValeurCorrecte()
         {
             if (LabelTypeMessage.Length > 20)
             {
@@ -64,9 +64,9 @@ namespace GestionMessage
         //
         // override insert
         //
-        public override void insert()
+        public override void Insert()
         {
-            if (valeurCorrect()) // vérifie la taille de LabelGroupeMessage
+            if (ValeurCorrecte()) // vérifie la taille de LabelGroupeMessage
             {
                 // création de la requete
                 string requete = """
@@ -74,21 +74,21 @@ namespace GestionMessage
                     (LabelTypeMessage) VALUES(@LabelTypeMessage);
                     """;
 
-                SQLiteCommand command = new SQLiteCommand(requete, this.maConnexion); // créer la commande
+                SQLiteCommand command = new SQLiteCommand(requete, this.MaConnexion); // créer la commande
 
                 command.Parameters.AddWithValue("@LabelTypeMessage", LabelTypeMessage); // Ajouter des paramètres à la commande
 
-                this.maConnexion.Open(); // ouvre la connexion à la base de données
+                this.MaConnexion.Open(); // ouvre la connexion à la base de données
                 command.ExecuteNonQuery(); // execute la requête
-                this.maConnexion.Close(); // ferme la connexion à la base de données
+                this.MaConnexion.Close(); // ferme la connexion à la base de données
             }
         }
         //
         // override update
         //
-        public override void update()
+        public override void Update()
         {
-            if (valeurCorrect()) // vérifie la taille de LabelGroupeMessage
+            if (ValeurCorrecte()) // vérifie la taille de LabelGroupeMessage
             {
                 // création de la requete
                 string requete =
@@ -96,34 +96,34 @@ namespace GestionMessage
                     " SET LabelTypeMessage = @LabelTypeMessage" +
                     " WHERE IdTypeMessage = @IdTypeMessage;";
 
-                SQLiteCommand command = new SQLiteCommand(requete, this.maConnexion);  // créer la commande
+                SQLiteCommand command = new SQLiteCommand(requete, this.MaConnexion);  // créer la commande
 
                 // Ajouter des paramètres à la commande
                 command.Parameters.AddWithValue("@LabelTypeMessage", LabelTypeMessage);
                 command.Parameters.AddWithValue("@IdTypeMessage", IdTypeMessage);
 
-                this.maConnexion.Open(); // ouvre la connexion à la base de données
+                this.MaConnexion.Open(); // ouvre la connexion à la base de données
                 command.ExecuteNonQuery(); // execute la requête
-                this.maConnexion.Close(); // ferme la connexion à la base de données
+                this.MaConnexion.Close(); // ferme la connexion à la base de données
             }
         }
         //
         // override delete
         //
-        public override void delete()
+        public override void Delete()
         {
             // création de la requete
             string requete =
                 "DELETE FROM T_TypeMessage " +
                 " WHERE IdTypeMessage = @IdTypeMessage;";
 
-            SQLiteCommand command = new SQLiteCommand(requete, this.maConnexion); // créer la commande
+            SQLiteCommand command = new SQLiteCommand(requete, this.MaConnexion); // créer la commande
 
             command.Parameters.AddWithValue("@IdTypeMessage", IdTypeMessage); // Ajouter des paramètres à la commande
 
-            this.maConnexion.Open(); // ouvre la connexion à la base de données
+            this.MaConnexion.Open(); // ouvre la connexion à la base de données
             command.ExecuteNonQuery(); // execute la requête
-            this.maConnexion.Close(); // ferme la connexion à la base de données
+            this.MaConnexion.Close(); // ferme la connexion à la base de données
         }
         //
         // override ToString

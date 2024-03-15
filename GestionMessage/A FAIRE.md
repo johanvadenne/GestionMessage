@@ -2,7 +2,6 @@
 - Injection SQL, requete préparer
 - procédure obligatoirement réecrite abstraite
 - Créer un mot de passe lors de la connection
-- Voir pour faire la limitation de chaine directement dans les variable string(20)
 - Authentification
 - corriger les fautes
 - prévoir un try catch pourt l'enregistrement double

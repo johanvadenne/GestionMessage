@@ -161,7 +161,7 @@ namespace GestionMessage
 
             int IdGroupMessageSelect = 0;
             int IdTypeMessageSelect = 0;
-            if (MessageSelect.valeurCorrect() == false) { return; }
+            if (MessageSelect.ValeurCorrecte() == false) { return; }
 
             foreach (Cl_Message messageParcouru in Cb_CodeMessage.Items)
             {
@@ -181,7 +181,7 @@ namespace GestionMessage
                     MessageSelect.TypeMessage = TypeMessageSelect;
                     MessageSelect.CodeMessage = Tb_CodeMessage.Text;
                     MessageSelect.Message = Tb_Message.Text;
-                    MessageSelect.insert();
+                    MessageSelect.Insert();
                 }
                 else
                 {
@@ -196,7 +196,7 @@ namespace GestionMessage
                     MessageSelect.TypeMessage = TypeMessageSelect;
                     MessageSelect.CodeMessage = Tb_CodeMessage.Text;
                     MessageSelect.Message = Tb_Message.Text;
-                    MessageSelect.update();
+                    MessageSelect.Update();
                 }
                 else
                 {
@@ -223,7 +223,7 @@ namespace GestionMessage
             if (Cb_CodeMessage.SelectedItem != null && typeModificationMessage == "")
             {
                 Cl_Message elementMessage = Cb_CodeMessage.SelectedItem as Cl_Message;
-                elementMessage.delete();
+                elementMessage.Delete();
             }
             typeModificationMessage = "";
             initialisationListes();
@@ -324,7 +324,7 @@ namespace GestionMessage
                     throw new InvalidOperationException(""); // lever une exeption
                 }
 
-                if (GroupeMessageSelect.valeurCorrect() == false) { return; }
+                if (GroupeMessageSelect.ValeurCorrecte() == false) { return; }
 
                 // vérifie qu'il n'y a pas un autre élément qui a le même label 
                 foreach (Cl_GroupeMessage elementGroupeMessage in Cb_ChercheGroupeMessage.Items)
@@ -341,11 +341,11 @@ namespace GestionMessage
 
                 if (typeModificationGroupeMessage == UPDATE) // si c'est une mise à jour
                 {
-                    GroupeMessageSelect.update();
+                    GroupeMessageSelect.Update();
                 }
                 else if (typeModificationGroupeMessage == INSERT) // si c'est une nouvelle valeurs
                 {
-                    GroupeMessageSelect.insert();
+                    GroupeMessageSelect.Insert();
                 }
                 else
                 {
@@ -382,7 +382,7 @@ namespace GestionMessage
                     return;
                 }
                 
-                elementGroupeMessage.delete();
+                elementGroupeMessage.Delete();
             }
             typeModificationGroupeMessage = "";
             initialisationListes();
@@ -486,7 +486,7 @@ namespace GestionMessage
             {
                 Cl_TypeMessage TypeMessageSelect = Cb_ChercheTypeMessage.SelectedItem as Cl_TypeMessage; // récupère l'instance selectionner dans la liste
 
-                if (TypeMessageSelect.valeurCorrect() == false) { return; }
+                if (TypeMessageSelect.ValeurCorrecte() == false) { return; }
 
                 if (TypeMessageSelect == null) // si la valeur selectionner n'est pas une classe Cl_TypeMessage
                 {
@@ -508,11 +508,11 @@ namespace GestionMessage
 
                 if (typeModificationTypeMessage == UPDATE) // si c'est une mise à jour
                 {
-                    TypeMessageSelect.update();
+                    TypeMessageSelect.Update();
                 }
                 else if (typeModificationTypeMessage == INSERT) // si c'est une nouvelle valeurs
                 {
-                    TypeMessageSelect.insert();
+                    TypeMessageSelect.Insert();
                 }
                 else
                 {
@@ -558,7 +558,7 @@ namespace GestionMessage
                     return;
                 }
 
-                elementTypeMessage.delete();
+                elementTypeMessage.Delete();
             }
             typeModificationTypeMessage = "";
             initialisationListes();

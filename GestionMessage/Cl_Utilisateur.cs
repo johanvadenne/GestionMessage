@@ -28,19 +28,19 @@ namespace GestionMessage
         }
 
         public override string ToString() { return _NomUtilisateur; }
-        public override void delete()
+        public override void Delete()
         {
             throw new NotImplementedException();
         }
-        public override void insert()
+        public override void Insert()
         {
             throw new NotImplementedException();
         }
-        public override void update()
+        public override void Update()
         {
             throw new NotImplementedException();
         }
-        public override bool valeurCorrect()
+        public override bool ValeurCorrecte()
         {
             if (!motDePasseCorrect())
             {
@@ -92,14 +92,14 @@ namespace GestionMessage
                     AND MotDePasse = @MotDePasse;
                 """;
     
-            SQLiteCommand command = new SQLiteCommand(requete, this.maConnexion); // créer la commande
+            SQLiteCommand command = new SQLiteCommand(requete, this.MaConnexion); // créer la commande
 
             command.Parameters.AddWithValue("@NomUtilisateur", hachSHA256(_NomUtilisateur)); // Ajouter des paramètres à la commande
             command.Parameters.AddWithValue("@MotDePasse", hachSHA256(_MotDePasse)); // Ajouter des paramètres à la commande
             //Clipboard.SetText(hachSHA256(_NomUtilisateur)); // Ajouter des paramètres à la commande
             Clipboard.SetText(hachSHA256(_MotDePasse)); // Ajouter des paramètres à la commande
 
-            this.maConnexion.Open(); // ouvre la connexion à la base de données
+            this.MaConnexion.Open(); // ouvre la connexion à la base de données
 
             SQLiteDataReader reader = command.ExecuteReader(); // execute la commande en mode lecture
 
@@ -110,7 +110,7 @@ namespace GestionMessage
                 IdUtilisateurLu = reader.GetInt32(0);
             }
             reader.Close();
-            this.maConnexion.Close(); // ferme la connexion à la base de données
+            this.MaConnexion.Close(); // ferme la connexion à la base de données
 
             if (IdUtilisateurLu > 0)
             {

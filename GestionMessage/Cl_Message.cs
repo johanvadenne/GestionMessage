@@ -114,7 +114,7 @@ namespace GestionMessage
         //
         // vérifie si les valeurs sont valide
         //
-        public override bool valeurCorrect()
+        public override bool ValeurCorrecte()
         {
             if (CodeMessage.Length > 4) // vérifie la taille de LabelGroupeMessage
             {
@@ -149,9 +149,9 @@ namespace GestionMessage
         //
         // override insert
         //
-        public override void insert()
+        public override void Insert()
         {
-            if (!valeurCorrect()) { return; }
+            if (!ValeurCorrecte()) { return; }
             
             // création de la requete
             string requete = """
@@ -159,7 +159,7 @@ namespace GestionMessage
                 VALUES(@IdGroupeMessage,@IdTypeMessage,@CodeMessage,@Message);
                 """;
 
-            SQLiteCommand command = new SQLiteCommand(requete, this.maConnexion); // créer la commande
+            SQLiteCommand command = new SQLiteCommand(requete, this.MaConnexion); // créer la commande
 
             // Ajouter des paramètres à la commande
             command.Parameters.AddWithValue("@IdGroupeMessage", IdGroupeMessage);
@@ -167,16 +167,16 @@ namespace GestionMessage
             command.Parameters.AddWithValue("@CodeMessage", CodeMessage);
             command.Parameters.AddWithValue("@Message", Message);
 
-            this.maConnexion.Open(); // ouvre la connexion à la base de données
+            this.MaConnexion.Open(); // ouvre la connexion à la base de données
             command.ExecuteNonQuery(); // execute la requête
-            this.maConnexion.Close(); // ferme la connexion à la base de données
+            this.MaConnexion.Close(); // ferme la connexion à la base de données
         }
         //
         // override update
         //
-        public override void update()
+        public override void Update()
         {
-            if (!valeurCorrect()) { return; }
+            if (!ValeurCorrecte()) { return; }
             else if (IdMessage <= 0)
             {
                 Cl_AfficheMessageBox.MessageAlerte("Il n'y a aucun message selectionner");
@@ -195,7 +195,7 @@ namespace GestionMessage
                     IdMessage = @IdMessage;
                 """;
 
-            SQLiteCommand command = new SQLiteCommand(requete, this.maConnexion); // créer la commande
+            SQLiteCommand command = new SQLiteCommand(requete, this.MaConnexion); // créer la commande
 
             // Ajouter des paramètres à la commande
             command.Parameters.AddWithValue("@IdGroupeMessage", IdGroupeMessage);
@@ -204,14 +204,14 @@ namespace GestionMessage
             command.Parameters.AddWithValue("@Message", Message);
             command.Parameters.AddWithValue("@IdMessage", IdMessage);
 
-            this.maConnexion.Open(); // ouvre la connexion à la base de données
+            this.MaConnexion.Open(); // ouvre la connexion à la base de données
             command.ExecuteNonQuery(); // execute la requête
-            this.maConnexion.Close(); // ferme la connexion à la base de données
+            this.MaConnexion.Close(); // ferme la connexion à la base de données
         }
         //
         // override delete
         //
-        public override void delete()
+        public override void Delete()
         {
             if (IdMessage <= 0) 
             {
@@ -225,13 +225,13 @@ namespace GestionMessage
                 WHERE IdMessage = @IdMessage;
                 """;
 
-            SQLiteCommand command = new SQLiteCommand(requete, this.maConnexion); // créer la commande
+            SQLiteCommand command = new SQLiteCommand(requete, this.MaConnexion); // créer la commande
 
             command.Parameters.AddWithValue("@IdMessage", IdMessage); // Ajouter des paramètres à la commande
 
-            this.maConnexion.Open(); // ouvre la connexion à la base de données
+            this.MaConnexion.Open(); // ouvre la connexion à la base de données
             command.ExecuteNonQuery(); // execute la requête
-            this.maConnexion.Close(); // ferme la connexion à la base de données
+            this.MaConnexion.Close(); // ferme la connexion à la base de données
         }
         //
         // override ToString
