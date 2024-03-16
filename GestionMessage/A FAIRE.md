@@ -7,3 +7,6 @@
 - prévoir un try catch pourt l'enregistrement double
 - vérifié si l'id modifier supprimer et afficher est > 0
 - cas erreur si connexion bdd echoué
+- MCD Classe
+- MCD BDD
+- Shéma réseaux
