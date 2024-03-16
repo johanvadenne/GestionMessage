@@ -1,0 +1,2 @@
+- 001: erreur de hachage sha256
+- 002: erreur dans "Cl_Utilisateur.utilisateurConnexion()" lors de la vérification si l'utilisateur est existant
