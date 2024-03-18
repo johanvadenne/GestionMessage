@@ -75,7 +75,7 @@ namespace GestionMessage
                 CommandSQLite.Parameters.AddWithValue("@MotDePasse", HachSHA256(MotDePasse));
                 
                 this.MaConnexion.Open(); // ouvre la connexion à la base de données
-                SQLiteDataReader LectureRequete = CommandSQLite.ExecuteReader(); // execute la commande en mode lecture
+                SQLiteDataReader LectureRequete = CommandSQLite.ExecuteReader(); // Exécute la commande en mode lecture
 
                 int IdUtilisateurLu = 0;
 

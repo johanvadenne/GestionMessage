@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
 using System.Data.SqlClient;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Data.Entity.Infrastructure;
 
 namespace GestionMessage
@@ -46,18 +45,18 @@ namespace GestionMessage
                 }
                 else
                 {
-                    Cl_AfficheMessageBox.MessageAlerte("Le label groupe message ne peux comporter plus de 100 charactères");
+                    Cl_AfficheMessageBox.MessageInformation("Le label groupe message ne peut comporter plus de 100 caractères!");
                 }
             }
         }
         //
-        // savoir si l'on peux enrigistrer
+        // Vérifie si toutes les données sont bien normées
         //
         public override bool ValeurCorrecte()
         {
-            if (LabelGroupeMessage.Length > 100)
+            if (LabelGroupeMessage.Length > 100) // vérifie la taille de value
             {
-                Cl_AfficheMessageBox.MessageAlerte("Le label groupe message ne peux comporter plus de 100 charactères");
+                Cl_AfficheMessageBox.MessageAlerte("Le label groupe message ne peut comporter plus de 100 caractères!");
                 return false;
             }
 
@@ -68,19 +67,21 @@ namespace GestionMessage
         //
         public override void Insert()
         {
-            if (ValeurCorrecte()) // vérifie la taille de LabelGroupeMessage
+            if (ValeurCorrecte()) // Vérifie si toutes les données sont bien normées
             {
-                // création de la requete
-                string requete =
-                    "INSERT INTO T_GroupeMessage " +
-                    "(LabelGroupeMessage) VALUES(@LabelGroupeMessage);";
+                // création de la requête INSERT
+                string RequeteSQL = """
+                    INSERT INTO T_GroupeMessage
+                    (LabelGroupeMessage) VALUES(@LabelGroupeMessage);
+                    """;
 
-                SQLiteCommand command = new SQLiteCommand(requete, this.MaConnexion); // créer la commande
+                SQLiteCommand CommandSQLite = new SQLiteCommand(RequeteSQL, this.MaConnexion); // création de la commande SQLite
 
-                command.Parameters.AddWithValue("@LabelGroupeMessage", LabelGroupeMessage); // Ajouter des paramètres à la commande
+                // Ajout des paramètres a la requête préparer
+                CommandSQLite.Parameters.AddWithValue("@LabelGroupeMessage", LabelGroupeMessage);
 
                 this.MaConnexion.Open(); // ouvre la connexion à la base de données
-                command.ExecuteNonQuery(); // execute la requête
+                CommandSQLite.ExecuteNonQuery(); // Exécute la commande INSERT
                 this.MaConnexion.Close(); // ferme la connexion à la base de données
             }
         }
@@ -89,22 +90,23 @@ namespace GestionMessage
         //
         public override void Update()
         {
-            if (ValeurCorrecte()) // vérifie la taille de LabelGroupeMessage
+            if (ValeurCorrecte()) // Vérifie si toutes les données sont bien normées
             {
-                // création de la requete
-                string requete =
-                    "UPDATE T_GroupeMessage " +
-                    " SET LabelGroupeMessage = @LabelGroupeMessage" +
-                    " WHERE IdGroupeMessage = @IdGroupeMessage;";
+                // création de la requête UPDATE
+                string RequeteSQL = """
+                    UPDATE T_GroupeMessage
+                    SET LabelGroupeMessage = @LabelGroupeMessage
+                    WHERE IdGroupeMessage = @IdGroupeMessage;
+                """;
 
-                SQLiteCommand command = new SQLiteCommand(requete, this.MaConnexion);  // créer la commande
+                SQLiteCommand CommandSQLite = new SQLiteCommand(RequeteSQL, this.MaConnexion);  // création de la commande SQLite
 
-                // Ajouter des paramètres à la commande
-                command.Parameters.AddWithValue("@LabelGroupeMessage", LabelGroupeMessage);
-                command.Parameters.AddWithValue("@IdGroupeMessage", IdGroupeMessage);
+                // Ajout des paramètres a la requête préparer
+                CommandSQLite.Parameters.AddWithValue("@LabelGroupeMessage", LabelGroupeMessage);
+                CommandSQLite.Parameters.AddWithValue("@IdGroupeMessage", IdGroupeMessage);
 
                 this.MaConnexion.Open(); // ouvre la connexion à la base de données
-                command.ExecuteNonQuery(); // execute la requête
+                CommandSQLite.ExecuteNonQuery(); // Exécute la commande UPDATE
                 this.MaConnexion.Close(); // ferme la connexion à la base de données
             }
 }
@@ -113,17 +115,18 @@ namespace GestionMessage
         //
         public override void Delete()
         {
-            // création de la requete
-            string requete =
+            // création de la requête DELETE
+            string RequeteSQL =
                 "DELETE FROM T_GroupeMessage " +
                 " WHERE IdGroupeMessage = @IdGroupeMessage;";
             
-            SQLiteCommand command = new SQLiteCommand(requete, this.MaConnexion); // créer la commande
+            SQLiteCommand CommandSQLite = new SQLiteCommand(RequeteSQL, this.MaConnexion); // création de la commande SQLite
 
-            command.Parameters.AddWithValue("@IdGroupeMessage", IdGroupeMessage); // Ajouter des paramètres à la commande
+            // Ajout des paramètres a la requête préparer
+            CommandSQLite.Parameters.AddWithValue("@IdGroupeMessage", IdGroupeMessage);
 
             this.MaConnexion.Open(); // ouvre la connexion à la base de données
-            command.ExecuteNonQuery(); // execute la requête
+            CommandSQLite.ExecuteNonQuery(); // Exécute la commande DELETE
             this.MaConnexion.Close(); // ferme la connexion à la base de données
         }
         //
