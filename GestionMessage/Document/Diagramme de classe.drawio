@@ -1,0 +1,50 @@
+<mxfile host="app.diagrams.net" modified="2024-03-18T18:03:16.143Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:123.0) Gecko/20100101 Firefox/123.0" etag="DqfsQXTSBpFoRyVhF8Oo" version="24.0.7" type="github">
+  <diagram name="Page-1" id="M4nyXgz_OTvfZ6UV233X">
+    <mxGraphModel dx="1434" dy="782" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="HMEKJtXv6nUC9A5PgHyP-1" value="&lt;div&gt;Cl_BDD&lt;/div&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="220" width="230" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="HMEKJtXv6nUC9A5PgHyP-2" value="+&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;MaConnexion: SQLiteConnection" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="HMEKJtXv6nUC9A5PgHyP-1">
+          <mxGeometry y="26" width="230" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="HMEKJtXv6nUC9A5PgHyP-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="HMEKJtXv6nUC9A5PgHyP-1">
+          <mxGeometry y="52" width="230" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="HMEKJtXv6nUC9A5PgHyP-4" value="&lt;div&gt;+&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;Cl_BDD() : void&lt;/div&gt;&lt;div&gt;+&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;abstract Insert() : void&lt;br&gt;+&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;abstract Update() : void&lt;br&gt;+&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;abstract Delete() : void&lt;/div&gt;&lt;div&gt;+ &lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&lt;/span&gt;abstract ToString() : string&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;div&gt;+ &lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&lt;/span&gt;abstract ValeurCorrecte() : bool&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="HMEKJtXv6nUC9A5PgHyP-1">
+          <mxGeometry y="60" width="230" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="HMEKJtXv6nUC9A5PgHyP-6" value="&lt;div&gt;Cl_ConnexionBDD&lt;br&gt;&lt;/div&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="460" width="230" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="HMEKJtXv6nUC9A5PgHyP-7" value="+&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;MaConnexion: SQLiteConnection" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="HMEKJtXv6nUC9A5PgHyP-6">
+          <mxGeometry y="26" width="230" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="HMEKJtXv6nUC9A5PgHyP-8" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="HMEKJtXv6nUC9A5PgHyP-6">
+          <mxGeometry y="52" width="230" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="HMEKJtXv6nUC9A5PgHyP-9" value="+&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;Insert() : void&lt;div&gt;+&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;Update() : void&lt;br&gt;+&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;Delete() : void&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ &lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;ToString() : string&lt;/div&gt;&lt;div&gt;+&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;ValeurCorrecte(): bool&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="HMEKJtXv6nUC9A5PgHyP-6">
+          <mxGeometry y="60" width="230" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="HMEKJtXv6nUC9A5PgHyP-10" value="" style="endArrow=none;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.004;exitY=0.081;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="HMEKJtXv6nUC9A5PgHyP-1" target="HMEKJtXv6nUC9A5PgHyP-6">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="240" y="220" as="sourcePoint" />
+            <mxPoint x="190" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HMEKJtXv6nUC9A5PgHyP-11" value="parent" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;" connectable="0" vertex="1" parent="HMEKJtXv6nUC9A5PgHyP-10">
+          <mxGeometry x="-1" relative="1" as="geometry">
+            <mxPoint x="-40" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HMEKJtXv6nUC9A5PgHyP-12" value="child" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;" connectable="0" vertex="1" parent="HMEKJtXv6nUC9A5PgHyP-10">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="-5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
