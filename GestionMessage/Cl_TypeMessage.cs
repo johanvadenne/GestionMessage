@@ -44,16 +44,16 @@ namespace GestionMessage
                 }
                 else
                 {
-                    Cl_AfficheMessageBox.MessageAlerte("Le label type message ne peux comporter plus de 20 charactères");
+                    Cl_AfficheMessageBox.MessageInformation("Le label type message ne peux comporter plus de 20 charactères");
                 }
             }
         }
         //
-        // savoir si l'on peux enrigistrer
+        // Vérifie si toutes les données sont bien normées
         //
         public override bool ValeurCorrecte()
         {
-            if (LabelTypeMessage.Length > 20)
+            if (LabelTypeMessage.Length > 20) // vérifie la taille
             {
                 Cl_AfficheMessageBox.MessageAlerte("Le label type message ne peux comporter plus de 20 charactères");
                 return false;
@@ -66,21 +66,29 @@ namespace GestionMessage
         //
         public override void Insert()
         {
-            if (ValeurCorrecte()) // vérifie la taille de LabelGroupeMessage
+            try
             {
-                // création de la requete
-                string requete = """
-                    INSERT INTO T_TypeMessage
-                    (LabelTypeMessage) VALUES(@LabelTypeMessage);
-                    """;
+                if (ValeurCorrecte()) // Vérifie si toutes les données sont bien normées
+                {
+                    // création de la requête INSERT
+                    string RequeteSQL = """
+                        INSERT INTO T_TypeMessage
+                        (LabelTypeMessage) VALUES(@LabelTypeMessage);
+                        """;
 
-                SQLiteCommand command = new SQLiteCommand(requete, this.MaConnexion); // créer la commande
+                    SQLiteCommand CommandSQLite = new SQLiteCommand(RequeteSQL, this.MaConnexion); // création de la commande SQLite
 
-                command.Parameters.AddWithValue("@LabelTypeMessage", LabelTypeMessage); // Ajouter des paramètres à la commande
+                    // Ajout des paramètres a la requête préparer
+                    CommandSQLite.Parameters.AddWithValue("@LabelTypeMessage", LabelTypeMessage);
 
-                this.MaConnexion.Open(); // ouvre la connexion à la base de données
-                command.ExecuteNonQuery(); // execute la requête
-                this.MaConnexion.Close(); // ferme la connexion à la base de données
+                    this.MaConnexion.Open(); // ouvre la connexion à la base de données
+                    CommandSQLite.ExecuteNonQuery(); // Exécute la commande INSERT
+                    this.MaConnexion.Close(); // ferme la connexion à la base de données
+                }
+            }
+            catch
+            {
+                Cl_AfficheMessageBox.MessageAlerte("Une erreur s'est produite. Veuillez contacter les développeurs.\nCode erreur 006");
             }
         }
         //
@@ -88,23 +96,31 @@ namespace GestionMessage
         //
         public override void Update()
         {
-            if (ValeurCorrecte()) // vérifie la taille de LabelGroupeMessage
+            try
             {
-                // création de la requete
-                string requete =
-                    "UPDATE T_TypeMessage " +
-                    " SET LabelTypeMessage = @LabelTypeMessage" +
-                    " WHERE IdTypeMessage = @IdTypeMessage;";
+                if (ValeurCorrecte()) // vérifie la taille de LabelGroupeMessage
+                {
+                    // création de la requête UPDATE
+                    string RequeteSQL = """
+                        UPDATE T_TypeMessage
+                        SET LabelTypeMessage = @LabelTypeMessage
+                        WHERE IdTypeMessage = @IdTypeMessage;
+                    """;
 
-                SQLiteCommand command = new SQLiteCommand(requete, this.MaConnexion);  // créer la commande
+                    SQLiteCommand CommandSQLite = new SQLiteCommand(RequeteSQL, this.MaConnexion);  // création de la commande SQLite
 
-                // Ajouter des paramètres à la commande
-                command.Parameters.AddWithValue("@LabelTypeMessage", LabelTypeMessage);
-                command.Parameters.AddWithValue("@IdTypeMessage", IdTypeMessage);
+                    // Ajout des paramètres a la requête prépar
+                    CommandSQLite.Parameters.AddWithValue("@LabelTypeMessage", LabelTypeMessage);
+                    CommandSQLite.Parameters.AddWithValue("@IdTypeMessage", IdTypeMessage);
 
-                this.MaConnexion.Open(); // ouvre la connexion à la base de données
-                command.ExecuteNonQuery(); // execute la requête
-                this.MaConnexion.Close(); // ferme la connexion à la base de données
+                    this.MaConnexion.Open(); // ouvre la connexion à la base de données
+                    CommandSQLite.ExecuteNonQuery(); // Exécute la commande UPDATE
+                    this.MaConnexion.Close(); // ferme la connexion à la base de données
+                }
+            }
+            catch
+            {
+                Cl_AfficheMessageBox.MessageAlerte("Une erreur s'est produite. Veuillez contacter les développeurs.\nCode erreur 007");
             }
         }
         //
@@ -112,19 +128,28 @@ namespace GestionMessage
         //
         public override void Delete()
         {
-            // création de la requete
-            string requete =
-                "DELETE FROM T_TypeMessage " +
-                " WHERE IdTypeMessage = @IdTypeMessage;";
+            try
+            {
+                // création de la requête DELETE
+                string RequeteSQL = """
+                    DELETE FROM T_TypeMessage
+                    WHERE IdTypeMessage = @IdTypeMessage;
+                    """;
 
-            SQLiteCommand command = new SQLiteCommand(requete, this.MaConnexion); // créer la commande
+                SQLiteCommand CommandSQLite = new SQLiteCommand(RequeteSQL, this.MaConnexion); // création de la commande SQLite
 
-            command.Parameters.AddWithValue("@IdTypeMessage", IdTypeMessage); // Ajouter des paramètres à la commande
+                // Ajout des paramètres a la requête préparer
+                CommandSQLite.Parameters.AddWithValue("@IdTypeMessage", IdTypeMessage);
 
-            this.MaConnexion.Open(); // ouvre la connexion à la base de données
-            command.ExecuteNonQuery(); // execute la requête
-            this.MaConnexion.Close(); // ferme la connexion à la base de données
-        }
+                this.MaConnexion.Open(); // ouvre la connexion à la base de données
+                CommandSQLite.ExecuteNonQuery(); // Exécute la commande DELETE
+                this.MaConnexion.Close(); // ferme la connexion à la base de données
+            }
+            catch
+            {
+                Cl_AfficheMessageBox.MessageAlerte("Une erreur s'est produite. Veuillez contacter les développeurs.\nCode erreur 008");
+            }
+}
         //
         // override ToString
         //

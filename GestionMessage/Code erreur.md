@@ -1,2 +1,8 @@
 - 001: erreur de hachage sha256
 - 002: erreur dans "Cl_Utilisateur.utilisateurConnexion()" lors de la vérification si l'utilisateur est existant
+- 003: erreur Cl_GroupeMessage.Insert
+- 004: erreur Cl_GroupeMessage.Update
+- 005: erreur Cl_GroupeMessage.Delete
+- 006: erreur Cl_GroupeMessage.Insert
+- 007: erreur Cl_GroupeMessage.Update
+- 008: erreur Cl_GroupeMessage.Delete
