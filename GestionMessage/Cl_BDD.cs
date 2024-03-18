@@ -7,7 +7,7 @@ namespace GestionMessage
         //
         // variable
         //
-        public SQLiteConnection MaConnexion = null;
+        public SQLiteConnection MaConnexion;
         //
         // Connexion à la base de données
         //
