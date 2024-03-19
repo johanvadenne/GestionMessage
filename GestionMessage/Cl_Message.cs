@@ -16,9 +16,7 @@ namespace GestionMessage
         //
         // variables
         //
-        private int _IdGroupeMessage;
         private int _IdMessage;
-        private int _IdTypeMessage;
         private string _CodeMessage;
         private string _Message;
         private Cl_GroupeMessage _GroupeMessage;
@@ -63,7 +61,7 @@ namespace GestionMessage
             get { return _CodeMessage; }
             set { 
                 if(value.Length > 4) {
-                    Cl_AfficheMessageBox.MessageAlerte("Le code ne peux comporter plus de 4 charactères");
+                    Cl_AfficheMessageBox.MessageInformation("Le code ne peut comporter plus de 4 caractères!");
                 }
                 else {
                     _CodeMessage = value.PadLeft(4, '0');
@@ -80,7 +78,7 @@ namespace GestionMessage
             {
                 if (value.Length > 255)
                 {
-                    Cl_AfficheMessageBox.MessageAlerte("Le code ne peux comporter plus de 255 charactères");
+                    Cl_AfficheMessageBox.MessageInformation("Le code ne peut comporter plus de 255 caractères!");
                 }
                 else
                 {
@@ -94,10 +92,7 @@ namespace GestionMessage
         public Cl_GroupeMessage GroupeMessage
         {
             get { return _GroupeMessage; }
-            set { 
-                _GroupeMessage = value;
-                _IdGroupeMessage = value.IdGroupeMessage;
-                }
+            set { _GroupeMessage = value; }
         }
         //
         // TypeMessage
@@ -105,40 +100,36 @@ namespace GestionMessage
         public Cl_TypeMessage TypeMessage
         {
             get { return _TypeMessage; }
-            set
-            {
-                _TypeMessage = value;
-                _IdTypeMessage = value.IdTypeMessage;
-            }
+            set { _TypeMessage = value; }
         }
         //
-        // vérifie si les valeurs sont valide
+        // Vérifie si toutes les données sont bien normées
         //
         public override bool ValeurCorrecte()
         {
             if (CodeMessage.Length > 4) // vérifie la taille de LabelGroupeMessage
             {
-                Cl_AfficheMessageBox.MessageAlerte("Le code ne peux comporter plus de 4 charactères");
+                Cl_AfficheMessageBox.MessageAlerte("Le code ne peut comporter plus de 4 caractères!");
                 return false;
             }
             else if(CodeMessage == "XXXX")
             {
-                Cl_AfficheMessageBox.MessageAlerte("Le code XXXX est un mot réserver au logiciel");
+                Cl_AfficheMessageBox.MessageAlerte("Le code XXXX est un mot réservé au logiciel!");
                 return false;
             }
             else if (Message.Length > 255)
             {
-                Cl_AfficheMessageBox.MessageAlerte("Le code ne peux comporter plus de 255 charactères");
+                Cl_AfficheMessageBox.MessageAlerte("Le code ne peut comporter plus de 255 caractères!");
                 return false;
             }
             else if (IdGroupeMessage <= 0)
             {
-                Cl_AfficheMessageBox.MessageAlerte("Le groupe de message n'ai pas définie");
+                Cl_AfficheMessageBox.MessageAlerte("Le groupe de message n'est pas définie!");
                 return false;
             }
             else if (IdTypeMessage <= 0)
             {
-                Cl_AfficheMessageBox.MessageAlerte("Le type de message n'ai pas définie");
+                Cl_AfficheMessageBox.MessageAlerte("Le type de message n'est pas définie!");
                 return false;
             }
             else
@@ -151,87 +142,110 @@ namespace GestionMessage
         //
         public override void Insert()
         {
-            if (!ValeurCorrecte()) { return; }
-            
-            // création de la requete
-            string requete = """
-                INSERT INTO T_Message (IdGroupeMessage,IdTypeMessage,CodeMessage,Message)
-                VALUES(@IdGroupeMessage,@IdTypeMessage,@CodeMessage,@Message);
-                """;
+            try
+            {
+                if (!ValeurCorrecte()) { return; }
 
-            SQLiteCommand command = new SQLiteCommand(requete, this.MaConnexion); // créer la commande
+                // création de la requête INSERT
+                string RequeteSQL = """
+                    INSERT INTO T_Message (IdGroupeMessage,IdTypeMessage,CodeMessage,Message)
+                    VALUES(@IdGroupeMessage,@IdTypeMessage,@CodeMessage,@Message);
+                    """;
 
-            // Ajouter des paramètres à la commande
-            command.Parameters.AddWithValue("@IdGroupeMessage", IdGroupeMessage);
-            command.Parameters.AddWithValue("@IdTypeMessage", IdTypeMessage);
-            command.Parameters.AddWithValue("@CodeMessage", CodeMessage);
-            command.Parameters.AddWithValue("@Message", Message);
+                SQLiteCommand CommandSQLite = new SQLiteCommand(RequeteSQL, this.MaConnexion); // création de la commande SQLite
 
-            this.MaConnexion.Open(); // ouvre la connexion à la base de données
-            command.ExecuteNonQuery(); // execute la requête
-            this.MaConnexion.Close(); // ferme la connexion à la base de données
+                // Ajout des paramètres a la requête préparer
+                CommandSQLite.Parameters.AddWithValue("@IdGroupeMessage", IdGroupeMessage);
+                CommandSQLite.Parameters.AddWithValue("@IdTypeMessage", IdTypeMessage);
+                CommandSQLite.Parameters.AddWithValue("@CodeMessage", CodeMessage);
+                CommandSQLite.Parameters.AddWithValue("@Message", Message);
+
+                this.MaConnexion.Open(); // ouvre la connexion à la base de données
+                CommandSQLite.ExecuteNonQuery(); // Exécute la commande INSERT
+                this.MaConnexion.Close(); // ferme la connexion à la base de données
+
+            }
+            catch
+            {
+                Cl_AfficheMessageBox.MessageAlerte("Une erreur s'est produite. Veuillez contacter les développeurs.\nCode erreur 009");
+            }
         }
         //
         // override update
         //
         public override void Update()
         {
-            if (!ValeurCorrecte()) { return; }
-            else if (IdMessage <= 0)
+            try
             {
-                Cl_AfficheMessageBox.MessageAlerte("Il n'y a aucun message selectionner");
-                return;
+                if (!ValeurCorrecte()) { return; } // Vérifie si toutes les données sont bien normées
+                else if (IdMessage <= 0)
+                {
+                    Cl_AfficheMessageBox.MessageAlerte("Il n'y a aucun message selectionner");
+                    return;
+                }
+
+                // création de la requête UPDATE
+                string RequeteSQL = """
+                    UPDATE T_Message 
+                    SET 
+                        IdGroupeMessage=@IdGroupeMessage,
+                        IdTypeMessage=@IdTypeMessage,
+                        CodeMessage=@CodeMessage,
+                        Message=@Message
+                    WHERE 
+                        IdMessage = @IdMessage;
+                    """;
+
+                SQLiteCommand CommandSQLite = new SQLiteCommand(RequeteSQL, this.MaConnexion); // création de la commande SQLite
+
+                // Ajout des paramètres a la requête préparer
+                CommandSQLite.Parameters.AddWithValue("@IdGroupeMessage", IdGroupeMessage);
+                CommandSQLite.Parameters.AddWithValue("@IdTypeMessage", IdTypeMessage);
+                CommandSQLite.Parameters.AddWithValue("@CodeMessage", CodeMessage);
+                CommandSQLite.Parameters.AddWithValue("@Message", Message);
+                CommandSQLite.Parameters.AddWithValue("@IdMessage", IdMessage);
+
+                this.MaConnexion.Open(); // ouvre la connexion à la base de données
+                CommandSQLite.ExecuteNonQuery(); // Exécute la commande UPDATE
+                this.MaConnexion.Close(); // ferme la connexion à la base de données
             }
-
-            // création de la requete
-            string requete = """
-                UPDATE T_Message 
-                SET 
-                    IdGroupeMessage=@IdGroupeMessage,
-                    IdTypeMessage=@IdTypeMessage,
-                    CodeMessage=@CodeMessage,
-                    Message=@Message
-                WHERE 
-                    IdMessage = @IdMessage;
-                """;
-
-            SQLiteCommand command = new SQLiteCommand(requete, this.MaConnexion); // créer la commande
-
-            // Ajouter des paramètres à la commande
-            command.Parameters.AddWithValue("@IdGroupeMessage", IdGroupeMessage);
-            command.Parameters.AddWithValue("@IdTypeMessage", IdTypeMessage);
-            command.Parameters.AddWithValue("@CodeMessage", CodeMessage);
-            command.Parameters.AddWithValue("@Message", Message);
-            command.Parameters.AddWithValue("@IdMessage", IdMessage);
-
-            this.MaConnexion.Open(); // ouvre la connexion à la base de données
-            command.ExecuteNonQuery(); // execute la requête
-            this.MaConnexion.Close(); // ferme la connexion à la base de données
+            catch
+            {
+                Cl_AfficheMessageBox.MessageAlerte("Une erreur s'est produite. Veuillez contacter les développeurs.\nCode erreur 010");
+            }
         }
         //
         // override delete
         //
         public override void Delete()
         {
-            if (IdMessage <= 0) 
+            try
             {
-                Cl_AfficheMessageBox.MessageAlerte("Il n'y a aucun message selectionner");
-                return; 
+                if (IdMessage <= 0) 
+                {
+                    Cl_AfficheMessageBox.MessageAlerte("Il n'y a aucun message sélectionné!");
+                    return; 
+                }
+
+                // création de la requête DELETE
+                string RequeteSQL = """
+                    DELETE FROM T_Message
+                    WHERE IdMessage = @IdMessage;
+                    """;
+
+                SQLiteCommand CommandSQLite = new SQLiteCommand(RequeteSQL, this.MaConnexion); // création de la commande SQLite
+
+                // Ajout des paramètres a la requête préparer
+                CommandSQLite.Parameters.AddWithValue("@IdMessage", IdMessage);
+
+                this.MaConnexion.Open(); // ouvre la connexion à la base de données
+                CommandSQLite.ExecuteNonQuery(); // Exécute la commande DELETE
+                this.MaConnexion.Close(); // ferme la connexion à la base de données
             }
-
-            // création de la requete
-            string requete = """
-                DELETE FROM T_Message
-                WHERE IdMessage = @IdMessage;
-                """;
-
-            SQLiteCommand command = new SQLiteCommand(requete, this.MaConnexion); // créer la commande
-
-            command.Parameters.AddWithValue("@IdMessage", IdMessage); // Ajouter des paramètres à la commande
-
-            this.MaConnexion.Open(); // ouvre la connexion à la base de données
-            command.ExecuteNonQuery(); // execute la requête
-            this.MaConnexion.Close(); // ferme la connexion à la base de données
+            catch
+            {
+                Cl_AfficheMessageBox.MessageAlerte("Une erreur s'est produite. Veuillez contacter les développeurs.\nCode erreur 011");
+            }
         }
         //
         // override ToString

@@ -11,3 +11,8 @@ Il permet d'afficher différents types de message (information, alerte, erreur) p
 Cette classe représente la table T_GroupeMessage dans la base de données, elle hérité de Cl_BDD
 ## Cl_TypeMessage
 Cette classe représente la table T_TypeMessage dans la base de données, elle hérité de Cl_BDD
+## Cl_Message
+Cette classe représente la table T_Message dans la base de données, elle hérité de Cl_BDD
+
+## Autre
+Le code "XXXX" est réserver par l'application car c'est cette valeur qu'il affiche lorsque l'utilisateur ajoute un nouveau messaged

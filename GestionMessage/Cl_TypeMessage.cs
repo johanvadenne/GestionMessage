@@ -98,7 +98,7 @@ namespace GestionMessage
         {
             try
             {
-                if (ValeurCorrecte()) // vérifie la taille de LabelGroupeMessage
+                if (ValeurCorrecte()) // Vérifie si toutes les données sont bien normées
                 {
                     // création de la requête UPDATE
                     string RequeteSQL = """
@@ -109,7 +109,7 @@ namespace GestionMessage
 
                     SQLiteCommand CommandSQLite = new SQLiteCommand(RequeteSQL, this.MaConnexion);  // création de la commande SQLite
 
-                    // Ajout des paramètres a la requête prépar
+                    // Ajout des paramètres a la requête préparer
                     CommandSQLite.Parameters.AddWithValue("@LabelTypeMessage", LabelTypeMessage);
                     CommandSQLite.Parameters.AddWithValue("@IdTypeMessage", IdTypeMessage);
 
@@ -130,6 +130,12 @@ namespace GestionMessage
         {
             try
             {
+                if (IdTypeMessage <= 0)
+                {
+                    Cl_AfficheMessageBox.MessageAlerte("Il n'y a aucun type message sélectionné!");
+                    return;
+                }
+
                 // création de la requête DELETE
                 string RequeteSQL = """
                     DELETE FROM T_TypeMessage

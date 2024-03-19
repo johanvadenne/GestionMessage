@@ -131,10 +131,17 @@ namespace GestionMessage
         {
             try
             {
+                if (IdGroupeMessage <= 0)
+                {
+                    Cl_AfficheMessageBox.MessageAlerte("Il n'y a aucun groupe message sélectionné!");
+                    return;
+                }
+
                 // création de la requête DELETE
-                string RequeteSQL =
-                    "DELETE FROM T_GroupeMessage " +
-                    " WHERE IdGroupeMessage = @IdGroupeMessage;";
+                string RequeteSQL = """
+                    DELETE FROM T_GroupeMessage
+                    WHERE IdGroupeMessage = @IdGroupeMessage
+                    """;
                 
                 SQLiteCommand CommandSQLite = new SQLiteCommand(RequeteSQL, this.MaConnexion); // création de la commande SQLite
 

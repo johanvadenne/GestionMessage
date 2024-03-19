@@ -6,3 +6,6 @@
 - 006: erreur Cl_GroupeMessage.Insert
 - 007: erreur Cl_GroupeMessage.Update
 - 008: erreur Cl_GroupeMessage.Delete
+- 009: erreur Cl_GroupeMessage.Insert
+- 010: erreur Cl_GroupeMessage.Update
+- 011: erreur Cl_GroupeMessage.Delete
