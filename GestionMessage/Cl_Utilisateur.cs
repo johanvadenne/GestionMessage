@@ -32,10 +32,11 @@ namespace GestionMessage
         //
         public string MotDePasse
         {
+            private get { return _MotDePasse; }
             set { _MotDePasse = value; }
         }
         //
-        // Permet de hacher une chaine en sha256
+        // Permets de hacher une chaine en sha256
         //
         public string HachSHA256(string Chaine)
         {
@@ -130,12 +131,12 @@ namespace GestionMessage
         public override void Update() { }
         public override bool ValeurCorrecte() 
         { 
-            if (_NomUtilisateur == "")
+            if (NomUtilisateur == "")
             {
                 Cl_AfficheMessageBox.MessageAlerte("Vous devez rentrer un nom utilisateur!");
                 return false;
             }
-            else if (_MotDePasse == "")
+            else if (MotDePasse == "")
             {
                 Cl_AfficheMessageBox.MessageAlerte("Vous devez rentrer un mot de passe!");
                 return false;
