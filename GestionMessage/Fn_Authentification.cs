@@ -16,25 +16,12 @@ namespace GestionMessage
     {
         Cl_Utilisateur Utilisateur;
         WindowsIdentity identiteWindows;
-        bool connexionUtilisateur = false;
-        public string MessageResult { get; private set; }
+        public bool connexionUtilisateur { get; private set; }
 
         public Fn_Authentification()
         {
             InitializeComponent();
             Utilisateur = new Cl_Utilisateur("", "");
-        }
-
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            base.OnFormClosing(e);
-
-            // Si la fenêtre est fermée par l'utilisateur sans interaction
-            if (e.CloseReason == CloseReason.UserClosing)
-            {
-                // Définir la valeur de MessageResult avant de fermer la fenêtre
-                MessageResult = connexionUtilisateur.ToString();
-            }
         }
 
         private void Fn_Authentification_Load(object sender, EventArgs e)
@@ -53,6 +40,16 @@ namespace GestionMessage
             {
                 Cl_AfficheMessageBox.MessageAlerte("Accees refuser!");
             }
+        }
+
+        private void Tb_Utilisateur_TextChanged(object sender, EventArgs e)
+        {
+            Utilisateur.NomUtilisateur = Tb_Utilisateur.Text;
+        }
+
+        private void Tb_MotDePasse_TextChanged(object sender, EventArgs e)
+        {
+            Utilisateur.MotDePasse = Tb_MotDePasse.Text;
         }
     }
 }

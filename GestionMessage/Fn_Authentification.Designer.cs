@@ -41,6 +41,7 @@
             Tb_Utilisateur.PlaceholderText = "Utilisateur";
             Tb_Utilisateur.Size = new Size(239, 23);
             Tb_Utilisateur.TabIndex = 2;
+            Tb_Utilisateur.TextChanged += Tb_Utilisateur_TextChanged;
             // 
             // Tb_MotDePasse
             // 
@@ -51,6 +52,7 @@
             Tb_MotDePasse.PlaceholderText = "Mot de passe";
             Tb_MotDePasse.Size = new Size(239, 23);
             Tb_MotDePasse.TabIndex = 3;
+            Tb_MotDePasse.TextChanged += Tb_MotDePasse_TextChanged;
             // 
             // Btn_Connexion
             // 

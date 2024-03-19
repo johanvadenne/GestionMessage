@@ -9,15 +9,30 @@ namespace GestionMessage
         //
         // Variables
         //
-        private string NomUtilisateur;
-        private string MotDePasse;
+        private string _NomUtilisateur;
+        private string _MotDePasse;
         //
         // constructeur
         //
         public Cl_Utilisateur(string NomUtilisateurRecu, string MotDePasseRecu)
         {
-            NomUtilisateur = NomUtilisateurRecu;
-            MotDePasse = MotDePasseRecu;
+            _NomUtilisateur = NomUtilisateurRecu;
+            _MotDePasse = MotDePasseRecu;
+        }
+        //
+        // NomUtilisateur
+        //
+        public string NomUtilisateur
+        {
+            get { return _NomUtilisateur; }
+            set { _NomUtilisateur = value; }
+        }
+        //
+        // NomUtilisateur
+        //
+        public string MotDePasse
+        {
+            set { _MotDePasse = value; }
         }
         //
         // Permet de hacher une chaine en sha256
@@ -57,6 +72,8 @@ namespace GestionMessage
         {
             try
             {
+                if (!ValeurCorrecte()) { return false; }
+
                 // Création de la requette SQL
                 string RequeteSQL = """
                     SELECT 
@@ -71,9 +88,10 @@ namespace GestionMessage
                 SQLiteCommand CommandSQLite = new SQLiteCommand(RequeteSQL, this.MaConnexion); // création de la commande SQLite
 
                 // Ajout des paramètres a la requête préparer
-                CommandSQLite.Parameters.AddWithValue("@NomUtilisateur", HachSHA256(NomUtilisateur)); 
-                CommandSQLite.Parameters.AddWithValue("@MotDePasse", HachSHA256(MotDePasse));
-                
+                CommandSQLite.Parameters.AddWithValue("@NomUtilisateur", HachSHA256(_NomUtilisateur)); 
+                CommandSQLite.Parameters.AddWithValue("@MotDePasse", HachSHA256(_MotDePasse));
+
+
                 this.MaConnexion.Open(); // ouvre la connexion à la base de données
                 SQLiteDataReader LectureRequete = CommandSQLite.ExecuteReader(); // Exécute la commande en mode lecture
 
@@ -110,6 +128,19 @@ namespace GestionMessage
         public override void Delete() { }
         public override void Insert() { }
         public override void Update() { }
-        public override bool ValeurCorrecte() { return false; }
+        public override bool ValeurCorrecte() 
+        { 
+            if (_NomUtilisateur == "")
+            {
+                Cl_AfficheMessageBox.MessageAlerte("Vous devez rentrer un nom utilisateur!");
+                return false;
+            }
+            else if (_MotDePasse == "")
+            {
+                Cl_AfficheMessageBox.MessageAlerte("Vous devez rentrer un mot de passe!");
+                return false;
+            }
+            return true;
+        }
     }
 }
