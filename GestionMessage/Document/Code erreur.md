@@ -9,3 +9,5 @@
 - 009: erreur Cl_GroupeMessage.Insert
 - 010: erreur Cl_GroupeMessage.Update
 - 011: erreur Cl_GroupeMessage.Delete
+- 012: erreur constructeur Fn_Authentification à générer une erreur
+- 013: erreur Btn_Connexion_Click dans Fn_Authentification, la tentative de connexion à générer une erreur

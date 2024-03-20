@@ -123,12 +123,8 @@ namespace GestionMessage
             }
         }
         //
-        // fonction et procédure abstraite non utilisée
+        // Vérifie si toutes les données sont bien normées
         //
-        public override string ToString() { return NomUtilisateur; }
-        public override void Delete() { }
-        public override void Insert() { }
-        public override void Update() { }
         public override bool ValeurCorrecte() 
         { 
             if (NomUtilisateur == "")
@@ -143,5 +139,12 @@ namespace GestionMessage
             }
             return true;
         }
+        //
+        // fonction et procédure abstraite non utilisée
+        //
+        public override string ToString() { return NomUtilisateur; }
+        public override void Delete() { }
+        public override void Insert() { }
+        public override void Update() { }
     }
 }

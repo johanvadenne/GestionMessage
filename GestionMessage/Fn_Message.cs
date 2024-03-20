@@ -35,7 +35,7 @@ namespace GestionMessage
             Fn_Authentification fenetreAuthentification = new Fn_Authentification();
             fenetreAuthentification.ShowDialog();
 
-            bool result = fenetreAuthentification.connexionUtilisateur;
+            bool result = fenetreAuthentification.ConnexionUtilisateur;
 
             if (result != true)
             {
