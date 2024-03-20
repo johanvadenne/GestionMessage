@@ -12,19 +12,20 @@ namespace GestionMessage
     public partial class Fn_Message : Form
     {
         //
-        // variable
+        // variables
         //
         Cl_ConnexionBDD BDD_SQLlite = new Cl_ConnexionBDD();
         const string UPDATE = "UPDATE";
         const string INSERT = "INSERT";
+        
+        // Indicateurs du type de modification
+        string typeModificationMessage = "";
+        string typeModificationGroupeMessage = "";
+        string typeModificationTypeMessage = "";
 
         const string GROUPE_MESSAGE = "GROUPE MESSAGE";
         const string TYPE_MESSAGE = "TYPE MESSAGE";
         const string MESSAGE = "MESSAGE";
-        
-        string typeModificationMessage = "";
-        string typeModificationGroupeMessage = "";
-        string typeModificationTypeMessage = "";
 
         delegate void AffichageChamp(bool valeur);
         //
