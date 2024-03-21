@@ -76,6 +76,7 @@
             Cb_GroupeMessage.Name = "Cb_GroupeMessage";
             Cb_GroupeMessage.Size = new Size(205, 23);
             Cb_GroupeMessage.TabIndex = 0;
+            Cb_GroupeMessage.SelectedIndexChanged += Cb_GroupeMessage_SelectedIndexChanged;
             // 
             // Tb_CodeMessage
             // 
@@ -94,6 +95,7 @@
             Tb_Message.Name = "Tb_Message";
             Tb_Message.Size = new Size(327, 92);
             Tb_Message.TabIndex = 2;
+            Tb_Message.TextChanged += Tb_Message_TextChanged;
             // 
             // Btn_NouveauMessage
             // 
@@ -205,6 +207,7 @@
             Cb_TypeMessage.Name = "Cb_TypeMessage";
             Cb_TypeMessage.Size = new Size(168, 23);
             Cb_TypeMessage.TabIndex = 14;
+            Cb_TypeMessage.SelectedIndexChanged += Cb_TypeMessage_SelectedIndexChanged;
             // 
             // Lb_Type
             // 

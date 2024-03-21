@@ -16,3 +16,12 @@
 - 016: Il y a aucun groupe message associé au message
 - 017: Il y a aucun type message associé au message
 - 018: Une erreur dans l'édition du texte code message à provoquer une erreur "Tb_CodeMessage_TextChanged"
+- 019: lors de la modification du code message, le message récupérer était à null "Tb_CodeMessage_TextChanged"
+- 020: erreur lorsque l'on ajoute un nouveau message "Btn_NouveauMessage_Click"
+- 021: erreur lorsque l'on enregistre un nouveau message "Btn_EnregistrerMessage_Click" le message récupérer est = null
+- 022: erreur lorsque l'on enregistre un nouveau message "Btn_EnregistrerMessage_Click"
+- 023: suppression message, message = null "Btn_SupprimerMessage_Click"
+- 024: Btn_SupprimerMessage_Click erreur
+- 025: selection d'un Type message "Cb_TypeMessage_SelectedIndexChanged"
+- 026: selection d'un Groupe message "Cb_GroupeMessage_SelectedIndexChanged"
+- 027: modification d'un label message "Tb_Message_TextChanged"
