@@ -11,3 +11,8 @@
 - 011: erreur Cl_GroupeMessage.Delete
 - 012: erreur constructeur Fn_Authentification à générer une erreur
 - 013: erreur Btn_Connexion_Click dans Fn_Authentification, la tentative de connexion à générer une erreur
+- 014: Erreur dans le constructeur de Fn_Message
+- 015: erreur lors de la selection d'un code message Cb_CodeMessage_SelectedIndexChanged
+- 016: Il y a aucun groupe message associé au message
+- 017: Il y a aucun type message associé au message
+- 018: Une erreur dans l'édition du texte code message à provoquer une erreur "Tb_CodeMessage_TextChanged"
