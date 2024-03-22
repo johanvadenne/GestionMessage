@@ -6,13 +6,13 @@ namespace GestionMessage
     {
         public SQLiteConnection Connexion
         {
-            get {  return this.MaConnexion; }
+            get { return this.MaConnexion; }
         }
 
         public override bool ValeurCorrecte() { return false; }
-        public override void Insert() {}
-        public override void Update() {}
-        public override void Delete() {}
+        public override void Insert() { }
+        public override void Update() { }
+        public override void Delete() { }
         public override string ToString() { return ""; }
     }
 }

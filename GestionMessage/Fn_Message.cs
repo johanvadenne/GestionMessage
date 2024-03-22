@@ -1,10 +1,4 @@
-using Microsoft.VisualBasic.ApplicationServices;
-using System.Data.Entity.Infrastructure;
-using System.Data.SqlClient;
 using System.Data.SQLite;
-using System.Diagnostics.CodeAnalysis;
-using System.Security.Principal;
-using System.Windows.Forms;
 
 
 namespace GestionMessage

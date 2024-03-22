@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml.Linq;
-using System.Data.SQLite;
-using System.Configuration;
+﻿using System.Data.SQLite;
 
 namespace GestionMessage
 {
@@ -59,11 +50,14 @@ namespace GestionMessage
         public string CodeMessage
         {
             get { return _CodeMessage; }
-            set { 
-                if(value.Length > 4) {
+            set
+            {
+                if (value.Length > 4)
+                {
                     Cl_AfficheMessageBox.MessageInformation("Le code ne peut comporter plus de 4 caractères!");
                 }
-                else {
+                else
+                {
                     _CodeMessage = value.PadLeft(4, '0');
                 }
             }
@@ -112,7 +106,7 @@ namespace GestionMessage
                 Cl_AfficheMessageBox.MessageAlerte("Le code ne peut comporter plus de 4 caractères!");
                 return false;
             }
-            else if(CodeMessage == "XXXX")
+            else if (CodeMessage == "XXXX")
             {
                 Cl_AfficheMessageBox.MessageAlerte("Le code XXXX est un mot réservé au logiciel!");
                 return false;
@@ -221,10 +215,10 @@ namespace GestionMessage
         {
             try
             {
-                if (IdMessage <= 0) 
+                if (IdMessage <= 0)
                 {
                     Cl_AfficheMessageBox.MessageAlerte("Il n'y a aucun message sélectionné!");
-                    return; 
+                    return;
                 }
 
                 // création de la requête DELETE

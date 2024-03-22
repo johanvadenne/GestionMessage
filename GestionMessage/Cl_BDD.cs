@@ -16,7 +16,7 @@ namespace GestionMessage
             string CheminBDD = "..\\..\\..\\GestionMessage.db";
             char Version = '3';
             string ChaineDeConnexion = "Data Source=" + CheminBDD + ";Version=" + Version + ";";
-            
+
             // test de connexion à la base de données
             try
             {
@@ -24,7 +24,7 @@ namespace GestionMessage
                 SQLiteCommand CommandSQLite = new SQLiteCommand("SELECT * FROM T_TypeMessage;", MaConnexion);
                 MaConnexion.Open();
                 CommandSQLite.ExecuteNonQuery();
-                MaConnexion.Close();    
+                MaConnexion.Close();
             }
             // Si une erreur est survenue alors afficher l'erreur et fermer l'application
             catch

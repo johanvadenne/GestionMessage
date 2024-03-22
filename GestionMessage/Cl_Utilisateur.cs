@@ -1,10 +1,10 @@
-﻿using System.Text;
+﻿using System.Data.SQLite;
 using System.Security.Cryptography;
-using System.Data.SQLite;
+using System.Text;
 
 namespace GestionMessage
 {
-    public class Cl_Utilisateur: Cl_BDD
+    public class Cl_Utilisateur : Cl_BDD
     {
         //
         // Variables
@@ -57,7 +57,7 @@ namespace GestionMessage
                 {
                     StrBuilder.Append(BytesHache[i].ToString("x2"));
                 }
-                
+
                 return StrBuilder.ToString();
             }
             catch
@@ -85,11 +85,11 @@ namespace GestionMessage
                         NomUtilisateur = @NomUtilisateur
                         AND MotDePasse = @MotDePasse;
                     """;
-    
+
                 SQLiteCommand CommandSQLite = new SQLiteCommand(RequeteSQL, this.MaConnexion); // création de la commande SQLite
 
                 // Ajout des paramètres a la requête préparer
-                CommandSQLite.Parameters.AddWithValue("@NomUtilisateur", HachSHA256(_NomUtilisateur)); 
+                CommandSQLite.Parameters.AddWithValue("@NomUtilisateur", HachSHA256(_NomUtilisateur));
                 CommandSQLite.Parameters.AddWithValue("@MotDePasse", HachSHA256(_MotDePasse));
 
 
@@ -101,7 +101,7 @@ namespace GestionMessage
                 // récupère l'IdUtilisateur
                 while (LectureRequete.Read())
                 {
-                    IdUtilisateurLu = LectureRequete.GetInt32(0); 
+                    IdUtilisateurLu = LectureRequete.GetInt32(0);
                 }
                 LectureRequete.Close(); // ferme la lecture de la requête
                 this.MaConnexion.Close(); // ferme la connexion à la base de données
@@ -111,9 +111,9 @@ namespace GestionMessage
                 {
                     return true;
                 }
-                else 
-                { 
-                    return false; 
+                else
+                {
+                    return false;
                 }
             }
             catch
@@ -125,8 +125,8 @@ namespace GestionMessage
         //
         // Vérifie si toutes les données sont bien normées
         //
-        public override bool ValeurCorrecte() 
-        { 
+        public override bool ValeurCorrecte()
+        {
             if (NomUtilisateur == "")
             {
                 Cl_AfficheMessageBox.MessageAlerte("Vous devez rentrer un nom utilisateur!");

@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Data.SQLite;
-using System.Data.SqlClient;
-using System.Data.Entity.Infrastructure;
+﻿using System.Data.SQLite;
 
 namespace GestionMessage
 {
@@ -30,7 +22,7 @@ namespace GestionMessage
         //
         public int IdGroupeMessage
         {
-            get {return _IdGroupeMessage;}
+            get { return _IdGroupeMessage; }
         }
         //
         // LabelGroupeMessage
@@ -38,7 +30,8 @@ namespace GestionMessage
         public string LabelGroupeMessage
         {
             get { return _LabelGroupeMessage; }
-            set {
+            set
+            {
                 if (value.Length <= 100) // vérifie la taille de value
                 {
                     _LabelGroupeMessage = value;
@@ -142,7 +135,7 @@ namespace GestionMessage
                     DELETE FROM T_GroupeMessage
                     WHERE IdGroupeMessage = @IdGroupeMessage
                     """;
-                
+
                 SQLiteCommand CommandSQLite = new SQLiteCommand(RequeteSQL, this.MaConnexion); // création de la commande SQLite
 
                 // Ajout des paramètres a la requête préparer
@@ -156,7 +149,7 @@ namespace GestionMessage
             {
                 Cl_AfficheMessageBox.MessageAlerte("Une erreur s'est produite. Veuillez contacter les développeurs.\nCode erreur 005");
             }
-}
+        }
         //
         // override ToString
         //

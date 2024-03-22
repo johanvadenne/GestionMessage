@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Data.SQLite;
+﻿using System.Data.SQLite;
 
 namespace GestionMessage
 {
@@ -155,7 +149,7 @@ namespace GestionMessage
             {
                 Cl_AfficheMessageBox.MessageAlerte("Une erreur s'est produite. Veuillez contacter les développeurs.\nCode erreur 008");
             }
-}
+        }
         //
         // override ToString
         //
