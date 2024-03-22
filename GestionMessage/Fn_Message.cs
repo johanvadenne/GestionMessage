@@ -360,36 +360,37 @@ namespace GestionMessage
         // ##################################################### //
 
         //
-        // evenement lors de la selection d'un élément de la liste
+        // Événement lors de la sélection d'un élément de la liste groupe message
         //
         private void Cb_ChercheGroupeMessage_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
-                // récupère l'instance selectionner dans la liste
+                // récupère l'instance groupe message sélectionner dans la liste
                 Cl_GroupeMessage GroupeMessageSelect = Cb_ChercheGroupeMessage.SelectedItem as Cl_GroupeMessage;
 
-                // si la valeur selectionner n'est pas une classe Cl_GroupeMessage
+                // si la valeur sélectionnée est à null
                 if (GroupeMessageSelect == null)
                 {
-                    Tb_LabelGroupeMessage.Enabled = false;
+                    Cl_AfficheMessageBox.MessageErreur("Une erreur est survenue, Veuillez contacter les développeurs.\nCode erreur 028");
                     return;
                 }
 
                 // si c'est un nouveau ou une modification
-                if (TypeModificationGroupeMessage == UPDATE || TypeModificationGroupeMessage == INSERT)
+                if (TypeModificationGroupeMessage != "")
                 {
                     Tb_LabelGroupeMessage.Enabled = true; // rendre le champ éditable
                 }
                 else
                 {
                     Tb_LabelGroupeMessage.Enabled = false; // rendre le champ inactif
-                    Tb_LabelGroupeMessage.Text = GroupeMessageSelect.LabelGroupeMessage;
                 }
+                
+                Tb_LabelGroupeMessage.Text = GroupeMessageSelect.LabelGroupeMessage; // Synchronise le labelle champ texte avec la liste
             }
             catch
             {
-                Cl_AfficheMessageBox.MessageErreur("Imposible de selectionner un élément");
+                Cl_AfficheMessageBox.MessageErreur("Une erreur est survenue, Veuillez contacter les développeurs.\nCode erreur 029");
             }
         }
         //
@@ -397,6 +398,8 @@ namespace GestionMessage
         //
         private void Tb_LabelGroupeMessage_TextChanged(object sender, EventArgs e)
         {
+            // à chaque modification du label groupe message, mettre à jour l'affichage de la liste
+            // l'élément est supprimé puis rajouter pour pouvoir mettre à jour l'affichage
             try
             {
                 if (TypeModificationGroupeMessage == INSERT) // si une modification
@@ -404,23 +407,32 @@ namespace GestionMessage
                     Cb_ChercheGroupeMessage.Items.RemoveAt(Cb_ChercheGroupeMessage.SelectedIndex); // je supprime l'élément
 
                     // j'instancie un nouveau groupe message avec le nouveau texte
-                    Cl_GroupeMessage nouveauGroupeMessage = new Cl_GroupeMessage(0, Tb_LabelGroupeMessage.Text);
-                    Cb_ChercheGroupeMessage.Items.Add(nouveauGroupeMessage); // je l'ajoute dans la liste
-                    Cb_ChercheGroupeMessage.SelectedItem = nouveauGroupeMessage; // je selectionne l'élément qui vien d'etre ajouter
+                    Cl_GroupeMessage NouveauGroupeMessage = new Cl_GroupeMessage(0, Tb_LabelGroupeMessage.Text);
+                    Cb_ChercheGroupeMessage.Items.Add(NouveauGroupeMessage); // je l'ajoute dans la liste
+                    Cb_ChercheGroupeMessage.SelectedItem = NouveauGroupeMessage; // je sélectionne l'élément qui vient d'être ajouté
                 }
                 else if (TypeModificationGroupeMessage == UPDATE)
                 {
                     Cl_GroupeMessage GroupeMessageSelect = Cb_ChercheGroupeMessage.SelectedItem as Cl_GroupeMessage; // récupère l'instance selectionner dans la liste
+
+                    if (GroupeMessageSelect == null)
+                    {
+                        Cl_AfficheMessageBox.MessageAlerte("Une erreur est survenue, Veuillez contacter les développeurs.\nCode erreur 030");
+                        InitialisationListes();
+                        return;
+                    }
+
                     Cb_ChercheGroupeMessage.Items.RemoveAt(Cb_ChercheGroupeMessage.SelectedIndex); // je supprime l'élément
+
                     GroupeMessageSelect.LabelGroupeMessage = Tb_LabelGroupeMessage.Text; // modifie le label
                     Cb_ChercheGroupeMessage.Items.Add(GroupeMessageSelect); // je l'ajoute dans la liste
-                    Cb_ChercheGroupeMessage.SelectedItem = GroupeMessageSelect; // je selectionne l'élément qui vien d'etre ajou
-                    Cb_ChercheGroupeMessage.SelectedItem = TypeModificationGroupeMessage; // je selectionne l'élément qui vien d'etre ajouter
+                    Cb_ChercheGroupeMessage.SelectedItem = GroupeMessageSelect; // je sélectionne l'élément qui vient d'être ajout
+                    Cb_ChercheGroupeMessage.SelectedItem = TypeModificationGroupeMessage; // je sélectionne l'élément qui vient d'être ajouté
                 }
             }
             catch
             {
-                Cl_AfficheMessageBox.MessageErreur("Une erreur dans l'édition du texte à provoquer une erreur");
+                Cl_AfficheMessageBox.MessageErreur("Une erreur est survenue, Veuillez contacter les développeurs.\nCode erreur 031");
             }
         }
         //

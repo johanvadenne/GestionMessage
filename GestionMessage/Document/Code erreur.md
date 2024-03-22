@@ -25,3 +25,7 @@
 - 025: selection d'un Type message "Cb_TypeMessage_SelectedIndexChanged"
 - 026: selection d'un Groupe message "Cb_GroupeMessage_SelectedIndexChanged"
 - 027: modification d'un label message "Tb_Message_TextChanged"
+- 028: Événement lors de la sélection d'un élément de la liste groupe message "Cb_ChercheGroupeMessage_SelectedIndexChanged"
+- 029: erreur "Cb_ChercheGroupeMessage_SelectedIndexChanged" 
+- 030: erreur "Tb_LabelGroupeMessage_TextChanged" élément récupérer est à null
+- 031: erreur "Tb_LabelGroupeMessage_TextChanged"
