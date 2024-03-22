@@ -436,17 +436,24 @@ namespace GestionMessage
             }
         }
         //
-        // evenement bouton "nouveau groupe message"
+        // Événement bouton "nouveau groupe message"
         //
         private void Btn_NouveauGroupeMessage_Click(object sender, EventArgs e)
         {
-            Cl_GroupeMessage nouveauGroupeMessage = new Cl_GroupeMessage(0, "Nouveau label groupe message");
-            Cb_ChercheGroupeMessage.Items.Add(nouveauGroupeMessage); // ajout dans la liste
-            Cb_ChercheGroupeMessage.SelectedItem = nouveauGroupeMessage; // selectionne la nouvelle valeur ajouter
-            Tb_LabelGroupeMessage.Text = "Nouveau label groupe message";
-
-            TypeModificationGroupeMessage = INSERT; // repère pour savoir que fait l'utilisateur
-            ModeAffichageediteGroupeMessage();
+            try
+            {
+                Cl_GroupeMessage nouveauGroupeMessage = new Cl_GroupeMessage(0, "Nouveau label groupe message"); // Instancie un nouveau groupe message
+                Cb_ChercheGroupeMessage.Items.Add(nouveauGroupeMessage); // ajout dans la liste
+                Cb_ChercheGroupeMessage.SelectedItem = nouveauGroupeMessage; // selectionne la nouvelle valeur ajouter
+                Tb_LabelGroupeMessage.Text = "Nouveau label groupe message";
+                
+                TypeModificationGroupeMessage = INSERT; // On indique que le groupe message est en mode INSERT
+                ModeAffichageediteGroupeMessage();
+            }
+            catch
+            {
+                Cl_AfficheMessageBox.MessageErreur("Une erreur est survenue, Veuillez contacter les développeurs.\nCode erreur 032");
+            }
         }
         //
         // evenement bouton "enregistrer groupe message"
@@ -457,11 +464,13 @@ namespace GestionMessage
             {
                 Cl_GroupeMessage GroupeMessageSelect = Cb_ChercheGroupeMessage.SelectedItem as Cl_GroupeMessage; // récupère l'instance selectionner dans la liste
 
-                if (GroupeMessageSelect == null) // si la valeur selectionner n'est pas une classe Cl_GroupeMessage
+                if (GroupeMessageSelect == null) 
                 {
-                    throw new InvalidOperationException(""); // lever une exeption
+                    Cl_AfficheMessageBox.MessageErreur("Une erreur est survenue, Veuillez contacter les développeurs.\nCode erreur 033");
+                    return;
                 }
 
+                // vérifie si les valeurs liées au message sont correctes
                 if (GroupeMessageSelect.ValeurCorrecte() == false) { return; }
 
                 // vérifie qu'il n'y a pas un autre élément qui a le même label 
@@ -471,7 +480,7 @@ namespace GestionMessage
                     {
                         if (elementGroupeMessage.LabelGroupeMessage == GroupeMessageSelect.LabelGroupeMessage && GroupeMessageSelect != elementGroupeMessage)
                         {
-                            Cl_AfficheMessageBox.MessageAlerte("Il ne peux pas y avoir 2 même label groupe message");
+                            Cl_AfficheMessageBox.MessageAlerte("Il ne peut pas y avoir 2 même label groupe message");
                             return;
                         }
                     }
@@ -487,14 +496,15 @@ namespace GestionMessage
                 }
                 else
                 {
-                    Cl_AfficheMessageBox.MessageErreur("Il n'y a aucun enregistrement à effectuer");
+                    Cl_AfficheMessageBox.MessageErreur("Il n'y a aucun enregistrement à effectuer, Veuillez contacter les développeurs.\nCode erreur 034");
                 }
+
                 TypeModificationGroupeMessage = ""; // plus de modification en cours
                 InitialisationListes();
             }
             catch
             {
-                Cl_AfficheMessageBox.MessageErreur("L'enregistrement à provoquer une erreur");
+                Cl_AfficheMessageBox.MessageErreur("Une erreur est survenue, Veuillez contacter les développeurs.\nCode erreur 035");
             }
         }
         //
@@ -502,10 +512,22 @@ namespace GestionMessage
         //
         private void Btn_SupprimerGroupeMessage_Click(object sender, EventArgs e)
         {
-            if (Cb_ChercheGroupeMessage.SelectedItem != null && TypeModificationGroupeMessage == "")
+            // si aucune modification est en cours
+            if (TypeModificationGroupeMessage == "")
             {
-                Cl_GroupeMessage elementGroupeMessage = Cb_ChercheGroupeMessage.SelectedItem as Cl_GroupeMessage;
+                Cl_GroupeMessage elementGroupeMessage = Cb_ChercheGroupeMessage.SelectedItem as Cl_GroupeMessage; // récupère l'instance selectionner dans la liste
+
+                // vérifie si la valeur n'est pas à null
+                if (elementGroupeMessage == null)
+                {
+                    Cl_AfficheMessageBox.MessageAlerte("Une erreur est survenue, Veuillez contacter les développeurs.\nCode erreur 023");
+                    InitialisationListes();
+                    return;
+                }
+
                 string code = "";
+
+                // Vérifie que le groupe message n'est pas associé à un message
                 foreach (Cl_Message messageSelect in Cb_CodeMessage.Items)
                 {
                     if (messageSelect.GroupeMessage == elementGroupeMessage)
@@ -520,13 +542,13 @@ namespace GestionMessage
                     return;
                 }
 
-                elementGroupeMessage.Delete();
+                elementGroupeMessage.Delete(); // supprime l'élément
             }
             TypeModificationGroupeMessage = "";
             InitialisationListes();
         }
         //
-        // evenement bouton "modifier groupe message"
+        // Événement bouton "modifier groupe message"
         //
         private void Btn_ModifierGroupeMessage_Click(object sender, EventArgs e)
         {

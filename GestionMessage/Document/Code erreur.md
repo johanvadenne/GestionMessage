@@ -29,3 +29,8 @@
 - 029: erreur "Cb_ChercheGroupeMessage_SelectedIndexChanged" 
 - 030: erreur "Tb_LabelGroupeMessage_TextChanged" élément récupérer est à null
 - 031: erreur "Tb_LabelGroupeMessage_TextChanged"
+- 032: erreur "Btn_NouveauGroupeMessage_Click"
+- 033: erreur "Btn_EnregistrerGroupeMessage_Click" GroupeMessageSelect == null
+- 034: erreur "Btn_EnregistrerGroupeMessage_Click" TypeModif mal définie
+- 035: erreur "Btn_EnregistrerGroupeMessage_Click"
+- 036! erreur "Btn_SupprimerGroupeMessage_Click" elementGroupeMessage == null
