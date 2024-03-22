@@ -520,7 +520,7 @@ namespace GestionMessage
                 // vérifie si la valeur n'est pas à null
                 if (elementGroupeMessage == null)
                 {
-                    Cl_AfficheMessageBox.MessageAlerte("Une erreur est survenue, Veuillez contacter les développeurs.\nCode erreur 023");
+                    Cl_AfficheMessageBox.MessageAlerte("Une erreur est survenue, Veuillez contacter les développeurs.\nCode erreur 036");
                     InitialisationListes();
                     return;
                 }
@@ -567,13 +567,13 @@ namespace GestionMessage
         {
             try
             {
-                // récupère l'instance selectionner dans la liste
+                // récupère l'instance type message sélectionner dans la liste
                 Cl_TypeMessage TypeMessageSelect = Cb_ChercheTypeMessage.SelectedItem as Cl_TypeMessage;
 
-                // si la valeur selectionner n'est pas une classe Cl_TypeMessage
+                // si la valeur sélectionnée est à null
                 if (TypeMessageSelect == null)
                 {
-                    Tb_LabelTypeMessage.Enabled = false;
+                    Cl_AfficheMessageBox.MessageErreur("Une erreur est survenue, Veuillez contacter les développeurs.\nCode erreur 038");
                     return;
                 }
 
@@ -581,6 +581,7 @@ namespace GestionMessage
                 if (TypeModificationTypeMessage == UPDATE || TypeModificationTypeMessage == INSERT)
                 {
                     Tb_LabelTypeMessage.Enabled = true; // rendre le champ éditable
+                    Tb_LabelTypeMessage.Text = TypeMessageSelect.LabelTypeMessage;
                 }
                 else
                 {
@@ -590,7 +591,7 @@ namespace GestionMessage
             }
             catch
             {
-                Cl_AfficheMessageBox.MessageErreur("Imposible de selectionner un élément");
+                Cl_AfficheMessageBox.MessageErreur("Une erreur est survenue, Veuillez contacter les développeurs.\nCode erreur 037");
             }
         }
         //
@@ -598,6 +599,8 @@ namespace GestionMessage
         //
         private void Tb_LabelTypeMessage_TextChanged(object sender, EventArgs e)
         {
+            // à chaque modification du label type message, mettre à jour l'affichage de la liste
+            // l'élément est supprimé puis rajouter pour pouvoir mettre à jour l'affichage
             try
             {
                 if (TypeModificationTypeMessage == INSERT) // si une modification
@@ -607,7 +610,7 @@ namespace GestionMessage
                     // j'instancie un nouveau Type message avec le nouveau texte
                     Cl_TypeMessage nouveauTypeMessage = new Cl_TypeMessage(0, Tb_LabelTypeMessage.Text);
                     Cb_ChercheTypeMessage.Items.Add(nouveauTypeMessage); // je l'ajoute dans la liste
-                    Cb_ChercheTypeMessage.SelectedItem = nouveauTypeMessage; // je selectionne l'élément qui vien d'etre ajouter
+                    Cb_ChercheTypeMessage.SelectedItem = nouveauTypeMessage; // je sélectionne l'élément qui vient d'être ajouté
                 }
                 else if (TypeModificationTypeMessage == UPDATE)
                 {
@@ -615,13 +618,13 @@ namespace GestionMessage
                     Cb_ChercheTypeMessage.Items.RemoveAt(Cb_ChercheTypeMessage.SelectedIndex); // je supprime l'élément
                     TypeMessageSelect.LabelTypeMessage = Tb_LabelTypeMessage.Text; // modifie le label
                     Cb_ChercheTypeMessage.Items.Add(TypeMessageSelect); // je l'ajoute dans la liste
-                    Cb_ChercheTypeMessage.SelectedItem = TypeMessageSelect; // je selectionne l'élément qui vien d'etre ajou
-                    Cb_ChercheTypeMessage.SelectedItem = TypeModificationTypeMessage; // je selectionne l'élément qui vien d'etre ajouter
+                    Cb_ChercheTypeMessage.SelectedItem = TypeMessageSelect; // je selectionne l'élément qui vient d'etre ajou
+                    Cb_ChercheTypeMessage.SelectedItem = TypeModificationTypeMessage; // je sélectionne l'élément qui vient d'être ajouté
                 }
             }
             catch
             {
-                Cl_AfficheMessageBox.MessageErreur("Une erreur dans l'édition du texte à provoquer une erreur");
+                Cl_AfficheMessageBox.MessageErreur("Une erreur est survenue, Veuillez contacter les développeurs.\nCode erreur 039");
             }
         }
         //
@@ -629,12 +632,19 @@ namespace GestionMessage
         //
         private void Btn_NouveauTypeMessage_Click(object sender, EventArgs e)
         {
-            Cl_TypeMessage nouveauTypeMessage = new Cl_TypeMessage(0, "Nouveau type message");
-            Cb_ChercheTypeMessage.Items.Add(nouveauTypeMessage); // ajout dans la liste
-            Cb_ChercheTypeMessage.SelectedItem = nouveauTypeMessage; // selectionne la nouvelle valeur ajouter
-            Tb_LabelTypeMessage.Text = "Nouveau type message";
+            try
+            {
+                Cl_TypeMessage nouveauTypeMessage = new Cl_TypeMessage(0, "Nouveau type message"); // Instancie un nouveau type message
+                Cb_ChercheTypeMessage.Items.Add(nouveauTypeMessage); // ajout dans la liste
+                Cb_ChercheTypeMessage.SelectedItem = nouveauTypeMessage; // selectionne la nouvelle valeur ajouter
+                Tb_LabelTypeMessage.Text = "Nouveau type message";
+            }
+            catch
+            {
+                Cl_AfficheMessageBox.MessageErreur("Une erreur est survenue, Veuillez contacter les développeurs.\nCode erreur 041");
+            }
 
-            TypeModificationTypeMessage = INSERT; // repère pour savoir que fait l'utilisateur
+            TypeModificationTypeMessage = INSERT; // On indique que le groupe message est en mode INSERT
             ModeAffichageediteTypeMessage();
         }
         //

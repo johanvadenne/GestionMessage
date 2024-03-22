@@ -34,3 +34,7 @@
 - 034: erreur "Btn_EnregistrerGroupeMessage_Click" TypeModif mal définie
 - 035: erreur "Btn_EnregistrerGroupeMessage_Click"
 - 036! erreur "Btn_SupprimerGroupeMessage_Click" elementGroupeMessage == null
+- 037: erreur "Cb_ChercheTypeMessage_SelectedIndexChanged" 
+- 038: erreur "Cb_ChercheTypeMessage_SelectedIndexChanged" TypeMessageSelect == null
+- 039: erreur "Tb_LabelTypeMessage_TextChanged"
+- 040: erreur "Btn_NouveauTypeMessage_Click"
