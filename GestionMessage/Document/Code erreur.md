@@ -38,3 +38,10 @@
 - 038: erreur "Cb_ChercheTypeMessage_SelectedIndexChanged" TypeMessageSelect == null
 - 039: erreur "Tb_LabelTypeMessage_TextChanged"
 - 040: erreur "Btn_NouveauTypeMessage_Click"
+- 041: erreur "Btn_SupprimerGroupeMessage_Click"
+- 042: erreur "Cb_ChercheTypeMessage_SelectedIndexChanged"
+- 043: "Btn_EnregistrerTypeMessage_Click" TypeModif mal définie
+- 044: "Btn_EnregistrerTypeMessage_Click"
+- 045: "Btn_EnregistrerTypeMessage_Click" TypeMessageSelect == null
+- 046: "Btn_SupprimerTypeMessage_Click"
+- 047: "Btn_SupprimerTypeMessage_Click" ElementTypeMessage == null

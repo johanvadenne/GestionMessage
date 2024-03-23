@@ -512,38 +512,46 @@ namespace GestionMessage
         //
         private void Btn_SupprimerGroupeMessage_Click(object sender, EventArgs e)
         {
-            // si aucune modification est en cours
-            if (TypeModificationGroupeMessage == "")
+            try
             {
-                Cl_GroupeMessage elementGroupeMessage = Cb_ChercheGroupeMessage.SelectedItem as Cl_GroupeMessage; // récupère l'instance selectionner dans la liste
-
-                // vérifie si la valeur n'est pas à null
-                if (elementGroupeMessage == null)
+                // si aucune modification est en cours
+                if (TypeModificationGroupeMessage == "")
                 {
-                    Cl_AfficheMessageBox.MessageAlerte("Une erreur est survenue, Veuillez contacter les développeurs.\nCode erreur 036");
-                    InitialisationListes();
-                    return;
-                }
+                    Cl_GroupeMessage ElementGroupeMessage = Cb_ChercheGroupeMessage.SelectedItem as Cl_GroupeMessage; // récupère l'instance selectionner dans la liste
 
-                string code = "";
-
-                // Vérifie que le groupe message n'est pas associé à un message
-                foreach (Cl_Message messageSelect in Cb_CodeMessage.Items)
-                {
-                    if (messageSelect.GroupeMessage == elementGroupeMessage)
+                    // vérifie si la valeur n'est pas à null
+                    if (ElementGroupeMessage == null)
                     {
-                        code += messageSelect.CodeMessage + ", ";
+                        Cl_AfficheMessageBox.MessageAlerte("Une erreur est survenue, Veuillez contacter les développeurs.\nCode erreur 036");
+                        InitialisationListes();
+                        return;
                     }
 
-                }
-                if (code != "")
-                {
-                    Cl_AfficheMessageBox.MessageAlerte("Le groupe message est utiliser dans le(s) message(s) " + code + "Il ne peux donc pas être supprimer.");
-                    return;
-                }
+                    string Code = "";
 
-                elementGroupeMessage.Delete(); // supprime l'élément
+                    // Vérifie que le groupe message n'est pas associé à un message
+                    foreach (Cl_Message MessageSelect in Cb_CodeMessage.Items)
+                    {
+                        if (MessageSelect.GroupeMessage == ElementGroupeMessage)
+                        {
+                            Code += MessageSelect.CodeMessage + ", ";
+                        }
+
+                    }
+                    if (Code != "")
+                    {
+                        Cl_AfficheMessageBox.MessageAlerte("Le groupe message est utilisé dans le(s) message(s) " + Code + "il ne peut donc pas être supprimé.");
+                        return;
+                    }
+
+                    ElementGroupeMessage.Delete(); // supprime l'élément
+                }
             }
+            catch
+            {
+                Cl_AfficheMessageBox.MessageAlerte("Une erreur est survenue, Veuillez contacter les développeurs.\nCode erreur 041");
+            }
+
             TypeModificationGroupeMessage = "";
             InitialisationListes();
         }
@@ -641,7 +649,7 @@ namespace GestionMessage
             }
             catch
             {
-                Cl_AfficheMessageBox.MessageErreur("Une erreur est survenue, Veuillez contacter les développeurs.\nCode erreur 041");
+                Cl_AfficheMessageBox.MessageErreur("Une erreur est survenue, Veuillez contacter les développeurs.\nCode erreur 042");
             }
 
             TypeModificationTypeMessage = INSERT; // On indique que le groupe message est en mode INSERT
@@ -658,9 +666,10 @@ namespace GestionMessage
 
                 if (TypeMessageSelect.ValeurCorrecte() == false) { return; }
 
-                if (TypeMessageSelect == null) // si la valeur selectionner n'est pas une classe Cl_TypeMessage
+                if (TypeMessageSelect == null)
                 {
-                    throw new InvalidOperationException(""); // lever une exeption
+                    Cl_AfficheMessageBox.MessageErreur("Une erreur est survenue, Veuillez contacter les développeurs.\nCode erreur 045");
+                    return;
                 }
 
                 // vérifie qu'il n'y a pas un autre élément qui a le même label 
@@ -670,7 +679,7 @@ namespace GestionMessage
                     {
                         if (elementTypeMessage.LabelTypeMessage == TypeMessageSelect.LabelTypeMessage && TypeMessageSelect != elementTypeMessage)
                         {
-                            Cl_AfficheMessageBox.MessageAlerte("Il ne peux pas y avoir 2 même label type message");
+                            Cl_AfficheMessageBox.MessageAlerte("Il ne peut pas y avoir 2 même label type message");
                             return;
                         }
                     }
@@ -686,14 +695,15 @@ namespace GestionMessage
                 }
                 else
                 {
-                    Cl_AfficheMessageBox.MessageErreur("Il n'y a aucun enregistrement à effectuer");
+                    Cl_AfficheMessageBox.MessageErreur("Il n'y a aucun enregistrement à effectuer, Veuillez contacter les développeurs.\nCode erreur 043");
                 }
+
                 TypeModificationTypeMessage = ""; // plus de modification en cours
-                InitialisationListes(); // initialise la liste
+                InitialisationListes(); // initialise les listes
             }
             catch
             {
-                Cl_AfficheMessageBox.MessageErreur("L'enregistrement à provoquer une erreur");
+                Cl_AfficheMessageBox.MessageErreur("Une erreur est survenue, Veuillez contacter les développeurs.\nCode erreur 044");
             }
         }
         //
@@ -709,28 +719,46 @@ namespace GestionMessage
         //
         private void Btn_SupprimerTypeMessage_Click(object sender, EventArgs e)
         {
-            if (Cb_ChercheTypeMessage.SelectedItem != null && TypeModificationTypeMessage == "")
+            try
             {
-                Cl_TypeMessage elementTypeMessage = Cb_ChercheTypeMessage.SelectedItem as Cl_TypeMessage;
-
-                string code = "";
-                foreach (Cl_Message messageSelect in Cb_CodeMessage.Items)
+                if (TypeModificationTypeMessage == "")
                 {
-                    if (messageSelect.TypeMessage == elementTypeMessage)
+                    Cl_TypeMessage ElementTypeMessage = Cb_ChercheTypeMessage.SelectedItem as Cl_TypeMessage;
+
+                    // vérifie si la valeur n'est pas à null
+                    if (ElementTypeMessage == null)
                     {
-                        code += messageSelect.CodeMessage + ", ";
+                        Cl_AfficheMessageBox.MessageAlerte("Une erreur est survenue, Veuillez contacter les développeurs.\nCode erreur 047");
+                        InitialisationListes();
+                        return;
                     }
 
-                }
-                if (code != "")
-                {
-                    Cl_AfficheMessageBox.MessageAlerte("Le groupe message est utiliser dans le(s) message(s) " + code + "Il ne peux donc pas être supprimer.");
-                    return;
-                }
+                    string Code = "";
 
-                elementTypeMessage.Delete();
+                    // Vérifie que le groupe message n'est pas associé à un message
+                    foreach (Cl_Message MessageSelect in Cb_CodeMessage.Items)
+                    {
+                        if (MessageSelect.TypeMessage == ElementTypeMessage)
+                        {
+                            Code += MessageSelect.CodeMessage + ", ";
+                        }
+
+                    }
+                    if (Code != "")
+                    {
+                        Cl_AfficheMessageBox.MessageAlerte("Le groupe message est utilisé dans le(s) message(s) " + Code + "il ne peut donc pas être supprimé.");
+                        return;
+                    }
+
+                    ElementTypeMessage.Delete(); // supprime l'élément
+                }
             }
-            TypeModificationTypeMessage = "";
+            catch
+            {
+                Cl_AfficheMessageBox.MessageAlerte("Une erreur est survenue, Veuillez contacter les développeurs.\nCode erreur 046");
+            }
+
+            TypeModificationGroupeMessage = "";
             InitialisationListes();
         }
 
