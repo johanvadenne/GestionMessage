@@ -245,4 +245,5 @@ la base de donnée a des champ limiter a 64 charactère, pile la taille du hacha
 ### UML BDD
 ![[Pasted image 20240323170209.png]]
 ### UML Classe
+![[Traitement/Diagramme de classe.drawio.png]]
 ### Shema environement informatique
