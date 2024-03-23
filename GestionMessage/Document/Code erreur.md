@@ -45,3 +45,7 @@
 - 045: "Btn_EnregistrerTypeMessage_Click" TypeMessageSelect == null
 - 046: "Btn_SupprimerTypeMessage_Click"
 - 047: "Btn_SupprimerTypeMessage_Click" ElementTypeMessage == null
+- 048: "remplieListe"
+- 049: "remplieListe" -> switch (nomListe) le contenant de nomListe n'est pas traiter
+- 050: "remplieListe" -> switch (nomListe) le contenant de nomListe n'est pas traiter
+- 051: "remplieListe" -> switch (nomListe) le contenant de nomListe n'est pas traiter
