@@ -1,0 +1,160 @@
+{
+  "main": {
+    "id": "213be07705e22c7b",
+    "type": "split",
+    "children": [
+      {
+        "id": "565ed4514ff8e259",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c4b016d8bcaa3d4e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Traitement/Authentification.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "84744d34ea4d9786",
+    "type": "split",
+    "children": [
+      {
+        "id": "160c882278fe79bb",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b5494be0cd7832b6",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "62e1a37eb3cb2a8f",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "e6954d815515cb18",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "87bc97ecc70a0972",
+    "type": "split",
+    "children": [
+      {
+        "id": "0ef92c7f45aa9057",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d84a2cb2f0136580",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Traitement/Authentification.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "b988ebf508a72af8",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Traitement/Authentification.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "7ca227e29f1b2347",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "9d031e278a7a03a7",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Traitement/Authentification.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Ouvrir le sélecteur rapide": false,
+      "graph:Ouvrir la vue graphique": false,
+      "canvas:Créer une nouvelle toile": false,
+      "daily-notes:Ouvrir la note quotidienne": false,
+      "templates:Insérer le modèle": false,
+      "command-palette:Ouvrir la palette de commandes": false
+    }
+  },
+  "active": "c4b016d8bcaa3d4e",
+  "lastOpenFiles": [
+    "Pasted image 20240323170209.png",
+    "Pasted image 20240323163254.png",
+    "image",
+    "Pasted image 20240323163225.png",
+    "Traitement",
+    "Developement.md",
+    "Traitement/Authentification.md",
+    "Code erreur.md"
+  ]
+}

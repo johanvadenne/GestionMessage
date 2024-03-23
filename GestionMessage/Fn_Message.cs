@@ -375,7 +375,7 @@ namespace GestionMessage
                     Cl_AfficheMessageBox.MessageErreur("Une erreur est survenue, Veuillez contacter les développeurs.\nCode erreur 028");
                     return;
                 }
-                
+
                 Tb_LabelGroupeMessage.Text = GroupeMessageSelect.LabelGroupeMessage; // Synchronise le labelle champ texte avec la liste
             }
             catch
@@ -436,7 +436,7 @@ namespace GestionMessage
                 Cb_ChercheGroupeMessage.Items.Add(nouveauGroupeMessage); // ajout dans la liste
                 Cb_ChercheGroupeMessage.SelectedItem = nouveauGroupeMessage; // selectionne la nouvelle valeur ajouter
                 Tb_LabelGroupeMessage.Text = "Nouveau label groupe message";
-                
+
                 TypeModificationGroupeMessage = INSERT; // On indique que le groupe message est en mode INSERT
                 ModeAffichageEditeGroupeMessage();
             }
@@ -454,7 +454,7 @@ namespace GestionMessage
             {
                 Cl_GroupeMessage GroupeMessageSelect = Cb_ChercheGroupeMessage.SelectedItem as Cl_GroupeMessage; // récupère l'instance selectionner dans la liste
 
-                if (GroupeMessageSelect == null) 
+                if (GroupeMessageSelect == null)
                 {
                     Cl_AfficheMessageBox.MessageErreur("Une erreur est survenue, Veuillez contacter les développeurs.\nCode erreur 033");
                     return;
@@ -908,7 +908,7 @@ namespace GestionMessage
                 CB_OngletEdition.SelectedIndex = 0;
                 CB_OngletMessage.SelectedIndex = 0;
             }
-            catch 
+            catch
             {
                 Cl_AfficheMessageBox.MessageErreur("Une erreur est survenue, Veuillez contacter les développeurs.\nCode erreur 048");
             }

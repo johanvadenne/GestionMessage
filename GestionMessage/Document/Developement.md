@@ -4,23 +4,23 @@ Nommage en PascalCase, exemple: MaVariable.
 # Classe
 
 ## Cl_BDD
-Cette classe effectue une connexion à la base de données. Elle est utilisée pour héritée certaine classe.
+Cette classe effectue une connexion ï¿½ la base de donnï¿½es. Elle est utilisï¿½e pour hï¿½ritï¿½e certaine classe.
 ## Cl_ConnexionBDD
-Cette classe permet simplement d'effectuer des requêtes à la base de données. Elle est utilisée par les fenêtres.
+Cette classe permet simplement d'effectuer des requï¿½tes ï¿½ la base de donnï¿½es. Elle est utilisï¿½e par les fenï¿½tres.
 ## Cl_AfficheMessageBox
-Il permet d'afficher différents types de message (information, alerte, erreur) pour informer l'utilisateur.
+Il permet d'afficher diffï¿½rents types de message (information, alerte, erreur) pour informer l'utilisateur.
 ## Cl_GroupeMessage
-Cette classe représente la table T_GroupeMessage dans la base de données, elle hérité de Cl_BDD
+Cette classe reprï¿½sente la table T_GroupeMessage dans la base de donnï¿½es, elle hï¿½ritï¿½ de Cl_BDD
 ## Cl_TypeMessage
-Cette classe représente la table T_TypeMessage dans la base de données, elle hérité de Cl_BDD
+Cette classe reprï¿½sente la table T_TypeMessage dans la base de donnï¿½es, elle hï¿½ritï¿½ de Cl_BDD
 ## Cl_Message
-Cette classe représente la table T_Message dans la base de données, elle hérité de Cl_BDD
+Cette classe reprï¿½sente la table T_Message dans la base de donnï¿½es, elle hï¿½ritï¿½ de Cl_BDD
 ## Cl_Utilisateur
-Cette classe gère la connexion a l'application, elle hérité de Cl_BDD
+Cette classe gï¿½re la connexion a l'application, elle hï¿½ritï¿½ de Cl_BDD
 
-# Fenêtre
+# Fenï¿½tre
 ## Fn_Authentification
 Page d'authentification
 
 ## Autre
-Le code "XXXX" est réserver par l'application car c'est cette valeur qu'il affiche lorsque l'utilisateur ajoute un nouveau messaged
+Le code "XXXX" est rï¿½server par l'application car c'est cette valeur qu'il affiche lorsque l'utilisateur ajoute un nouveau messaged
