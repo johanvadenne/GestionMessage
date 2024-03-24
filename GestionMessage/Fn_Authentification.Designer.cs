@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Fn_Authentification));
             Tb_Utilisateur = new TextBox();
             Tb_MotDePasse = new TextBox();
             Btn_Connexion = new Button();
@@ -72,6 +73,7 @@
             Controls.Add(Btn_Connexion);
             Controls.Add(Tb_MotDePasse);
             Controls.Add(Tb_Utilisateur);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Fn_Authentification";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Authentification";

@@ -13,13 +13,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Traitement/Authentification.md",
+                "file": "Developement/Code erreur.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "d4554254b192d7f6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Logiciel/GestionMessage.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -85,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Traitement/Authentification.md",
+                "file": "Logiciel/GestionMessage.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Traitement/Authentification.md",
+                "file": "Logiciel/GestionMessage.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Traitement/Authentification.md"
+                "file": "Logiciel/GestionMessage.md"
               }
             }
           }
@@ -146,16 +159,23 @@
       "command-palette:Ouvrir la palette de commandes": false
     }
   },
-  "active": "c4b016d8bcaa3d4e",
+  "active": "d4554254b192d7f6",
   "lastOpenFiles": [
-    "Traitement/Diagramme de classe.drawio.png",
-    "Pasted image 20240323170209.png",
-    "Pasted image 20240323163254.png",
-    "image",
-    "Pasted image 20240323163225.png",
-    "Traitement",
-    "Developement.md",
+    "image/message-icon-petit.ico",
+    "image/message-icon-petit.png",
+    "image/message-icon-2043x2048-z7d1f8at.png",
+    "image/megaphone-orange.png",
     "Traitement/Authentification.md",
-    "Code erreur.md"
+    "Logiciel/GestionMessage.md",
+    "Logiciel",
+    "Developement/Code erreur.md",
+    "Developement/Developement.md",
+    "Developement",
+    "image/Pasted image 20240323163225.png",
+    "Traitement/Diagramme de classe.drawio.png",
+    "image/Pasted image 20240323170209.png",
+    "image/Pasted image 20240323163254.png",
+    "image",
+    "Traitement"
   ]
 }

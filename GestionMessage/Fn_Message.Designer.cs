@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Fn_Message));
             Cb_GroupeMessage = new ComboBox();
             Tb_CodeMessage = new TextBox();
             Tb_Message = new TextBox();
@@ -434,6 +435,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(416, 259);
             Controls.Add(TP_GestionMessage);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximumSize = new Size(432, 298);
             MinimumSize = new Size(432, 298);
             Name = "Fn_Message";
