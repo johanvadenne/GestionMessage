@@ -20,7 +20,7 @@ END;
 
 -- Création du trigger
 CREATE TRIGGER Trig_DELETE_T_TypeMessage
-AFTER INSERT ON T_TypeMessage
+AFTER DELETE ON T_TypeMessage
 BEGIN
 	INSERT INTO T_Log (NomTable,IdTable,DateModif,TypeModif)
 	VALUES ('T_TypeMessage', old.IdTypeMessage,datetime('now'),'DELETE');

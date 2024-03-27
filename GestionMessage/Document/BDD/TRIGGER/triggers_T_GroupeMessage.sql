@@ -1,27 +1,27 @@
-DROP TRIGGER Trig_INSERT_T_Message;
-DROP TRIGGER Trig_UPDATE_T_Message;
-DROP TRIGGER Trig_DELETE_T_Message;
+DROP TRIGGER Trig_INSERT_T_GroupeMessage;
+DROP TRIGGER Trig_UPDATE_T_GroupeMessage;
+DROP TRIGGER Trig_DELETE_T_GroupeMessage;
 
 -- Création du trigger
-CREATE TRIGGER Trig_INSERT_T_Message
-AFTER INSERT ON T_Message
+CREATE TRIGGER Trig_INSERT_T_GroupeMessage
+AFTER INSERT ON T_GroupeMessage
 BEGIN
 	INSERT INTO T_Log (NomTable,IdTable,DateModif,TypeModif)
-	VALUES ('T_Message', new.IdTypeMessage,datetime('now'),'INSERT');
+	VALUES ('T_GroupeMessage', new.IdGroupeMessage,datetime('now'),'INSERT');
 END;
 
 -- Création du trigger
-CREATE TRIGGER Trig_UPDATE_T_Message
-AFTER UPDATE ON T_Message
+CREATE TRIGGER Trig_UPDATE_T_GroupeMessage
+AFTER UPDATE ON T_GroupeMessage
 BEGIN
 	INSERT INTO T_Log (NomTable,IdTable,DateModif,TypeModif)
-	VALUES ('T_Message', old.IdTypeMessage,datetime('now'),'UPDATE');
+	VALUES ('T_GroupeMessage', old.IdGroupeMessage,datetime('now'),'UPDATE');
 END;
 
 -- Création du trigger
-CREATE TRIGGER Trig_DELETE_T_Message
-AFTER INSERT ON T_Message
+CREATE TRIGGER Trig_DELETE_T_GroupeMessage
+AFTER DELETE ON T_GroupeMessage
 BEGIN
 	INSERT INTO T_Log (NomTable,IdTable,DateModif,TypeModif)
-	VALUES ('T_Message', old.IdTypeMessage,datetime('now'),'DELETE');
+	VALUES ('T_GroupeMessage', old.IdGroupeMessage,datetime('now'),'DELETE');
 END;

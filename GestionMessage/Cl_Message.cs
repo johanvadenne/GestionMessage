@@ -159,9 +159,9 @@ namespace GestionMessage
                 this.MaConnexion.Close(); // ferme la connexion à la base de données
 
             }
-            catch
+            catch (Exception ex)
             {
-                Cl_AfficheMessageBox.MessageAlerte("Une erreur s'est produite. Veuillez contacter les développeurs.\nCode erreur 009");
+                Cl_AfficheMessageBox.MessageAlerte("Une erreur s'est produite. Veuillez contacter les développeurs.\nCode erreur 009\n"+ex);
             }
         }
         //

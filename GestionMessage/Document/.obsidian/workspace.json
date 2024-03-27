@@ -158,6 +158,9 @@
   },
   "active": "c4b016d8bcaa3d4e",
   "lastOpenFiles": [
+    "BDD/TRIGGER/triggers_T_Message.sql",
+    "BDD/TRIGGER/triggers_T_GroupeMessage.sql",
+    "BDD/TRIGGER/triggers_T_roupeMessage.sql",
     "Logiciel/~$-Epreuve-E5_Fiche-expression-des-besoins_2024.docx",
     "Logiciel/~WRL0001.tmp",
     "Logiciel/~WRD0000.tmp",
@@ -166,8 +169,6 @@
     "Logiciel/~WRD3681.tmp",
     "Logiciel/~$-SLAM-Epreuve-E5_Fiche-description-réalisation-professionnelle_2024.docx",
     "Logiciel/~WRL2632.tmp",
-    "Logiciel/~WRD2593.tmp",
-    "Logiciel/01-SLAM-Epreuve-E5_Fiche-description-réalisation-professionnelle_2024.docx",
     "Traitement/Authentification.md",
     "Logiciel/GestionMessage.md",
     "Traitement/Diagramme de classe.drawio.png",
@@ -181,7 +182,6 @@
     "image/message-icon-petit.png",
     "image/Pasted image 20240323163225.png",
     "image/Pasted image 20240323163254.png",
-    "Traitement/Schéma environnement informatique.drawio",
     "image/megaphone-orange.png"
   ]
 }
