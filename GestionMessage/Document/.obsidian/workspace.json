@@ -158,6 +158,8 @@
   },
   "active": "c4b016d8bcaa3d4e",
   "lastOpenFiles": [
+    "A FAIRE.md",
+    "BDD/gestionMessage.db",
     "BDD/TRIGGER/triggers_T_Message.sql",
     "BDD/TRIGGER/triggers_T_GroupeMessage.sql",
     "BDD/TRIGGER/triggers_T_roupeMessage.sql",
@@ -167,8 +169,6 @@
     "Logiciel/02-Epreuve-E5_Fiche-expression-des-besoins_2024.docx",
     "Logiciel/~WRL3716.tmp",
     "Logiciel/~WRD3681.tmp",
-    "Logiciel/~$-SLAM-Epreuve-E5_Fiche-description-réalisation-professionnelle_2024.docx",
-    "Logiciel/~WRL2632.tmp",
     "Traitement/Authentification.md",
     "Logiciel/GestionMessage.md",
     "Traitement/Diagramme de classe.drawio.png",
