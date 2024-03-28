@@ -77,6 +77,7 @@
             Name = "Fn_Authentification";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Authentification";
+            Load += Fn_Authentification_Load;
             ResumeLayout(false);
             PerformLayout();
         }
