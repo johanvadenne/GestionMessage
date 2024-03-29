@@ -65,5 +65,10 @@
         {
             Utilisateur.MotDePasse = Tb_MotDePasse.Text;
         }
+
+        private void Fn_Authentification_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
